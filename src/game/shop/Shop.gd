@@ -83,7 +83,6 @@ func LoadMultiLevelUpgrades() -> void:
 
 ## Handle item hover - update description
 func _OnItemHovered(item:BaseShopItem) -> void:
-	print("Hovered ", item.get_description())
 	if item_description and item:
 		item_description.text = item.get_description()
 

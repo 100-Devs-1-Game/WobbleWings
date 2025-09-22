@@ -13,6 +13,7 @@ var world:World
 
 @onready var events:GlobalEvents = $GlobalEvents
 @onready var config: GameConfig = $GameConfig
+@onready var sceneTransition: CanvasLayer = $SceneTransition
 
 func _ready() -> void:
 	pass

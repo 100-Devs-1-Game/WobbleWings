@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfhvxqxyxxbif"]
+[gd_scene load_steps=15 format=3 uid="uid://dfhvxqxyxxbif"]
 
 [ext_resource type="Script" uid="uid://pfofwvncohie" path="res://lib_boo/global/game_manager/GameManager.gd" id="1_qhk37"]
 [ext_resource type="Script" uid="uid://4ic8nnk56j4h" path="res://lib_boo/global/BooEvents.gd" id="2_k6wlb"]
@@ -10,6 +10,32 @@
 [ext_resource type="Script" uid="uid://dvg7vkpbqxt47" path="res://lib_boo/global/global_config/GlobalConfig.gd" id="4_48h4i"]
 [ext_resource type="PackedScene" uid="uid://cctgecw8yuofi" path="res://lib_boo/global/global spawner/GlobalSpawner.tscn" id="6_mm2u6"]
 [ext_resource type="Script" uid="uid://co1yi3a37pn85" path="res://lib_boo/global/global audio player/GlobalAudioPlayer.gd" id="7_ud2t6"]
+[ext_resource type="Script" uid="uid://8vdg6gf23dsq" path="res://lib_boo/global/SceneTransition.gd" id="11_4w702"]
+[ext_resource type="Shader" uid="uid://cuyq81pcq3344" path="res://lib_boo/shaders/universal_transition_shader.gdshader" id="12_6083e"]
+[ext_resource type="Texture2D" uid="uid://ca258d1i3u1nk" path="res://lib_boo/shaders/mask_textures/star_mask_texture.png" id="13_uqqms"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqqms"]
+shader = ExtResource("12_6083e")
+shader_parameter/use_sprite_alpha = false
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 1
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(1, 1)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/mask_texture = ExtResource("13_uqqms")
+shader_parameter/use_mask_size = true
+shader_parameter/mask_size = Vector2(24, 24)
+shader_parameter/edges = 6
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_bias = Vector2(0, 0)
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_qhk37")
@@ -26,8 +52,6 @@ script = ExtResource("3_y5vfa")
 
 [node name="GameConfig" type="Node" parent="."]
 script = ExtResource("4_48h4i")
-ShouldSkipIntros = true
-overrideInEditor = true
 metadata/_custom_type_script = "uid://dvg7vkpbqxt47"
 
 [node name="GlobalSpawner" parent="." instance=ExtResource("6_mm2u6")]
@@ -54,3 +78,17 @@ script = ExtResource("7_ud2t6")
 [node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="GlobalAudioPlayer"]
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="GlobalAudioPlayer"]
+
+[node name="SceneTransition" type="CanvasLayer" parent="."]
+layer = 128
+script = ExtResource("11_4w702")
+
+[node name="ColorRect" type="ColorRect" parent="SceneTransition"]
+visible = false
+material = SubResource("ShaderMaterial_uqqms")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

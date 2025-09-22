@@ -5,8 +5,9 @@ extends Node
 
 
 func _ready():
+
 	if GM.config.ShouldSkipIntros and OS.is_debug_build():
-		LoadGame()
+		get_tree().change_scene_to_packed.call_deferred(mainScn)
 
 func LoadGame():
-	get_tree().change_scene_to_packed.call_deferred(mainScn)
+	GM.sceneTransition.GoToScene(mainScn)

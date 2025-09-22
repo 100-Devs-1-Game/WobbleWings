@@ -2,10 +2,10 @@ class_name GlobalConfig extends Node
 
 
 #region General
-@export var ShouldSkipIntros:bool = false:
+@export var ShouldSkipIntros:bool = true:
 	set(skip):
 		ShouldSkipIntros = skip
-		if is_node_ready(): #Needed because of exported values calling this setter too early.
+		if GM:
 			GM.saveLoad.SaveConfig("game_config", "general", "should_skip_intros", skip)
 #endregion
 
@@ -42,11 +42,14 @@ class_name GlobalConfig extends Node
 
 
 func _ready() -> void:
+	
 	if overrideInEditor and OS.is_debug_build():
 		return
 	
 	_LoadAudioVolumesFromConfig.call_deferred()
 
+	await get_tree().process_frame
+	ShouldSkipIntros = true
 
 func _LoadAudioVolumesFromConfig() -> void:
 	# Load all audio settings from config file on startup
