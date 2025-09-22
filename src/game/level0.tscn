@@ -1,0 +1,528 @@
+[gd_scene load_steps=47 format=3 uid="uid://cdtumpmve4ox3"]
+
+[ext_resource type="Script" uid="uid://qgsj20igv7x8" path="res://game/GameLevel.gd" id="2_hvlfb"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="3_bnmkg"]
+[ext_resource type="Script" uid="uid://bh3mv0l7nri5e" path="res://game/Player.gd" id="3_eg1qk"]
+[ext_resource type="Script" uid="uid://c1wtdx4ymp08f" path="res://game/GameStateChart.gd" id="3_omobt"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="4_1rb85"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="4_eom4q"]
+[ext_resource type="Script" uid="uid://r7p65a2nbglw" path="res://lib_boo/components/CB2D/CB2DBehaviorManager.gd" id="5_4eq7h"]
+[ext_resource type="PackedScene" uid="uid://crqvo4d77v72n" path="res://game/level_backgrounds/bg0.tscn" id="5_xksyc"]
+[ext_resource type="Script" uid="uid://buhirs3y8dfq4" path="res://lib_boo/components/CB2D/CB2DGravity.gd" id="6_mhpwd"]
+[ext_resource type="Texture2D" uid="uid://bdk5wlb1t1p54" path="res://lib_boo/assets/img/placeholders/1920x1080_hd_placeholder.png" id="6_xbyi2"]
+[ext_resource type="Texture2D" uid="uid://i3tg61fkvtp3" path="res://lib_boo/assets/img/star_yellow_rounded.png" id="6_xksyc"]
+[ext_resource type="Texture2D" uid="uid://dpmyns8mmjwa6" path="res://assets/graphic/wobble wings - player only.png" id="6_xns2i"]
+[ext_resource type="Script" uid="uid://ba4hrmngcdoai" path="res://lib_boo/components/CB2D/jump/CB2DJumpSimple.gd" id="7_6oj2u"]
+[ext_resource type="Texture2D" uid="uid://dghiy0wdvrku5" path="res://assets/graphic/wobble wings - orbit only.png" id="7_c62tx"]
+[ext_resource type="PackedScene" uid="uid://cyhdasei2cig1" path="res://lib_boo/dev_and_templates/world/WorldTemplate.tscn" id="7_xirai"]
+[ext_resource type="Script" uid="uid://xjeeitdr55mq" path="res://lib_boo/act_system/acts/instancing/SpawnerAct.gd" id="9_wu187"]
+[ext_resource type="PackedScene" uid="uid://c8ctwi7qi0m82" path="res://game/FlappyObstacle.tscn" id="11_speg8"]
+[ext_resource type="AudioStream" uid="uid://bdgqqadt7ps2s" path="res://assets/sfx/retro-coin-1-236677.mp3" id="12_t6oaa"]
+[ext_resource type="LabelSettings" uid="uid://dbm3rntcuvahk" path="res://common/base_label_small.tres" id="14_3w21h"]
+[ext_resource type="PackedScene" uid="uid://cytbu807mdyqf" path="res://game/gem/GemSpawn.tscn" id="14_c62tx"]
+[ext_resource type="Theme" uid="uid://blpg4nf6pmt2r" path="res://game/main_style_theme.tres" id="19_38qkh"]
+[ext_resource type="Script" uid="uid://dkj2mgb16kv47" path="res://lib_boo/components/BooStreamPlayer.gd" id="20_ffkp2"]
+[ext_resource type="LabelSettings" uid="uid://bojj0ywqtfplx" path="res://game/ui_ux/label_24.tres" id="23_woij5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqpsq"]
+atlas = ExtResource("6_xns2i")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xksyc"]
+atlas = ExtResource("6_xns2i")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6oaa"]
+atlas = ExtResource("6_xns2i")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48r7y"]
+atlas = ExtResource("6_xns2i")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3rjb"]
+atlas = ExtResource("6_xns2i")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38qkh"]
+atlas = ExtResource("6_xns2i")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_48r7y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqpsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xksyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6oaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48r7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3rjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38qkh")
+}],
+"loop": false,
+"name": &"default",
+"speed": 16.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woij5"]
+atlas = ExtResource("7_c62tx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnmkg"]
+atlas = ExtResource("7_c62tx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rb85"]
+atlas = ExtResource("7_c62tx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbyi2"]
+atlas = ExtResource("7_c62tx")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xirai"]
+atlas = ExtResource("7_c62tx")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffkp2"]
+atlas = ExtResource("7_c62tx")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84iox"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woij5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnmkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rb85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbyi2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xirai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffkp2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xns2i"]
+radius = 10.5
+height = 51.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6oaa"]
+size = Vector2(32, 60)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eom4q"]
+radius = 7.81025
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cjyyr"]
+radius = 54.0
+
+[sub_resource type="Animation" id="Animation_48r7y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySpr:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySpr:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t6oaa"]
+resource_name = "flap"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("BodySpr:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.349066, 0.0174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySpr:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.3, 0.7), Vector2(0.7, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q3rjb"]
+_data = {
+&"RESET": SubResource("Animation_48r7y"),
+&"flap": SubResource("Animation_t6oaa")
+}
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t6oaa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_38qkh"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Level0" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("2_hvlfb")
+oscillationSpeedIncrease = 0.05
+minPipeSeparation = 340
+maxPipeSeparation = 380
+
+[node name="GameStateChart" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("3_omobt")
+player = NodePath("../World/MainSpace/Player")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="GameStateChart"]
+script = ExtResource("3_bnmkg")
+initial_state = NodePath("Loading")
+
+[node name="Loading" type="Node" parent="GameStateChart/CompoundState"]
+script = ExtResource("4_1rb85")
+
+[node name="to_Menu" type="Node" parent="GameStateChart/CompoundState/Loading"]
+script = ExtResource("4_eom4q")
+to = NodePath("../../Menu")
+event = &"loading_done"
+delay_in_seconds = "0.0"
+
+[node name="Menu" type="Node" parent="GameStateChart/CompoundState"]
+script = ExtResource("4_1rb85")
+
+[node name="to_Playing" type="Node" parent="GameStateChart/CompoundState/Menu"]
+script = ExtResource("4_eom4q")
+to = NodePath("../../Playing")
+event = &"play_triggered"
+delay_in_seconds = "0.0"
+
+[node name="Playing" type="Node" parent="GameStateChart/CompoundState"]
+script = ExtResource("3_bnmkg")
+initial_state = NodePath("StartingPlay")
+
+[node name="StartingPlay" type="Node" parent="GameStateChart/CompoundState/Playing"]
+script = ExtResource("4_1rb85")
+
+[node name="to_Active" type="Node" parent="GameStateChart/CompoundState/Playing/StartingPlay"]
+script = ExtResource("4_eom4q")
+to = NodePath("../../Active")
+event = &"play_started"
+delay_in_seconds = "0.0"
+
+[node name="Active" type="Node" parent="GameStateChart/CompoundState/Playing"]
+script = ExtResource("4_1rb85")
+
+[node name="to_Pause" type="Node" parent="GameStateChart/CompoundState/Playing/Active"]
+script = ExtResource("4_eom4q")
+to = NodePath("../../Pause")
+event = &"paused"
+delay_in_seconds = "0.0"
+
+[node name="to_GameOver" type="Node" parent="GameStateChart/CompoundState/Playing/Active"]
+script = ExtResource("4_eom4q")
+to = NodePath("../../../GameOver")
+event = &"game_over"
+delay_in_seconds = "0.0"
+
+[node name="Pause" type="Node" parent="GameStateChart/CompoundState/Playing"]
+script = ExtResource("4_1rb85")
+
+[node name="to_Active" type="Node" parent="GameStateChart/CompoundState/Playing/Pause"]
+script = ExtResource("4_eom4q")
+to = NodePath("../../Active")
+event = &"resumed"
+delay_in_seconds = "0.0"
+
+[node name="GameOver" type="Node" parent="GameStateChart/CompoundState"]
+script = ExtResource("4_1rb85")
+
+[node name="to_Menu" type="Node" parent="GameStateChart/CompoundState/GameOver"]
+script = ExtResource("4_eom4q")
+to = NodePath("../../Menu")
+event = &"reset_game"
+delay_in_seconds = "0.0"
+
+[node name="Skybox" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.6141, 0.69, 0.6141, 1)
+z_index = -1000
+scale = Vector2(0.333333, 0.333333)
+texture = ExtResource("6_xbyi2")
+centered = false
+
+[node name="World" parent="." instance=ExtResource("7_xirai")]
+
+[node name="Level0" parent="World/BackgroundSpace" index="0" instance=ExtResource("5_xksyc")]
+
+[node name="Player" type="CharacterBody2D" parent="World/MainSpace" index="0"]
+position = Vector2(115, 162)
+collision_mask = 3
+script = ExtResource("3_eg1qk")
+metadata/_edit_group_ = true
+
+[node name="BodySpr" type="AnimatedSprite2D" parent="World/MainSpace/Player"]
+sprite_frames = SubResource("SpriteFrames_48r7y")
+frame = 5
+frame_progress = 1.0
+
+[node name="OrbitSpr" type="AnimatedSprite2D" parent="World/MainSpace/Player"]
+sprite_frames = SubResource("SpriteFrames_84iox")
+autoplay = "default"
+frame_progress = 0.781241
+
+[node name="CB2DBehaviorManager" type="Node2D" parent="World/MainSpace/Player" node_paths=PackedStringArray("characterBody")]
+script = ExtResource("5_4eq7h")
+characterBody = NodePath("..")
+shouldCallMoveAndSlide = true
+metadata/_custom_type_script = "uid://r7p65a2nbglw"
+
+[node name="CB2DGravity" type="Node2D" parent="World/MainSpace/Player/CB2DBehaviorManager"]
+script = ExtResource("6_mhpwd")
+gravity_force = 2000.0
+max_fall_speed = 4000.0
+enabled = false
+metadata/_custom_type_script = "uid://buhirs3y8dfq4"
+
+[node name="CB2DJumpSimple" type="Node2D" parent="World/MainSpace/Player/CB2DBehaviorManager"]
+script = ExtResource("7_6oj2u")
+jump_force = 540.0
+enabled = false
+metadata/_custom_type_script = "uid://ba4hrmngcdoai"
+
+[node name="LoseCheck" type="Area2D" parent="World/MainSpace/Player"]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MainSpace/Player/LoseCheck"]
+position = Vector2(-1, -1)
+shape = SubResource("CapsuleShape2D_xns2i")
+debug_color = Color(0.914262, 0.20429, 0.524317, 0.42)
+
+[node name="_CollisionShape2D" type="CollisionShape2D" parent="World/MainSpace/Player"]
+visible = false
+position = Vector2(-9, -1)
+shape = SubResource("RectangleShape2D_t6oaa")
+
+[node name="PickupsCollector" type="Node2D" parent="World/MainSpace/Player"]
+
+[node name="Picker" type="Area2D" parent="World/MainSpace/Player/PickupsCollector"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MainSpace/Player/PickupsCollector/Picker"]
+shape = SubResource("CircleShape2D_eom4q")
+debug_color = Color(0.26202, 0.624462, 0.319591, 0.42)
+
+[node name="Magnet" type="Area2D" parent="World/MainSpace/Player/PickupsCollector"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MainSpace/Player/PickupsCollector/Magnet"]
+shape = SubResource("CircleShape2D_cjyyr")
+debug_color = Color(0.26202, 0.624462, 0.319591, 0.42)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="World/MainSpace/Player"]
+
+[node name="Camera2D" type="Camera2D" parent="World/MainSpace/Player"]
+position = Vector2(205, 18)
+limit_top = 0
+limit_bottom = 360
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/MainSpace/Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_q3rjb")
+}
+
+[node name="InvulTimer" type="Timer" parent="World/MainSpace/Player"]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="World/MainSpace/Player"]
+stream = ExtResource("12_t6oaa")
+volume_db = -16.0
+bus = &"SFX"
+
+[node name="LoseArea" type="Area2D" parent="World/ForegroundSpace" index="0" groups=["floor"]]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ForegroundSpace/LoseArea"]
+position = Vector2(345, 457)
+shape = SubResource("WorldBoundaryShape2D_t6oaa")
+debug_color = Color(0.954189, 1.92523e-06, 0.549712, 0.42)
+
+[node name="Obstacles" type="Node2D" parent="World/ForegroundSpace" index="1"]
+
+[node name="ObstacleTimer" type="Timer" parent="World/ForegroundSpace/Obstacles"]
+unique_name_in_owner = true
+wait_time = 2.0
+
+[node name="ObstacleSpawner" type="Marker2D" parent="World/ForegroundSpace/Obstacles"]
+position = Vector2(740, 180)
+script = ExtResource("9_wu187")
+sceneToSpawn = ExtResource("11_speg8")
+canOverlap = true
+canAct = true
+metadata/_custom_type_script = "uid://xjeeitdr55mq"
+
+[node name="_currently_off GemSpawner" type="Marker2D" parent="World/ForegroundSpace/Obstacles"]
+position = Vector2(740, 180)
+script = ExtResource("9_wu187")
+sceneToSpawn = ExtResource("14_c62tx")
+canOverlap = true
+canAct = true
+metadata/_custom_type_script = "uid://xjeeitdr55mq"
+
+[node name="BgStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"Music"
+script = ExtResource("20_ffkp2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PlayAgainBtn" type="Button" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = 57.0
+offset_right = 44.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("19_38qkh")
+text = "ENTER: Play Again"
+
+[node name="FinalScoreLabel" type="Label" parent="CanvasLayer/PlayAgainBtn"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = 19.5
+offset_right = 69.5
+offset_bottom = 78.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("19_38qkh")
+text = "Stage Score: 8
+Final Score: 10"
+label_settings = SubResource("LabelSettings_38qkh")
+horizontal_alignment = 3
+
+[node name="ControlsLabel" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 8.0
+offset_top = 237.0
+offset_right = 286.0
+offset_bottom = 260.0
+theme = ExtResource("19_38qkh")
+text = "Click, Tap or Press the SPACE BAR to FLY! 
+(Temporary, make it intuitive)"
+label_settings = ExtResource("14_3w21h")
+horizontal_alignment = 1
+
+[node name="Score" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme = ExtResource("19_38qkh")
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Score"]
+layout_mode = 2
+theme = ExtResource("19_38qkh")
+texture = ExtResource("6_xksyc")
+expand_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Score"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("19_38qkh")
+text = "x 0"
+label_settings = ExtResource("23_woij5")
+
+[node name="Lives" type="HBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("19_38qkh")
+alignment = 1
+
+[connection signal="took_damage" from="GameStateChart" to="." method="_on_game_state_chart_took_damage"]
+[connection signal="state_entered" from="GameStateChart/CompoundState/Loading" to="GameStateChart" method="_on_loading_state_entered"]
+[connection signal="state_entered" from="GameStateChart/CompoundState/Menu" to="GameStateChart" method="_on_menu_state_entered"]
+[connection signal="state_input" from="GameStateChart/CompoundState/Menu" to="GameStateChart" method="_on_menu_state_input"]
+[connection signal="state_unhandled_input" from="GameStateChart/CompoundState/Menu" to="GameStateChart" method="_on_menu_state_unhandled_input"]
+[connection signal="state_entered" from="GameStateChart/CompoundState/Playing/StartingPlay" to="GameStateChart" method="_on_starting_play_state_entered"]
+[connection signal="state_exited" from="GameStateChart/CompoundState/Playing/StartingPlay" to="GameStateChart" method="_on_starting_play_state_exited"]
+[connection signal="state_entered" from="GameStateChart/CompoundState/Playing/Active" to="GameStateChart" method="_on_active_state_entered"]
+[connection signal="state_entered" from="GameStateChart/CompoundState/Playing/Pause" to="GameStateChart" method="_on_pause_state_entered"]
+[connection signal="state_exited" from="GameStateChart/CompoundState/Playing/Pause" to="GameStateChart" method="_on_pause_state_exited"]
+[connection signal="state_entered" from="GameStateChart/CompoundState/GameOver" to="GameStateChart" method="_on_game_over_state_entered"]
+[connection signal="state_input" from="GameStateChart/CompoundState/GameOver" to="GameStateChart" method="_on_game_over_state_input"]
+[connection signal="got_hit" from="World/MainSpace/Player" to="GameStateChart" method="_on_player_got_hit"]
+[connection signal="frame_changed" from="World/MainSpace/Player/BodySpr" to="World/MainSpace/Player" method="_on_body_spr_frame_changed"]
+[connection signal="area_entered" from="World/MainSpace/Player/LoseCheck" to="GameStateChart" method="_on_lose_check_area_entered"]
+[connection signal="area_entered" from="World/MainSpace/Player/LoseCheck" to="World/MainSpace/Player" method="_on_lose_check_area_entered"]
+[connection signal="area_entered" from="World/MainSpace/Player/PickupsCollector/Picker" to="World/MainSpace/Player" method="_on_picker_area_entered"]
+[connection signal="area_entered" from="World/MainSpace/Player/PickupsCollector/Magnet" to="World/MainSpace/Player" method="_on_magnet_area_entered"]
+[connection signal="timeout" from="World/MainSpace/Player/InvulTimer" to="World/MainSpace/Player" method="_on_invul_timer_timeout"]
+[connection signal="timeout" from="World/ForegroundSpace/Obstacles/ObstacleTimer" to="World/ForegroundSpace/Obstacles/ObstacleSpawner" method="Execute"]
+[connection signal="done" from="World/ForegroundSpace/Obstacles/ObstacleSpawner" to="." method="_on_spawner_act_done"]
+[connection signal="pressed" from="CanvasLayer/PlayAgainBtn" to="GameStateChart" method="_on_play_again_btn_pressed"]
+
+[editable path="World"]

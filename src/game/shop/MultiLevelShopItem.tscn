@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7fl6jy4b3iwx"]
+
+[ext_resource type="Theme" uid="uid://blpg4nf6pmt2r" path="res://game/main_style_theme.tres" id="1_8jrr8"]
+[ext_resource type="Script" uid="uid://cfu01xeeduqst" path="res://game/shop/MultiLevelShopItem.gd" id="1_multi"]
+[ext_resource type="LabelSettings" uid="uid://dbm3rntcuvahk" path="res://common/base_label_small.tres" id="2_fgq8u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_multi"]
+bg_color = Color(0.2, 0.3, 0.8, 1)
+
+[node name="MultiLevelShopItem" type="PanelContainer"]
+custom_minimum_size = Vector2(40, 40)
+offset_right = 42.0
+offset_bottom = 42.0
+theme = ExtResource("1_8jrr8")
+theme_override_styles/panel = SubResource("StyleBoxFlat_multi")
+script = ExtResource("1_multi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Lives"
+label_settings = ExtResource("2_fgq8u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cost" type="Label" parent="VBox"]
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("2_fgq8u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Btn" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+flat = true
+
+[connection signal="pressed" from="Btn" to="." method="_on_btn_pressed"]

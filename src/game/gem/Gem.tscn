@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://cly33o3fvqvu0"]
+
+[ext_resource type="Script" uid="uid://bakbaquuqeri" path="res://game/gem/Pickable.gd" id="1_4u0a0"]
+[ext_resource type="Texture2D" uid="uid://ch8ac0jhcfs14" path="res://assets/graphic/wobble wings - crystal cllctbl sprite sheet.png" id="2_4u0a0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ac0qp"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ygr6"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cljdr"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kl6i"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poc6g"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vntdl"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ynok"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5qki"]
+atlas = ExtResource("2_4u0a0")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ps01j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ac0qp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ygr6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cljdr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kl6i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_poc6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vntdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ynok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5qki")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_naky0"]
+radius = 15.0
+
+[node name="Gem" type="Area2D" groups=["pickups"]]
+collision_layer = 2
+script = ExtResource("1_4u0a0")
+push_away_duration = 0.25
+push_away_distance = 16.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ps01j")
+autoplay = "default"
+frame_progress = 0.807682
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_naky0")
+debug_color = Color(0.599681, 0.541816, 0.120053, 0.42)

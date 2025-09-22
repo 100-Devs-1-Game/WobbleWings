@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://cytbu807mdyqf"]
+
+[ext_resource type="Script" uid="uid://dlol3idaqhhyh" path="res://lib_boo/act_system/cues/timing/TimerCue.gd" id="1_0ye3n"]
+[ext_resource type="Script" uid="uid://bkaqfcved0uek" path="res://game/gem/GemSpawn.gd" id="1_15lr1"]
+[ext_resource type="Script" uid="uid://y7jx5xehunbb" path="res://lib_boo/act_system/acts/util/DestroyNodeAct.gd" id="2_15lr1"]
+[ext_resource type="PackedScene" uid="uid://cly33o3fvqvu0" path="res://game/gem/Gem.tscn" id="2_a8omj"]
+[ext_resource type="Script" uid="uid://cv237uqyco3es" path="res://lib_boo/act_system/acts/move_acts/rgbd2d/RGBD2DMoveInDirectionAct.gd" id="3_a8omj"]
+[ext_resource type="Texture2D" uid="uid://c0d6w4oj1yf5s" path="res://assets/graphic/placeholder_gate.png" id="4_rytyp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdkn4"]
+
+[node name="GemSpawn" type="RigidBody2D" groups=["hazard"]]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_15lr1")
+gemScn = ExtResource("2_a8omj")
+
+[node name="TimerCue" type="Timer" parent="."]
+wait_time = 12.0
+autostart = true
+script = ExtResource("1_0ye3n")
+metadata/_custom_type_script = "uid://dlol3idaqhhyh"
+
+[node name="DestroyNodeAct" type="Node2D" parent="TimerCue" node_paths=PackedStringArray("actor")]
+script = ExtResource("2_15lr1")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://y7jx5xehunbb"
+
+[node name="RGBD2DMoveInDirectionAct" type="Node2D" parent="." node_paths=PackedStringArray("body")]
+script = ExtResource("3_a8omj")
+body = NodePath("..")
+direction = Vector2(-1, 0)
+moveForce = 320.0
+isLinearVelocity = true
+steeringForce = 300.0
+autoStart = true
+metadata/_custom_type_script = "uid://cv237uqyco3es"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qdkn4")
+disabled = true
+
+[node name="Gate" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 72)
+scale = Vector2(1, 2.01528)
+texture = ExtResource("4_rytyp")
+
+[node name="PossibleGemPositions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="PossibleGemPositions"]
+position = Vector2(-80, -120)
+gizmo_extents = 25.5
+
+[node name="Marker2D2" type="Marker2D" parent="PossibleGemPositions"]
+position = Vector2(-100, 0)
+gizmo_extents = 25.5
+
+[node name="Marker2D3" type="Marker2D" parent="PossibleGemPositions"]
+position = Vector2(-80, 120)
+gizmo_extents = 25.5
+
+[node name="Marker2D4" type="Marker2D" parent="PossibleGemPositions"]
+position = Vector2(80, -120)
+gizmo_extents = 25.5
+
+[node name="Marker2D5" type="Marker2D" parent="PossibleGemPositions"]
+position = Vector2(100, 0)
+gizmo_extents = 25.5
+
+[node name="Marker2D6" type="Marker2D" parent="PossibleGemPositions"]
+position = Vector2(80, 120)
+gizmo_extents = 25.5
+
+[node name="Marker2D7" type="Marker2D" parent="PossibleGemPositions"]
+gizmo_extents = 25.5

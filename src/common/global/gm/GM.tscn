@@ -1,0 +1,56 @@
+[gd_scene load_steps=12 format=3 uid="uid://8xocvupsala6"]
+
+[ext_resource type="PackedScene" uid="uid://dfhvxqxyxxbif" path="res://lib_boo/global/game_manager/GameManager.tscn" id="1_qnctq"]
+[ext_resource type="Script" uid="uid://duueg2lplw6o8" path="res://common/global/gm/GM.gd" id="2_kqw5o"]
+[ext_resource type="Script" uid="uid://v23j6p333drj" path="res://game/SaveKeys.gd" id="4_fvoa5"]
+[ext_resource type="Script" uid="uid://dgmfsit0u5r61" path="res://common/global/GameConfig.gd" id="5_1h201"]
+[ext_resource type="Script" uid="uid://doan63l2huqln" path="res://common/global/events/GlobalEvents.gd" id="5_gdxav"]
+[ext_resource type="AudioStream" uid="uid://jdkfu3x7bqt6" path="res://assets/sfx/drop-coin-384921.mp3" id="5_ld35o"]
+[ext_resource type="AudioStream" uid="uid://cec8yv3bqvsft" path="res://assets/sfx/item-equip-6904.mp3" id="6_fvoa5"]
+[ext_resource type="AudioStream" uid="uid://bdgqqadt7ps2s" path="res://assets/sfx/retro-coin-1-236677.mp3" id="7_1h201"]
+[ext_resource type="AudioStream" uid="uid://dsuwmnbml1c8f" path="res://assets/sfx/hard-slap-46388.mp3" id="8_l6xsv"]
+[ext_resource type="AudioStream" uid="uid://pn8ua1plnsuu" path="res://assets/sfx/wing-flap-1-6434.mp3" id="9_fvoa5"]
+
+[sub_resource type="Resource" id="Resource_1h201"]
+script = ExtResource("4_fvoa5")
+metadata/_custom_type_script = "uid://v23j6p333drj"
+
+[node name="GM" instance=ExtResource("1_qnctq")]
+script = ExtResource("2_kqw5o")
+
+[node name="GlobalEvents" parent="." index="0"]
+script = ExtResource("5_gdxav")
+
+[node name="BooSaveLoad" parent="." index="2"]
+saveKeys = SubResource("Resource_1h201")
+
+[node name="GameConfig" parent="." index="3"]
+script = ExtResource("5_1h201")
+ShouldSkipIntros = false
+
+[node name="GlobalAudioPlayer" parent="." index="6"]
+audioDictionary = Dictionary[String, AudioStream]({
+"flap": ExtResource("9_fvoa5"),
+"gem": ExtResource("7_1h201"),
+"hit": ExtResource("8_l6xsv"),
+"item_equip": ExtResource("6_fvoa5"),
+"item_purchased": ExtResource("5_ld35o")
+})
+
+[node name="AudioStreamPlayer2D" parent="GlobalAudioPlayer" index="0"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D2" parent="GlobalAudioPlayer" index="1"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2D3" parent="GlobalAudioPlayer" index="2"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer" parent="GlobalAudioPlayer" index="3"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer2" parent="GlobalAudioPlayer" index="4"]
+bus = &"SFX"
+
+[node name="AudioStreamPlayer3" parent="GlobalAudioPlayer" index="5"]
+bus = &"SFX"

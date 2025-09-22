@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8ctwi7qi0m82"]
+
+[ext_resource type="Script" uid="uid://cv7stc2w4g7kh" path="res://game/FlappyObstacle.gd" id="1_akc5q"]
+[ext_resource type="PackedScene" uid="uid://cly33o3fvqvu0" path="res://game/gem/Gem.tscn" id="3_3co8v"]
+[ext_resource type="Texture2D" uid="uid://d3t057phufsp7" path="res://lib_boo/assets/img/placeholders/16x16 white_block - placeholder.png" id="3_a82eq"]
+[ext_resource type="Script" uid="uid://dlol3idaqhhyh" path="res://lib_boo/act_system/cues/timing/TimerCue.gd" id="4_3co8v"]
+[ext_resource type="Script" uid="uid://y7jx5xehunbb" path="res://lib_boo/act_system/acts/util/DestroyNodeAct.gd" id="5_3mn66"]
+[ext_resource type="Texture2D" uid="uid://c0d6w4oj1yf5s" path="res://assets/graphic/placeholder_gate.png" id="6_3mn66"]
+[ext_resource type="AudioStream" uid="uid://ers103i5gubu" path="res://lib_boo/assets/cc0/sound/notification-740420__anthonyrox__message-notification-1.wav" id="7_a82eq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg1qk"]
+size = Vector2(80, 572)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akc5q"]
+size = Vector2(52, 309)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdkn4"]
+
+[node name="FlappyObstacle" type="RigidBody2D" node_paths=PackedStringArray("pipes") groups=["hazard"]]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_akc5q")
+pipes = [NodePath("Body/Hazard/CollisionShape2D"), NodePath("Body/Hazard/CollisionShape2D2")]
+gemScn = ExtResource("3_3co8v")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Hazard" type="Area2D" parent="Body"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Hazard"]
+position = Vector2(0, -400)
+shape = SubResource("RectangleShape2D_eg1qk")
+debug_color = Color(0.998593, 0, 0.137932, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Body/Hazard/CollisionShape2D"]
+position = Vector2(-1.5, -4)
+scale = Vector2(5.0625, 36.25)
+texture = ExtResource("3_a82eq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Body/Hazard"]
+position = Vector2(0, 400)
+shape = SubResource("RectangleShape2D_eg1qk")
+debug_color = Color(0.998593, 0, 0.137932, 0.42)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Body/Hazard/CollisionShape2D2"]
+position = Vector2(-0.499998, 4)
+scale = Vector2(5.0625, 36.25)
+texture = ExtResource("3_a82eq")
+
+[node name="Scoring" type="Area2D" parent="Body" groups=["scoring"]]
+position = Vector2(24, 0)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Scoring"]
+position = Vector2(43, 0.5)
+shape = SubResource("RectangleShape2D_akc5q")
+debug_color = Color(0, 0.634547, 0.427764, 0.42)
+
+[node name="TimerCue" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+script = ExtResource("4_3co8v")
+metadata/_custom_type_script = "uid://dlol3idaqhhyh"
+
+[node name="DestroyNodeAct" type="Node2D" parent="TimerCue" node_paths=PackedStringArray("actor")]
+script = ExtResource("5_3mn66")
+actor = NodePath("../..")
+metadata/_custom_type_script = "uid://y7jx5xehunbb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qdkn4")
+disabled = true
+
+[node name="Gate" type="Sprite2D" parent="."]
+position = Vector2(0, 72)
+scale = Vector2(1, 2.01528)
+texture = ExtResource("6_3mn66")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_a82eq")
+
+[connection signal="body_entered" from="Body/Scoring" to="." method="_on_scoring_body_entered"]

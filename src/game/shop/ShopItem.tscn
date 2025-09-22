@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bl04ismiy8j6d"]
+
+[ext_resource type="Script" uid="uid://ly4g1l13idgb" path="res://game/shop/ShopItem.gd" id="1_enl0t"]
+[ext_resource type="Theme" uid="uid://blpg4nf6pmt2r" path="res://game/main_style_theme.tres" id="1_xl3qh"]
+[ext_resource type="Resource" uid="uid://clnrtjh7oal83" path="res://game/shop/items/0.tres" id="2_l68wd"]
+[ext_resource type="Texture2D" uid="uid://boaq1e28lpkqc" path="res://assets/graphic/player 24x24 portrait.png" id="4_3xw6i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l68wd"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ShopItem" type="PanelContainer"]
+custom_minimum_size = Vector2(40, 40)
+offset_right = 42.0
+offset_bottom = 42.0
+theme = ExtResource("1_xl3qh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_l68wd")
+script = ExtResource("1_enl0t")
+data = ExtResource("2_l68wd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("4_3xw6i")
+
+[node name="Btn" type="Button" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "100"
+flat = true
+
+[connection signal="pressed" from="Btn" to="." method="_on_btn_pressed"]

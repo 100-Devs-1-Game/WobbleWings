@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MultiLevelUpgradeData" load_steps=2 format=3 uid="uid://dokp85l68sx1m"]
+
+[ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="1_lives"]
+
+[resource]
+script = ExtResource("1_lives")
+upgradeId = "lives"
+upgradeName = "Lives"
+description = "Start with more lives"
+color = Color(0.8, 0.2, 0.2, 1)
+levelPrices = Array[int]([5, 15, 30])
+maxLevel = 3

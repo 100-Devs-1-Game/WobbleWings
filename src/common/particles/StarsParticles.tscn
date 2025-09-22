@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpnywg0wx0w1"]
+
+[ext_resource type="PackedScene" uid="uid://chclbv7cqeige" path="res://lib_boo/components/one_off_particles/OneOffGPUParticles.tscn" id="1_u7smb"]
+[ext_resource type="Texture2D" uid="uid://i3tg61fkvtp3" path="res://lib_boo/assets/img/star_yellow_rounded.png" id="2_rgbaa"]
+
+[sub_resource type="Curve" id="Curve_xr5o0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.939227, 0.719101), 0.0, 0.0, 0, 0, Vector2(1, 0.0224719), -2.93758, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2ebtx"]
+curve = SubResource("Curve_xr5o0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1fflw"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.08
+scale_max = 0.18
+alpha_curve = SubResource("CurveTexture_2ebtx")
+
+[node name="StarsOneOffGPUParticles" instance=ExtResource("1_u7smb")]
+texture = ExtResource("2_rgbaa")
+process_material = SubResource("ParticleProcessMaterial_1fflw")

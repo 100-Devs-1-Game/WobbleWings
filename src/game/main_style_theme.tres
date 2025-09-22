@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://blpg4nf6pmt2r"]
+
+[ext_resource type="FontFile" uid="uid://c5ij0wn8lptse" path="res://lib_boo/assets/cc0/font/Jacquard24-Regular.ttf" id="1_8js5j"]
+[ext_resource type="FontFile" uid="uid://ddy1u3w52h86i" path="res://lib_boo/assets/cc0/font/GermaniaOne-Regular.ttf" id="1_lnutp"]
+
+[resource]
+default_font = ExtResource("1_8js5j")
+Button/fonts/font = ExtResource("1_lnutp")
+Label/fonts/font = ExtResource("1_lnutp")
