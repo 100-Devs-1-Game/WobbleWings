@@ -27,8 +27,8 @@ const SCREEN_WIDTH:int = 640
 @export var maxPipeSeparation = 412
 
 @export_group("Pipe speed settings")
-@export var minPipeSpeed = 200
-@export var maxPipeSpeed = 600
+@export var minPipeSpeed:float = 200
+@export var maxPipeSpeed:float = 600
 @export var speedIncreaseRate:float = 20
 var currentPipeSpeed:float = minPipeSpeed
 
@@ -301,6 +301,8 @@ func _CalculateClosingSpeed() -> float:
 
 #endregion
 
-#region signal
-
+#region wip
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("confirm"):
+		pass
 #endregion

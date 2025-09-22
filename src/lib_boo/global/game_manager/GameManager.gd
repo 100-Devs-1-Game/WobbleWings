@@ -1,5 +1,7 @@
 class_name GameManager extends Node
 
+signal gm_ready
+
 var main:MAIN
 var world:World
 
@@ -14,6 +16,7 @@ var world:World
 
 func _ready() -> void:
 	pass
+	gm_ready.emit()
 
 func ShowTextPopup(text:String, parent:Node2D = world, start_pos:Vector2 = Vector2.ZERO, color:Color = Color.WHITE) -> TextPopup:
 	var popup = textSpawner.Execute({"parent":parent})[0] as TextPopup

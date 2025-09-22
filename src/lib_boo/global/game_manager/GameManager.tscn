@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfhvxqxyxxbif"]
+[gd_scene load_steps=11 format=3 uid="uid://dfhvxqxyxxbif"]
 
 [ext_resource type="Script" uid="uid://pfofwvncohie" path="res://lib_boo/global/game_manager/GameManager.gd" id="1_qhk37"]
 [ext_resource type="Script" uid="uid://4ic8nnk56j4h" path="res://lib_boo/global/BooEvents.gd" id="2_k6wlb"]
 [ext_resource type="Script" uid="uid://xjeeitdr55mq" path="res://lib_boo/act_system/acts/instancing/SpawnerAct.gd" id="3_6v3ys"]
 [ext_resource type="PackedScene" uid="uid://d06pbwryxf1l4" path="res://lib_boo/global/time_manager/TimeManager.tscn" id="3_8suub"]
+[ext_resource type="PackedScene" uid="uid://dppeuwhkxhmhj" path="res://lib_boo/components/AchivementInterface.tscn" id="3_41pw0"]
 [ext_resource type="Script" uid="uid://be7io4goq06ct" path="res://lib_boo/global/save load/BooSaveLoad.gd" id="3_y5vfa"]
 [ext_resource type="PackedScene" uid="uid://dkt40jkk731pi" path="res://lib_boo/components/popups/TextPopup.tscn" id="4_8suub"]
 [ext_resource type="Script" uid="uid://dvg7vkpbqxt47" path="res://lib_boo/global/global_config/GlobalConfig.gd" id="4_48h4i"]
@@ -15,6 +16,8 @@ script = ExtResource("1_qhk37")
 
 [node name="GlobalEvents" type="Node" parent="."]
 script = ExtResource("2_k6wlb")
+
+[node name="AchievementInterface" parent="GlobalEvents" instance=ExtResource("3_41pw0")]
 
 [node name="TimeManager" parent="." instance=ExtResource("3_8suub")]
 

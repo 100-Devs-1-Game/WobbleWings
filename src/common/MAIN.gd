@@ -26,8 +26,7 @@ func _ready() -> void:
 	# Load saved gem gems
 	LoadGemScore()
 	
-
-
+	
 func _onMenuEntered() -> void:
 	shop.show()
 	sound_main.show()

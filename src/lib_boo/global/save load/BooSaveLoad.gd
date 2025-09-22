@@ -108,6 +108,10 @@ func ResetAllGameData() -> void:
 		if DeleteFile(key):
 			print("Deleted: ", key)
 	
+
+	if AchievementManager:
+		AchievementManager.reset_achievements()
+		
 	_EmitDeleteSignal(_registered_keys)
 	print("All save data has been reset.")
 #endregion

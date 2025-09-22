@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://h76w65eic6iq"]
+
+[ext_resource type="Texture2D" uid="uid://cg3b84ak8bsrv" path="res://addons/milestone/icons/hidden_achievement.svg" id="1_oi2op"]
+[ext_resource type="Texture2D" uid="uid://tetnyqr4i53d" path="res://assets/graphic/gem_single.png" id="2_oi2op"]
+[ext_resource type="Script" uid="uid://dtyojmellf4e5" path="res://addons/milestone/scripts/achievements/achievement.gd" id="3_qdtek"]
+
+[resource]
+script = ExtResource("3_qdtek")
+id = "first_10"
+icon = ExtResource("2_oi2op")
+icon_filter = 1
+group = "collect_gems"
+name = "First 10"
+description = "Get 10 gems"
+progressive = true
+progress_goal = 10.0
+indicate_progress_interval = 10.0

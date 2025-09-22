@@ -10,12 +10,13 @@ config_version=5
 
 [application]
 
-config/name="Wobble Wings Test"
+config/name="Wobble Wings"
 run/main_scene="uid://cqq88bw2sesh1"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 
 [autoload]
 
+AchievementManager="*res://addons/milestone/autoload/achievement_manager.gd"
 GM="*res://common/global/gm/GM.tscn"
 GameUpgrades="*res://common/global/GameUpgrades.gd"
 
@@ -33,7 +34,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/milestone/plugin.cfg")
 
 [file_customization]
 
@@ -43,7 +44,8 @@ folder_colors={
 "res://assets/": "gray",
 "res://common/": "blue",
 "res://game/": "teal",
-"res://lib_boo/": "purple"
+"res://lib_boo/": "purple",
+"res://lib_boo_internal/": "gray"
 }
 
 [input]
@@ -79,6 +81,13 @@ motherload={
 2d_physics/layer_1="PLAYER"
 2d_physics/layer_2="ALLY"
 2d_physics/layer_5="ENEMY"
+
+[milestone]
+
+general/achievements_path="res://addons/milestone/demo/achievements/"
+debug/print_errors=true
+debug/print_output=true
+general/save_as_json=true
 
 [rendering]
 

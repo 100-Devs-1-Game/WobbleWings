@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dppeuwhkxhmhj"]
+
+[ext_resource type="Script" uid="uid://c67sx8wqhcnky" path="res://common/global/gm/AchievementInterface.gd" id="1_pit52"]
+[ext_resource type="Script" uid="uid://wn30x7o3f47m" path="res://addons/milestone/scripts/achievements/achievement_notifier.gd" id="2_s04n3"]
+
+[node name="AchievementInterface" type="CanvasLayer"]
+layer = 77
+script = ExtResource("1_pit52")
+
+[node name="AchievementNotifierBoO" type="Node" parent="."]
+script = ExtResource("2_s04n3")
+metadata/_custom_type_script = "uid://wn30x7o3f47m"

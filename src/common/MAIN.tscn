@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=47 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" uid="uid://cemwblg5dbr8c" path="res://lib_boo/act_system/cues/ui_ux/ButtonCue.gd" id="26_ge5fl"]
 [ext_resource type="Texture2D" uid="uid://pbon6my3qo1m" path="res://lib_boo/assets/cc0/img/audioOff.png" id="27_v3efc"]
 [ext_resource type="Texture2D" uid="uid://c2taclnmffs8h" path="res://lib_boo/assets/cc0/img/audioOn.png" id="28_84tgi"]
+[ext_resource type="PackedScene" uid="uid://b2ygwvy3dv00a" path="res://addons/milestone/components/achievement_display.tscn" id="29_ge5fl"]
 
 [sub_resource type="Resource" id="Resource_e40kh"]
 script = ExtResource("9_db7hj")
@@ -140,13 +141,34 @@ corner_radius_bottom_left = 100
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mni8j"]
 bg_color = Color(0, 0, 0, 0.854902)
 
+[sub_resource type="GDScript" id="GDScript_84tgi"]
+resource_name = "Achievements"
+script/source = "extends PanelContainer
+
+@export var achievementDisplay:PackedScene
+@onready var vBox: VBoxContainer = $VBoxContainer
+
+func _ready() -> void:
+	var sorted_ids = AchievementManager.achievements_list.keys()
+
+	for achievement_id in sorted_ids:
+		var achievement_display = achievementDisplay.instantiate()
+		achievement_display.achievement_id = achievement_id
+		var data = AchievementManager.achievements.get(achievement_id, null)
+		vBox.add_child(achievement_display)
+		
+	
+func _onLoaded() -> void:
+	print(\"ASs\")
+"
+
 [node name="MAIN" instance=ExtResource("1_dp5wg")]
 script = ExtResource("2_cdcvv")
 
 [node name="GlobalUI" type="CanvasLayer" parent="." index="0"]
 layer = 128
 
-[node name="MainUI" type="Control" parent="GlobalUI" index="0"]
+[node name="MainUI" type="Control" parent="GlobalUI" index="0" groups=["scene_manager_entity_nodes"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -459,6 +481,16 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+
+[node name="Achievements" type="PanelContainer" parent="GlobalUI" index="1"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_84tgi")
+achievementDisplay = ExtResource("29_ge5fl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GlobalUI/Achievements" index="0"]
+layout_mode = 2
 
 [node name="Level0" parent="." index="1" instance=ExtResource("5_dp5wg")]
 oscillationSpeedIncrease = 0.1

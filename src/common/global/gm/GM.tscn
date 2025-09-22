@@ -15,7 +15,7 @@
 script = ExtResource("4_fvoa5")
 metadata/_custom_type_script = "uid://v23j6p333drj"
 
-[node name="GM" instance=ExtResource("1_qnctq")]
+[node name="GM" groups=["scene_manager_entity_nodes"] instance=ExtResource("1_qnctq")]
 script = ExtResource("2_kqw5o")
 
 [node name="GlobalEvents" parent="." index="0"]
@@ -26,7 +26,6 @@ saveKeys = SubResource("Resource_1h201")
 
 [node name="GameConfig" parent="." index="3"]
 script = ExtResource("5_1h201")
-ShouldSkipIntros = false
 
 [node name="GlobalAudioPlayer" parent="." index="6"]
 audioDictionary = Dictionary[String, AudioStream]({
