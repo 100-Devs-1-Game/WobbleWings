@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://cemwblg5dbr8c" path="res://lib_boo/act_system/cues/ui_ux/ButtonCue.gd" id="26_ge5fl"]
 [ext_resource type="Texture2D" uid="uid://pbon6my3qo1m" path="res://lib_boo/assets/cc0/img/audioOff.png" id="27_v3efc"]
 [ext_resource type="Texture2D" uid="uid://c2taclnmffs8h" path="res://lib_boo/assets/cc0/img/audioOn.png" id="28_84tgi"]
-[ext_resource type="PackedScene" uid="uid://b2ygwvy3dv00a" path="res://addons/milestone/components/achievement_display.tscn" id="29_ge5fl"]
+[ext_resource type="PackedScene" uid="uid://dm1jvpowrjilt" path="res://game/ui_ux/achievement/AchievementDisplayLocal.tscn" id="30_ge5fl"]
 
 [sub_resource type="Resource" id="Resource_e40kh"]
 script = ExtResource("9_db7hj")
@@ -146,7 +146,7 @@ resource_name = "Achievements"
 script/source = "extends PanelContainer
 
 @export var achievementDisplay:PackedScene
-@onready var vBox: VBoxContainer = $VBoxContainer
+@onready var vBox: VBoxContainer = $ScrollContainer/VBoxContainer
 
 func _ready() -> void:
 	var sorted_ids = AchievementManager.achievements_list.keys()
@@ -483,13 +483,29 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 
 [node name="Achievements" type="PanelContainer" parent="GlobalUI" index="1"]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 131.0
+offset_top = 65.0
+offset_right = 387.0
+offset_bottom = 259.0
 script = SubResource("GDScript_84tgi")
-achievementDisplay = ExtResource("29_ge5fl")
+achievementDisplay = ExtResource("30_ge5fl")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GlobalUI/Achievements" index="0"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GlobalUI/Achievements" index="0"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GlobalUI/Achievements/ScrollContainer" index="0"]
+layout_mode = 2
+
+[node name="AchievementDisplay" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("30_ge5fl")]
+layout_mode = 2
+
+[node name="AchievementDisplay2" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("30_ge5fl")]
+layout_mode = 2
+
+[node name="AchievementDisplay3" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("30_ge5fl")]
+layout_mode = 2
+
+[node name="AchievementDisplay4" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="3" instance=ExtResource("30_ge5fl")]
 layout_mode = 2
 
 [node name="Level0" parent="." index="1" instance=ExtResource("5_dp5wg")]
