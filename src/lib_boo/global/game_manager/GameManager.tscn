@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfhvxqxyxxbif"]
+
+[ext_resource type="Script" uid="uid://pfofwvncohie" path="res://lib_boo/global/game_manager/GameManager.gd" id="1_qhk37"]
+[ext_resource type="Script" uid="uid://4ic8nnk56j4h" path="res://lib_boo/global/BooEvents.gd" id="2_k6wlb"]
+[ext_resource type="Script" uid="uid://xjeeitdr55mq" path="res://lib_boo/act_system/acts/instancing/SpawnerAct.gd" id="3_6v3ys"]
+[ext_resource type="PackedScene" uid="uid://d06pbwryxf1l4" path="res://lib_boo/global/time_manager/TimeManager.tscn" id="3_8suub"]
+[ext_resource type="Script" uid="uid://be7io4goq06ct" path="res://lib_boo/global/save load/BooSaveLoad.gd" id="3_y5vfa"]
+[ext_resource type="PackedScene" uid="uid://dkt40jkk731pi" path="res://lib_boo/components/popups/TextPopup.tscn" id="4_8suub"]
+[ext_resource type="Script" uid="uid://dvg7vkpbqxt47" path="res://lib_boo/global/global_config/GlobalConfig.gd" id="4_48h4i"]
+[ext_resource type="PackedScene" uid="uid://cctgecw8yuofi" path="res://lib_boo/global/global spawner/GlobalSpawner.tscn" id="6_mm2u6"]
+[ext_resource type="Script" uid="uid://co1yi3a37pn85" path="res://lib_boo/global/global audio player/GlobalAudioPlayer.gd" id="7_ud2t6"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_qhk37")
+
+[node name="GlobalEvents" type="Node" parent="."]
+script = ExtResource("2_k6wlb")
+
+[node name="TimeManager" parent="." instance=ExtResource("3_8suub")]
+
+[node name="BooSaveLoad" type="Node" parent="."]
+script = ExtResource("3_y5vfa")
+
+[node name="GameConfig" type="Node" parent="."]
+script = ExtResource("4_48h4i")
+ShouldSkipIntros = true
+overrideInEditor = true
+metadata/_custom_type_script = "uid://dvg7vkpbqxt47"
+
+[node name="GlobalSpawner" parent="." instance=ExtResource("6_mm2u6")]
+
+[node name="TextPopupSpawner" type="Marker2D" parent="."]
+script = ExtResource("3_6v3ys")
+sceneToSpawn = ExtResource("4_8suub")
+parentMode = 6
+canOverlap = true
+canAct = true
+metadata/_custom_type_script = "uid://xjeeitdr55mq"
+
+[node name="GlobalAudioPlayer" type="Node2D" parent="."]
+script = ExtResource("7_ud2t6")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GlobalAudioPlayer"]
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="GlobalAudioPlayer"]
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="GlobalAudioPlayer"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GlobalAudioPlayer"]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="GlobalAudioPlayer"]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="GlobalAudioPlayer"]

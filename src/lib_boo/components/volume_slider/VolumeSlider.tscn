@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr6nknd6187ce"]
+
+[ext_resource type="Script" uid="uid://boit5b6ruw3au" path="res://lib_boo/components/volume_slider/VolumeSlider.gd" id="1_m3rqt"]
+
+[node name="MusicHSlider" type="HSlider"]
+max_value = 1.0
+step = 0.001
+script = ExtResource("1_m3rqt")
+busName = "Music"

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cctgecw8yuofi"]
+
+[ext_resource type="Script" uid="uid://7vlr2fx75uvc" path="res://lib_boo/global/global spawner/GlobalSpawner.gd" id="1_h1t5d"]
+
+
+[node name="GlobalSpawner" type="Node2D"]
+script = ExtResource("1_h1t5d")

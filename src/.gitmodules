@@ -1,6 +1,0 @@
-[submodule "lib_boo"]
-	path = lib_boo
-	url = https://github.com/BrainOnOxygen/lib_boo.git
-[submodule "lib_boo_internal"]
-	path = lib_boo_internal
-	url = https://github.com/BrainOnOxygen/lib_boo_internal.git

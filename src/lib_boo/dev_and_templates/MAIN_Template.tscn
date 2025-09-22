@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://oevkgsymtr66"]
+
+[ext_resource type="Script" uid="uid://cdgfyjmfkhhu8" path="res://lib_boo/dev_and_templates/MAIN_Template.gd" id="1_3kcmh"]
+
+
+[node name="MAIN_Template" type="Node"]
+script = ExtResource("1_3kcmh")

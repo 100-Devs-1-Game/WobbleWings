@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn65nw1akimst"]
+
+[ext_resource type="Script" uid="uid://dlol3idaqhhyh" path="res://lib_boo/act_system/cues/timing/TimerCue.gd" id="1_6mrfv"]
+
+
+[node name="TimerCueScene" type="Node2D"]
+script = ExtResource("1_6mrfv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/PanelContainer"]
+layout_mode = 2
+text = "00:00"
