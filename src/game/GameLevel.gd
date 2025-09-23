@@ -26,12 +26,6 @@ const SCREEN_WIDTH:int = 640
 @export var minPipeSeparation = 372
 @export var maxPipeSeparation = 412
 
-@export_group("Pipe speed settings")
-@export var minPipeSpeed:float = 200
-@export var maxPipeSpeed:float = 600
-@export var speedIncreaseRate:float = 20
-var currentPipeSpeed:float = minPipeSpeed
-
 
 @export_group("Spawn rate settings")
 @export var minSpawnRate:float = .5
@@ -44,8 +38,9 @@ var currentPipeSpeed:float = minPipeSpeed
 @export var livesShakeDuration: float = 0.3  # How long the shake lasts
 
 @export_group("Firefly spawn settings")
-@export var fireflySpawnRate: float = 3.0  # Time between firefly spawns in seconds
-@export var fireflySpawnChance: float = 0.7  # Chance to spawn a firefly each timer tick
+@export var fireflySpawnRate: float = 3.0 
+@export var fireflySpawnChance: float = 0.7 
+@export var fireflyPoolSize: int = 10 ## Maximum number of fireflies in the pool
 #endregion
 
 var lifeIconScn:PackedScene = preload("res://game/LifeIcon.tscn")
@@ -88,6 +83,10 @@ var _livesOriginalPosition: Vector2
 
 var livesTween: Tween = null
 
+# Firefly pooling system
+var _fireflyPool: Array[Node2D] = []
+var _activeFireflies: Array[Node2D] = []
+
 
 func _ready() -> void:
 	GM.events.play_started.connect(_onPlayStarted)
@@ -102,8 +101,9 @@ func _ready() -> void:
 	# Store original position for shake effect
 	_livesOriginalPosition = lives.position
 	
-	# Setup firefly timer
+	# Setup firefly timer and pool
 	_SetupFireflyTimer()
+	_SetupFireflyPool()
 
 
 func _OnMenuEntered() -> void:
@@ -141,8 +141,6 @@ func _OnObstacleDodge() -> void:
 	obstacle_timer.wait_time = maxf(minSpawnRate, maxSpawnRate - (obstacleDodgeCount * 0.05))
 
 func _OnGameOver(_score:int) -> void:
-	print("currentRunGems: ", currentRunGems, "\n currentSeparation: ", currentSeparation, "\n currentPipeSpeed: ", currentPipeSpeed, "\n obstacle_timer.wait_time: ", obstacle_timer.wait_time, "\n obstacleDodgeCount: ", obstacleDodgeCount, "\n highScore: ", GM.main.highScore)
-	
 	print("🏁🏁🏁Game Over")
 
 
@@ -175,9 +173,6 @@ func _on_spawner_act_done(spawnedInstances: Variant) -> void:
 		separation_amount = currentSeparation + 24
 	obstacle.SetSeparation(separation_amount)
 	
-	#Speed
-	# obstacle.SetSpeed(currentPipeSpeed)
-	currentPipeSpeed = minf(maxPipeSpeed, currentPipeSpeed + speedIncreaseRate)
 	
 	#Set oscillation speed if oscillating
 	if is_oscillating:
@@ -198,7 +193,7 @@ func _on_game_state_chart_took_damage(amount: int) -> void:
 		_ResetLivesOpacity()
 
 
-#region firefly system
+#region FireFly Pooling System
 func _SetupFireflyTimer() -> void:
 	firefly_timer = Timer.new()
 	firefly_timer.wait_time = fireflySpawnRate
@@ -206,16 +201,34 @@ func _SetupFireflyTimer() -> void:
 	firefly_timer.timeout.connect(_OnFireflyTimerTimeout)
 	add_child(firefly_timer)
 
+func _SetupFireflyPool() -> void:
+	if not firefly:
+		return
+	
+	# Create all fireflies upfront and add them to the pool
+	for i in range(fireflyPoolSize):
+		var firefly_instance = firefly.instantiate()
+		foreground_space.add_child(firefly_instance)
+		
+		# Disable the firefly initially
+		firefly_instance.visible = false
+		firefly_instance.process_mode = Node.PROCESS_MODE_DISABLED
+		
+		# Connect to animation finished signal to return to pool
+		if firefly_instance.has_signal("animation_finished"):
+			firefly_instance.animation_finished.connect(_OnFireflyAnimationFinished.bind(firefly_instance))
+		
+		_fireflyPool.append(firefly_instance)
+
 func _OnFireflyTimerTimeout() -> void:
 	if randf() < fireflySpawnChance:
 		_SpawnFirefly()
 
 func _SpawnFirefly() -> void:
-	if not firefly:
-		return
-	
-	var firefly_instance = firefly.instantiate()
-	foreground_space.add_child(firefly_instance)
+	# Get a firefly from the pool
+	var firefly_instance = _GetFireflyFromPool()
+	if not firefly_instance:
+		return # Pool is empty
 	
 	# Position firefly in world space relative to player's current position
 	var screen_size = get_viewport().get_visible_rect().size
@@ -225,13 +238,50 @@ func _SpawnFirefly() -> void:
 	var spawn_x = player_pos.x + randf_range(-screen_size.x * 0.5, screen_size.x * 0.5)
 	var spawn_y = player_pos.y + randf_range(-screen_size.y * 0.5, screen_size.y * 0.5)
 	
+	# Activate the firefly
 	firefly_instance.global_position = Vector2(spawn_x, spawn_y)
+	firefly_instance.visible = true
+	firefly_instance.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	# Reset animation to start from beginning
+	if firefly_instance.has_method("play"):
+		firefly_instance.play("default")
+	
+	# Move from pool to active list
+	_activeFireflies.append(firefly_instance)
+
+func _GetFireflyFromPool() -> Node2D:
+	if _fireflyPool.is_empty():
+		return null
+	
+	return _fireflyPool.pop_back()
+
+func _ReturnFireflyToPool(firefly_instance: Node2D) -> void:
+	# Remove from active list
+	_activeFireflies.erase(firefly_instance)
+	
+	# Disable the firefly
+	firefly_instance.visible = false
+	firefly_instance.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# Return to pool
+	_fireflyPool.append(firefly_instance)
+
+func _OnFireflyAnimationFinished(firefly_instance: Node2D) -> void:
+	# Return the firefly to the pool when animation finishes
+	_ReturnFireflyToPool(firefly_instance)
+
+func _ResetFireflyPool() -> void:
+	# Return all active fireflies to the pool
+	for firefly_instance in _activeFireflies.duplicate():
+		_ReturnFireflyToPool(firefly_instance)
 #endregion
 
 #region helpers
 func _Reset() -> void:
 	currentRunGems = 0
 	_ResetDifficulty()
+	_ResetFireflyPool()
 
 func _ResetLivesOpacity() -> void:
 	# Stop any existing tween
@@ -283,7 +333,6 @@ func _AddShakeEffect(tween: Tween) -> void:
 func _ResetDifficulty() -> void:
 	obstacleDodgeCount = 0
 	currentSeparation = maxPipeSeparation
-	currentPipeSpeed = minPipeSpeed
 	obstacle_timer.wait_time = maxSpawnRate
 
 func _OnPlayerScored(score_amount: int) -> void:

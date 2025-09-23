@@ -35,7 +35,6 @@
 [sub_resource type="Resource" id="Resource_e40kh"]
 script = ExtResource("9_db7hj")
 itemId = "4"
-price = 1
 color = Color(0.209125, 0.62614, 0.375691, 1)
 description = "Level 1"
 type = 1
@@ -247,6 +246,7 @@ columns = 4
 [node name="ShopItem4" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsLevels" index="0" instance=ExtResource("5_fy7di")]
 layout_mode = 2
 data = SubResource("Resource_e40kh")
+isPurchased = true
 
 [node name="ShopItem5" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsLevels" index="1" instance=ExtResource("5_fy7di")]
 layout_mode = 2
@@ -469,13 +469,13 @@ text = "Highscore: 0"
 
 [node name="CreditsBtn" type="Button" parent="GlobalUI/MainUI/Credits" index="2"]
 layout_mode = 0
-offset_left = 47.0
-offset_top = 322.0
-offset_right = 258.0
-offset_bottom = 353.0
-theme_override_font_sizes/font_size = 8
+offset_left = 41.0
+offset_top = 326.0
+offset_right = 87.0
+offset_bottom = 348.0
+theme_override_font_sizes/font_size = 12
 toggle_mode = true
-text = "Credits - Made with Collaborative Godot Game Jam"
+text = "Credits"
 
 [node name="CreditsCrawl" type="PanelContainer" parent="GlobalUI/MainUI/Credits" index="3"]
 visible = false
@@ -550,30 +550,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 alignment = 1
-
-[node name="AchievementDisplay" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="0" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
-
-[node name="AchievementDisplay2" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="1" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
-
-[node name="AchievementDisplay3" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="2" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
-
-[node name="AchievementDisplay4" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="3" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
-
-[node name="AchievementDisplay5" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="4" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
-
-[node name="AchievementDisplay6" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="5" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
-
-[node name="AchievementDisplay7" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="6" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
-
-[node name="AchievementDisplay8" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="7" instance=ExtResource("30_ge5fl")]
-layout_mode = 2
 
 [node name="Click_ControlSignalsCue" type="Node" parent="GlobalUI/MainUI/Achievements" index="1" node_paths=PackedStringArray("parent")]
 script = ExtResource("23_hghuq")

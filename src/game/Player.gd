@@ -28,7 +28,7 @@ func _ready() -> void:
 	GM.events.play_started.connect(_onPlayStarted)
 
 func _OnObstacleDodge() -> void:
-	IncreaseSpeed(0.1)
+	IncreaseSpeed(0.05)
 
 func _OnShopItemSelected(item:ShopItemData) -> void:
 	if item.type == ShopItemData.Type.COSTUME:

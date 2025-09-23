@@ -63,8 +63,8 @@ func LoadGemScore() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("delete_all"):
 		ResetAllGameData()
-	elif event.is_action_pressed("motherload"):
-		gems = 999999
+	# elif event.is_action_pressed("motherload"):
+	# 	gems = 999999
 
 ## DEBUG: Resets all game data and reloads the game
 func ResetAllGameData() -> void:

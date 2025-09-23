@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpeggnp44jqgv"]
+[gd_scene load_steps=15 format=3 uid="uid://dpeggnp44jqgv"]
 
 [ext_resource type="Texture2D" uid="uid://dg41i7iy22nvn" path="res://assets/graphic/wobblewings - forest firefly sprite sheet.png" id="1_5wwue"]
 
@@ -94,18 +94,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_5wwue"]
-resource_name = "Firefly"
-script/source = "extends AnimatedSprite2D
-
-func _on_animation_finished() -> void:
-	queue_free()
-"
-
 [node name="Firefly" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_tn04q")
 autoplay = "default"
 frame_progress = 0.6661756
-script = SubResource("GDScript_5wwue")
-
-[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

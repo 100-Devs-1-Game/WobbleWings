@@ -208,20 +208,21 @@ font_size = 24
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="GDScript" id="GDScript_xbyi2"]
+[sub_resource type="GDScript" id="GDScript_1rb85"]
 resource_name = "TitleScreen"
-script/source = "extends TextureRect
-
+script/source = "extends CanvasLayer
 @export var showTitleScreen:= true
+@onready var title_screen: TextureRect = $TitleScreen
 
 func _ready() -> void:
+	show()
 	if not showTitleScreen:
 		hide()
 		return
 	
 	var t = get_tree().create_tween() as Tween
 	t.tween_interval(2.5)
-	t.tween_property(self, \"modulate:a\", 0.0, 3)
+	t.tween_property(title_screen, \"modulate:a\", 0.0, 3)
 	await t.finished
 	hide()
 "
@@ -229,11 +230,13 @@ func _ready() -> void:
 [node name="Level0" type="CanvasLayer"]
 follow_viewport_enabled = true
 script = ExtResource("2_hvlfb")
+increaseDifficultyThreshold = 5
 oscillationSpeedIncrease = 0.05
 minPipeSeparation = 340
 maxPipeSeparation = 380
 fireflySpawnRate = 0.05
 fireflySpawnChance = 1.0
+fireflyPoolSize = 40
 firefly = ExtResource("2_bnmkg")
 
 [node name="GameStateChart" type="Node" parent="." node_paths=PackedStringArray("player", "level")]
@@ -528,6 +531,8 @@ alignment = 1
 
 [node name="Title" type="CanvasLayer" parent="."]
 layer = 100
+visible = false
+script = SubResource("GDScript_1rb85")
 
 [node name="TitleScreen" type="TextureRect" parent="Title"]
 anchors_preset = 15
@@ -538,7 +543,6 @@ grow_vertical = 2
 mouse_filter = 0
 texture = ExtResource("25_1rb85")
 expand_mode = 3
-script = SubResource("GDScript_xbyi2")
 
 [connection signal="took_damage" from="GameStateChart" to="." method="_on_game_state_chart_took_damage"]
 [connection signal="state_entered" from="GameStateChart/CompoundState/Loading" to="GameStateChart" method="_on_loading_state_entered"]

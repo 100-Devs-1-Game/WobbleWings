@@ -5,7 +5,7 @@ signal took_damage(amount:int)
 
 @export var player:CharacterBody2D = null
 @export var level:CanvasLayer = null
-@onready var title_screen: TextureRect = $"../Title/TitleScreen"
+@onready var title_screen: CanvasLayer = $"../Title/"
 
 var startPos:Vector2 = Vector2(115, 162)
 
