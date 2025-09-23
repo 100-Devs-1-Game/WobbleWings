@@ -2,7 +2,7 @@ class_name GlobalConfig extends Node
 
 
 #region General
-@export var ShouldSkipIntros:bool = true:
+@export var ShouldSkipIntros:bool = false:
 	set(skip):
 		ShouldSkipIntros = skip
 		if GM:

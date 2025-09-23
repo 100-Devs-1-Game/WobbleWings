@@ -5,6 +5,7 @@ signal took_damage(amount:int)
 
 @export var player:CharacterBody2D = null
 @export var level:CanvasLayer = null
+@onready var title_screen: TextureRect = $"../Title/TitleScreen"
 
 var startPos:Vector2 = Vector2(115, 162)
 
@@ -35,6 +36,8 @@ func _on_menu_state_input(_event: InputEvent) -> void:
 	pass
 
 func _on_menu_state_unhandled_input(event: InputEvent) -> void:
+	if title_screen.visible:
+		return
 	if event.is_action_pressed("confirm") or event.is_action_pressed("left_click"):
 		send_event("play_triggered")
 
