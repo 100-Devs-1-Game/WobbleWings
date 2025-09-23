@@ -5,7 +5,6 @@ signal upgrade_pressed(MultiLevelShopItem)
 @export var data: MultiLevelUpgradeData = null
 @onready var name_label: Label = $VBox/NameLabel
 @onready var cost: Label = $VBox/Cost
-
 var currentLevel: int = 0
 
 func get_button_node() -> Button:
@@ -36,6 +35,8 @@ func update_display() -> void:
 		else:
 			var price = data.GetNextLevelPrice(currentLevel)
 			cost.text = str(price)
+	
+	texture_rect.texture = data.icon
 	
 	# Update button state
 	update_button_state()

@@ -14,6 +14,7 @@ var world:World
 @onready var events:GlobalEvents = $GlobalEvents
 @onready var config: GameConfig = $GameConfig
 @onready var sceneTransition: CanvasLayer = $SceneTransition
+@onready var achieve: CanvasLayer = $GlobalEvents/AchievementInterface
 
 func _ready() -> void:
 	pass

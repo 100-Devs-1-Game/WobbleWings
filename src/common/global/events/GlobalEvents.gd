@@ -97,9 +97,9 @@ signal play_again_called()
 func PlayAgainCalled() -> void:
 	play_again_called.emit()
 
-signal game_over()
-func GameOver() -> void:
-	game_over.emit()
+signal game_over(score:int)
+func GameOver(score:int) -> void:
+	game_over.emit(score)
 
 ## Converts enum value to signal name string
 func GetSignalNameFromEnum(event_enum: EventName) -> String:

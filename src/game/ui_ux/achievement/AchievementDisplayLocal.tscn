@@ -81,7 +81,7 @@ corner_radius_bottom_left = 24
 [node name="AchievementDisplay" type="PanelContainer" node_paths=PackedStringArray("achievement_rare_overlay", "achievement_icon", "achievement_name", "achievement_description", "achievement_action_label", "progress_container", "achievement_progress_label", "achievement_progress_bar")]
 offset_right = 221.0
 offset_bottom = 86.0
-size_flags_horizontal = 0
+size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pv48d")

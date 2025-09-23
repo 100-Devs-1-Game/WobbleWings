@@ -174,7 +174,7 @@ func _WriteToConfigFile(key: String, section: String, property: String, value) -
 	if FileAccess.file_exists(file_path):
 		var err = config.load(file_path)
 		if err != OK:
-			print("Warning: Could not load existing config file: ", file_path)
+			print("❌Could not load existing config file: ", file_path)
 	
 	# Set the value
 	config.set_value(section, property, value)
@@ -188,21 +188,20 @@ func _WriteToConfigFile(key: String, section: String, property: String, value) -
 
 func _ReadFromConfigFile(key: String, section: String, property: String, default_value):
 	var file_path = "user://" + key + ".cfg"
-	print("Attempting to read config from: ", file_path)
 	
 	if not FileAccess.file_exists(file_path):
-		print("Config file does not exist: ", file_path)
+		print("❌Config file does not exist: ", file_path)
 		return default_value
 	
 	var config = ConfigFile.new()
 	var err = config.load(file_path)
 	if err != OK:
-		print("Warning: Could not load config file: ", file_path, " Error: ", err)
+		print("❌Could not load config file: ", file_path, " Error: ", err)
 		return default_value
 	
 	if config.has_section_key(section, property):
 		var value = config.get_value(section, property)
-		print("Successfully loaded config value: ", section, ".", property, " = ", value)
+		print("✅Loaded: ", section, ".", property, " = ", value)
 		return value
 	else:
 		print("Config section/property not found: ", section, ".", property)

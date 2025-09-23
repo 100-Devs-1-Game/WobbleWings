@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=51 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -20,15 +20,16 @@
 [ext_resource type="PackedScene" uid="uid://c3cx280f4i76s" path="res://100_devs_components/src/components/discord_link/discord_button.tscn" id="12_70eb6"]
 [ext_resource type="PackedScene" uid="uid://d4n4q5lg0lqd3" path="res://game/level_backgrounds/bg2.tscn" id="12_jur75"]
 [ext_resource type="Script" uid="uid://hf5ajblwmega" path="res://common/SoundMain.gd" id="13_8gllf"]
-[ext_resource type="Texture2D" uid="uid://tetnyqr4i53d" path="res://assets/graphic/gem_single.png" id="13_mni8j"]
 [ext_resource type="PackedScene" uid="uid://cr6nknd6187ce" path="res://lib_boo/components/volume_slider/VolumeSlider.tscn" id="13_xiwjy"]
 [ext_resource type="Texture2D" uid="uid://bivhtnnpj5x8i" path="res://assets/graphic/wobble wings - shop mage sprite sheet.png" id="19_84tgi"]
+[ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="19_ge5fl"]
 [ext_resource type="LabelSettings" uid="uid://bojj0ywqtfplx" path="res://game/ui_ux/label_24.tres" id="19_jur75"]
 [ext_resource type="Script" uid="uid://cpivbxsuk43nj" path="res://lib_boo/act_system/cues/ui_ux/ControlSignalsCue.gd" id="23_hghuq"]
 [ext_resource type="Script" uid="uid://cnwb780wdumwd" path="res://lib_boo/act_system/acts/util/ToggleAct.gd" id="24_si2jk"]
 [ext_resource type="Script" uid="uid://cemwblg5dbr8c" path="res://lib_boo/act_system/cues/ui_ux/ButtonCue.gd" id="26_ge5fl"]
 [ext_resource type="Texture2D" uid="uid://pbon6my3qo1m" path="res://lib_boo/assets/cc0/img/audioOff.png" id="27_v3efc"]
 [ext_resource type="Texture2D" uid="uid://c2taclnmffs8h" path="res://lib_boo/assets/cc0/img/audioOn.png" id="28_84tgi"]
+[ext_resource type="Texture2D" uid="uid://cr5msydxmxwa7" path="res://lib_boo/assets/cc0/img/chest_opengameart.png" id="29_ge5fl"]
 [ext_resource type="PackedScene" uid="uid://dm1jvpowrjilt" path="res://game/ui_ux/achievement/AchievementDisplayLocal.tscn" id="30_ge5fl"]
 
 [sub_resource type="Resource" id="Resource_e40kh"]
@@ -141,12 +142,32 @@ corner_radius_bottom_left = 100
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mni8j"]
 bg_color = Color(0, 0, 0, 0.854902)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_df26s"]
+atlas = ExtResource("29_ge5fl")
+region = Rect2(2, 0, 214, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymu5t"]
+atlas = ExtResource("29_ge5fl")
+region = Rect2(295.645, 0, 214, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84tgi"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.91764706)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="GDScript" id="GDScript_84tgi"]
 resource_name = "Achievements"
 script/source = "extends PanelContainer
 
 @export var achievementDisplay:PackedScene
-@onready var vBox: VBoxContainer = $ScrollContainer/VBoxContainer
+@onready var vBox: VBoxContainer = %List
 
 func _ready() -> void:
 	var sorted_ids = AchievementManager.achievements_list.keys()
@@ -275,7 +296,7 @@ alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="GlobalUI/MainUI/Gems" index="0"]
 layout_mode = 2
-texture = ExtResource("13_mni8j")
+texture = ExtResource("19_ge5fl")
 expand_mode = 2
 
 [node name="GemsLabel" type="Label" parent="GlobalUI/MainUI/Gems" index="1"]
@@ -316,7 +337,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -29.0
+offset_right = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -337,9 +358,9 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -258.0
+offset_left = -220.0
 offset_top = 31.0
-offset_right = -37.0
+offset_right = 1.0
 offset_bottom = 169.0
 grow_horizontal = 0
 
@@ -375,10 +396,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 73.5
-offset_top = -178.0
-offset_right = 150.5
-offset_bottom = -152.0
+offset_left = 111.5
+offset_top = -177.0
+offset_right = 188.5
+offset_bottom = -151.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 12
@@ -396,10 +417,10 @@ metadata/_custom_type_script = "uid://cnwb780wdumwd"
 
 [node name="SoundToggleContainer" type="PanelContainer" parent="GlobalUI/MainUI/SoundMain" index="3"]
 layout_mode = 0
-offset_left = 253.0
-offset_top = 3.0
-offset_right = 277.0
-offset_bottom = 27.0
+offset_left = 291.0
+offset_top = 4.0
+offset_right = 315.0
+offset_bottom = 28.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v3efc")
 
 [node name="ToggleSoundBtn" type="TextureButton" parent="GlobalUI/MainUI/SoundMain/SoundToggleContainer" index="0"]
@@ -482,31 +503,89 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="Achievements" type="PanelContainer" parent="GlobalUI" index="1"]
-offset_left = 131.0
-offset_top = 65.0
-offset_right = 387.0
-offset_bottom = 259.0
+[node name="AchievementButton" type="TextureButton" parent="GlobalUI/MainUI" index="5"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 278.0
+offset_right = 409.0
+offset_bottom = 336.61682
+texture_normal = SubResource("AtlasTexture_df26s")
+texture_hover = SubResource("AtlasTexture_ymu5t")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="AchieveLabel" type="Label" parent="GlobalUI/MainUI/AchievementButton" index="0"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 58.0
+offset_right = 45.0
+offset_bottom = 77.0
+text = "Feats"
+horizontal_alignment = 1
+
+[node name="Achievements" type="PanelContainer" parent="GlobalUI/MainUI" index="6"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_84tgi")
 script = SubResource("GDScript_84tgi")
 achievementDisplay = ExtResource("30_ge5fl")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GlobalUI/Achievements" index="0"]
+[node name="CenterContainer" type="CenterContainer" parent="GlobalUI/MainUI/Achievements" index="0"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GlobalUI/Achievements/ScrollContainer" index="0"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GlobalUI/MainUI/Achievements/CenterContainer" index="0"]
+custom_minimum_size = Vector2(234.24, 332)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="AchievementDisplay" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="0" instance=ExtResource("30_ge5fl")]
 layout_mode = 2
 
-[node name="AchievementDisplay" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="0" instance=ExtResource("30_ge5fl")]
+[node name="AchievementDisplay2" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="1" instance=ExtResource("30_ge5fl")]
 layout_mode = 2
 
-[node name="AchievementDisplay2" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="1" instance=ExtResource("30_ge5fl")]
+[node name="AchievementDisplay3" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="2" instance=ExtResource("30_ge5fl")]
 layout_mode = 2
 
-[node name="AchievementDisplay3" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="2" instance=ExtResource("30_ge5fl")]
+[node name="AchievementDisplay4" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="3" instance=ExtResource("30_ge5fl")]
 layout_mode = 2
 
-[node name="AchievementDisplay4" parent="GlobalUI/Achievements/ScrollContainer/VBoxContainer" index="3" instance=ExtResource("30_ge5fl")]
+[node name="AchievementDisplay5" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="4" instance=ExtResource("30_ge5fl")]
 layout_mode = 2
+
+[node name="AchievementDisplay6" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="5" instance=ExtResource("30_ge5fl")]
+layout_mode = 2
+
+[node name="AchievementDisplay7" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="6" instance=ExtResource("30_ge5fl")]
+layout_mode = 2
+
+[node name="AchievementDisplay8" parent="GlobalUI/MainUI/Achievements/CenterContainer/ScrollContainer/List" index="7" instance=ExtResource("30_ge5fl")]
+layout_mode = 2
+
+[node name="Click_ControlSignalsCue" type="Node" parent="GlobalUI/MainUI/Achievements" index="1" node_paths=PackedStringArray("parent")]
+script = ExtResource("23_hghuq")
+cueOnClick = true
+parent = NodePath("..")
+metadata/_custom_type_script = "uid://cpivbxsuk43nj"
+
+[node name="ToggleAct" type="Node" parent="GlobalUI/MainUI/Achievements/Click_ControlSignalsCue" index="0" node_paths=PackedStringArray("actors")]
+script = ExtResource("24_si2jk")
+mode = 1
+actors = [NodePath("../..")]
+metadata/_custom_type_script = "uid://cnwb780wdumwd"
 
 [node name="Level0" parent="." index="1" instance=ExtResource("5_dp5wg")]
 oscillationSpeedIncrease = 0.1
@@ -515,3 +594,4 @@ oscillationSpeedIncrease = 0.1
 [connection signal="toggled" from="GlobalUI/MainUI/SoundMain/SoundToggleContainer/ToggleSoundBtn" to="GlobalUI/MainUI/SoundMain" method="_on_toggle_sound_btn_toggled"]
 [connection signal="pressed" from="GlobalUI/MainUI/Credits/CreditsBtn" to="." method="_on_credits_btn_pressed"]
 [connection signal="gui_input" from="GlobalUI/MainUI/Credits/CreditsCrawl" to="." method="_on_credits_gui_input"]
+[connection signal="pressed" from="GlobalUI/MainUI/AchievementButton" to="GlobalUI/MainUI/Achievements" method="show"]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://j80wbkue68fj"]
+
+[ext_resource type="Texture2D" uid="uid://cg3b84ak8bsrv" path="res://addons/milestone/icons/hidden_achievement.svg" id="1_be5rr"]
+[ext_resource type="Texture2D" uid="uid://bsdmf74e2pd3x" path="res://assets/graphic/gate_icon.png" id="2_be5rr"]
+[ext_resource type="Script" uid="uid://dtyojmellf4e5" path="res://addons/milestone/scripts/achievements/achievement.gd" id="3_ujxs8"]
+
+[resource]
+script = ExtResource("3_ujxs8")
+id = "gate_crasher_1"
+icon = ExtResource("2_be5rr")
+group = "gates"
+name = "Gate Crasher Apprentice"
+description = "Fly through 50 gates"
+progressive = true
+progress_goal = 100.0
+indicate_progress_interval = 100.0

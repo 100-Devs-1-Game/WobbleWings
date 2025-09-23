@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7fl6jy4b3iwx"]
+[gd_scene load_steps=6 format=3 uid="uid://c7fl6jy4b3iwx"]
 
 [ext_resource type="Theme" uid="uid://blpg4nf6pmt2r" path="res://game/main_style_theme.tres" id="1_8jrr8"]
 [ext_resource type="Script" uid="uid://cfu01xeeduqst" path="res://game/shop/MultiLevelShopItem.gd" id="1_multi"]
 [ext_resource type="LabelSettings" uid="uid://dbm3rntcuvahk" path="res://common/base_label_small.tres" id="2_fgq8u"]
+[ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="3_1fsy5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_multi"]
 bg_color = Color(0.2, 0.3, 0.8, 1)
@@ -17,6 +18,8 @@ script = ExtResource("1_multi")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
+texture = ExtResource("3_1fsy5")
+expand_mode = 2
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2

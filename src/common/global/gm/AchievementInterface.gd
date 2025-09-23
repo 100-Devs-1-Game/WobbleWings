@@ -12,6 +12,23 @@ func _ConnectGlobalEvents():
 		AchievementManager.progress_group("collect_gems", amount)
 	)
 
+	GM.events.obstacle_dodge.connect(func():
+		AchievementManager.progress_group("gates", 1)
+	)
+
+	GM.events.game_over.connect(func(score:int):
+		match score:
+			10:
+				AchievementManager.unlock_achievement("run_gate_0")
+			40:
+				AchievementManager.unlock_achievement("run_gate_1")
+			100:
+				AchievementManager.unlock_achievement("run_gate_2")
+	)
+
+
+
+
 func _input(event: InputEvent) -> void:
 	if not AchievementManager.is_unlocked("press_space"):
 		return

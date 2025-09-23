@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="MultiLevelUpgradeData" load_steps=2 format=3 uid="uid://dokp85l68sx1m"]
+[gd_resource type="Resource" script_class="MultiLevelUpgradeData" load_steps=3 format=3 uid="uid://dokp85l68sx1m"]
 
+[ext_resource type="Texture2D" uid="uid://2j6eu44k36j7" path="res://assets/graphic/game_icon.png" id="1_dt2vl"]
 [ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="1_lives"]
 
 [resource]
@@ -8,5 +9,6 @@ upgradeId = "lives"
 upgradeName = "Lives"
 description = "Start with more lives"
 color = Color(0.8, 0.2, 0.2, 1)
+icon = ExtResource("1_dt2vl")
 levelPrices = Array[int]([5, 15, 30])
 maxLevel = 3

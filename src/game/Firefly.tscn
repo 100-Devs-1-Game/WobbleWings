@@ -1,0 +1,111 @@
+[gd_scene load_steps=16 format=3 uid="uid://dpeggnp44jqgv"]
+
+[ext_resource type="Texture2D" uid="uid://dg41i7iy22nvn" path="res://assets/graphic/wobblewings - forest firefly sprite sheet.png" id="1_5wwue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84iox"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28mnu"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ncfc"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7yeg"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyecp"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_685un"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08bq7"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn0lo"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2esgh"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ushws"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmdhx"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekg76"]
+atlas = ExtResource("1_5wwue")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tn04q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84iox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28mnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ncfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7yeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyecp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_685un")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08bq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn0lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2esgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ushws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmdhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekg76")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_5wwue"]
+resource_name = "Firefly"
+script/source = "extends AnimatedSprite2D
+
+func _on_animation_finished() -> void:
+	queue_free()
+"
+
+[node name="Firefly" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_tn04q")
+autoplay = "default"
+frame_progress = 0.6661756
+script = SubResource("GDScript_5wwue")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

@@ -42,6 +42,10 @@ var currentPipeSpeed:float = minPipeSpeed
 @export var minLivesOpacity: float = 0.0  # Minimum opacity for lives display
 @export var livesShakeIntensity: float = 10.0  # How much the lives shake when damage is taken
 @export var livesShakeDuration: float = 0.3  # How long the shake lasts
+
+@export_group("Firefly spawn settings")
+@export var fireflySpawnRate: float = 3.0  # Time between firefly spawns in seconds
+@export var fireflySpawnChance: float = 0.7  # Chance to spawn a firefly each timer tick
 #endregion
 
 var lifeIconScn:PackedScene = preload("res://game/LifeIcon.tscn")
@@ -78,6 +82,10 @@ var _livesOriginalPosition: Vector2
 @onready var score: HBoxContainer = $CanvasLayer/Score
 @onready var final_score_label: Label = $CanvasLayer/PlayAgainBtn/FinalScoreLabel
 
+@export var firefly:PackedScene
+@onready var foreground_space: Node2D = $World/ForegroundSpace
+@onready var firefly_timer: Timer
+
 var livesTween: Tween = null
 
 
@@ -93,6 +101,9 @@ func _ready() -> void:
 	
 	# Store original position for shake effect
 	_livesOriginalPosition = lives.position
+	
+	# Setup firefly timer
+	_SetupFireflyTimer()
 
 
 func _OnMenuEntered() -> void:
@@ -129,7 +140,7 @@ func _OnObstacleDodge() -> void:
 	obstacleDodgeCount += 1
 	obstacle_timer.wait_time = maxf(minSpawnRate, maxSpawnRate - (obstacleDodgeCount * 0.05))
 
-func _OnGameOver() -> void:
+func _OnGameOver(_score:int) -> void:
 	print("currentRunGems: ", currentRunGems, "\n currentSeparation: ", currentSeparation, "\n currentPipeSpeed: ", currentPipeSpeed, "\n obstacle_timer.wait_time: ", obstacle_timer.wait_time, "\n obstacleDodgeCount: ", obstacleDodgeCount, "\n highScore: ", GM.main.highScore)
 	
 	print("🏁🏁🏁Game Over")
@@ -141,7 +152,6 @@ func _OnGameOver() -> void:
 		GM.main.SaveHighScore()
 		print("🎉 New high score! Obstacles dodged: ", GM.main.highScore)
 
-	
 	final_score_label.text = "Level Score: " + str(obstacleDodgeCount) +"\n"+ "High Score: " + str(GM.main.highScore)
 	_Reset()
 	_ResetDifficulty()
@@ -187,6 +197,36 @@ func _on_game_state_chart_took_damage(amount: int) -> void:
 	if _currentLives > 0:
 		_ResetLivesOpacity()
 
+
+#region firefly system
+func _SetupFireflyTimer() -> void:
+	firefly_timer = Timer.new()
+	firefly_timer.wait_time = fireflySpawnRate
+	firefly_timer.autostart = true
+	firefly_timer.timeout.connect(_OnFireflyTimerTimeout)
+	add_child(firefly_timer)
+
+func _OnFireflyTimerTimeout() -> void:
+	if randf() < fireflySpawnChance:
+		_SpawnFirefly()
+
+func _SpawnFirefly() -> void:
+	if not firefly:
+		return
+	
+	var firefly_instance = firefly.instantiate()
+	foreground_space.add_child(firefly_instance)
+	
+	# Position firefly in world space relative to player's current position
+	var screen_size = get_viewport().get_visible_rect().size
+	var player_pos = player.global_position + Vector2.RIGHT * 200
+	
+	# Spawn firefly within screen bounds relative to player position
+	var spawn_x = player_pos.x + randf_range(-screen_size.x * 0.5, screen_size.x * 0.5)
+	var spawn_y = player_pos.y + randf_range(-screen_size.y * 0.5, screen_size.y * 0.5)
+	
+	firefly_instance.global_position = Vector2(spawn_x, spawn_y)
+#endregion
 
 #region helpers
 func _Reset() -> void:

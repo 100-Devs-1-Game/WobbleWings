@@ -60,11 +60,11 @@ func _LoadAudioVolumesFromConfig() -> void:
 		var loaded_music = GM.saveLoad.LoadConfig("game_config", "audio", "music_volume", 0.5)
 		var loaded_sfx = GM.saveLoad.LoadConfig("game_config", "audio", "sfx_volume", 0.5)
 		
-		print("Loaded audio settings from config file:")
-		print("  Muted: ", loaded_muted)
-		print("  Master Volume: ", loaded_master)
-		print("  Music Volume: ", loaded_music)
-		print("  SFX Volume: ", loaded_sfx)
+		# print("Loaded audio settings from config file:")
+		# print("  Muted: ", loaded_muted)
+		# print("  Master Volume: ", loaded_master)
+		# print("  Music Volume: ", loaded_music)
+		# print("  SFX Volume: ", loaded_sfx)
 		
 		# Set values directly to avoid triggering setters during loading
 		IsMuted = loaded_muted

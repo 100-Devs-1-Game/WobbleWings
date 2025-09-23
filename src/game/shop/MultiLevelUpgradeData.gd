@@ -7,6 +7,7 @@ class_name MultiLevelUpgradeData extends Resource
 @export var upgradeName: String = ""
 @export var description: String = ""
 @export var color: Color = Color.WHITE
+@export var icon:Texture2D = null
 
 # Array of prices for each level (index 0 = level 1, index 1 = level 2, etc.)
 @export var levelPrices: Array[int] = []

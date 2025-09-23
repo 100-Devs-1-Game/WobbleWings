@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://d1lrb5a1f0pet"]
 
 [ext_resource type="Texture2D" uid="uid://cg3b84ak8bsrv" path="res://addons/milestone/icons/hidden_achievement.svg" id="1_wxtki"]
-[ext_resource type="Texture2D" uid="uid://tetnyqr4i53d" path="res://assets/graphic/gem_single.png" id="2_wxtki"]
+[ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="2_wxtki"]
 [ext_resource type="Script" uid="uid://dtyojmellf4e5" path="res://addons/milestone/scripts/achievements/achievement.gd" id="3_7ou3w"]
 
 [resource]
@@ -9,7 +9,7 @@ script = ExtResource("3_7ou3w")
 id = "first_100"
 icon = ExtResource("2_wxtki")
 group = "collect_gems"
-name = "First 100"
+name = "Nice 100"
 description = "Collect 100 Gems"
 progressive = true
 progress_goal = 100.0

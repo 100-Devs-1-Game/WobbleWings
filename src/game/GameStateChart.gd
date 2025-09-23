@@ -4,6 +4,7 @@ extends BaseGameStateChart
 signal took_damage(amount:int)
 
 @export var player:CharacterBody2D = null
+@export var level:CanvasLayer = null
 
 var startPos:Vector2 = Vector2(115, 162)
 
@@ -54,10 +55,11 @@ func _on_game_over_state_entered() -> void:
 	for obstacle in get_tree().get_nodes_in_group("hazard"):
 		obstacle.linear_velocity = Vector2.ZERO
 	
+	
 	playAgainBtn.show()
 	playAgainBtn.grab_focus()
 	GM.main.SaveGemScore()
-	GM.events.GameOver()
+	GM.events.GameOver(level.obstacleDodgeCount)
 
 func _on_game_over_state_input(_event: InputEvent) -> void:
 	pass

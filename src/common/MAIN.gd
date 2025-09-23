@@ -7,6 +7,8 @@ extends MAIN
 
 @onready var credits: Control = $GlobalUI/MainUI/Credits
 @onready var credits_crawl: PanelContainer = $GlobalUI/MainUI/Credits/CreditsCrawl
+@onready var achievement_button: TextureButton = $GlobalUI/MainUI/AchievementButton
+@onready var achievements: PanelContainer = $GlobalUI/MainUI/Achievements
 
 var gems:int = 0:
 	set(val):
@@ -31,6 +33,7 @@ func _onMenuEntered() -> void:
 	shop.show()
 	sound_main.show()
 	credits.show()
+	achievement_button.show()
 
 	LoadHighScore()
 	%Highscore.text = "Highscore: " + str(highScore)
@@ -45,6 +48,8 @@ func _OnPlayStarted() -> void:
 	shop.hide()
 	sound_main.hide()
 	credits.hide()
+	achievement_button.hide()
+	achievements.hide()
 
 ## Saves the current gem gems to persistent storage
 func SaveGemScore() -> void:
