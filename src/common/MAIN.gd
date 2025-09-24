@@ -12,6 +12,9 @@ extends MAIN
 @onready var thanks_for_playing: Label = $GlobalUI/MainUI/ThanksForPlaying
 @onready var final_upgrade: MultiLevelShopItem = $GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades/FinalUpgrade
 
+@onready var username_btn: Button = $GlobalUI/MainUI/Credits/Highscore/UsernameBtn
+@onready var leaderboard: Control = $GlobalUI/MainUI/Leaderboard
+
 var gems:int = 0:
 	set(val):
 		gems = val
@@ -30,6 +33,8 @@ func _ready() -> void:
 	GM.events.upgrade_purchased.connect(_onUpgradePurchased)
 	# Load saved gem gems
 	LoadGemScore()
+	username_btn.hide()
+	
 	
 	
 func _onMenuEntered() -> void:
@@ -106,6 +111,24 @@ func _on_credits_gui_input(event: InputEvent) -> void:
 func SaveHighScore() -> void:
 	GM.saveLoad.SaveInt(SaveKeys.OBSTACLE_HIGH_SCORE, highScore)
 
+	leaderboard.SubmitScore(highScore)
+
 ## Loads the saved high gems from persistent storage
 func LoadHighScore() -> void:
 	highScore = GM.saveLoad.LoadInt(SaveKeys.OBSTACLE_HIGH_SCORE, 0)
+
+
+func _on_username_btn_pressed() -> void:
+	leaderboard.show()
+
+
+func _on_leaderboard_loaded_entries(user:String) -> void:
+	_UpdateUsernameBtn(user)
+
+
+func _on_leaderboard_username_saved(user: String) -> void:
+	_UpdateUsernameBtn(user)
+
+func _UpdateUsernameBtn(user: String) -> void:
+	username_btn.text = "Create User" if user == "" else "Hi, "+ user + " - Leaderboards"
+	username_btn.show()

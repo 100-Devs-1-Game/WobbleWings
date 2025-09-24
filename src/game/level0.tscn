@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cdtumpmve4ox3"]
+[gd_scene load_steps=52 format=3 uid="uid://cdtumpmve4ox3"]
 
 [ext_resource type="PackedScene" uid="uid://dpeggnp44jqgv" path="res://game/Firefly.tscn" id="2_bnmkg"]
 [ext_resource type="Script" uid="uid://qgsj20igv7x8" path="res://game/GameLevel.gd" id="2_hvlfb"]
@@ -200,6 +200,8 @@ _data = {
 &"RESET": SubResource("Animation_48r7y"),
 &"flap": SubResource("Animation_t6oaa")
 }
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xbyi2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t6oaa"]
 
@@ -411,6 +413,15 @@ one_shot = true
 stream = ExtResource("12_t6oaa")
 volume_db = -16.0
 bus = &"SFX"
+
+[node name="ObstacleCleaner" type="Area2D" parent="World/MainSpace/Player" groups=["cleaner"]]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MainSpace/Player/ObstacleCleaner"]
+position = Vector2(-214, 0)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_xbyi2")
 
 [node name="LoseArea" type="Area2D" parent="World/ForegroundSpace" index="0" groups=["floor"]]
 collision_layer = 16

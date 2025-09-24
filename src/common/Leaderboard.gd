@@ -1,5 +1,8 @@
 extends Control
 
+signal loaded_entries(user:String)
+signal username_saved(user:String)
+
 const ENTRY_SCN = preload("res://addons/talo/samples/leaderboards/entry.tscn")
 
 @export var leaderboardInternalName: String = "test_board"
@@ -8,16 +11,48 @@ const ENTRY_SCN = preload("res://addons/talo/samples/leaderboards/entry.tscn")
 @onready var boardName: Label = %LeaderboardName
 @onready var entriesContainer: VBoxContainer = %Entries
 @onready var infoLabel: Label = %InfoLabel
-@onready var username: TextEdit = %UsernameEntry
+@onready var usernameEntry: TextEdit = %UsernameEntry
+@onready var user_h_box: HBoxContainer = $MarginContainer/VBoxContainer/Username/User_HBox
+@onready var username_info: Label = $MarginContainer/VBoxContainer/Username/UsernameInfo
 @onready var filterBtn: Button = %Filter
 
 var _entriesErr: bool
+var savedUsername: String = ""
 
 func _ready() -> void:
+	GM.events.game_data_delete_requested.connect(_onGameDataDeleteRequested)
 	boardName.text = boardName.text.replace("{leaderboard}", leaderboardInternalName)
+
+	# Check if we have a saved username
+	savedUsername = GM.saveLoad.LoadString(SaveKeys.USERNAME)
+	if savedUsername != "":
+		user_h_box.visible = false
+		username_info.text = "Playing as " + savedUsername
+		username_info.visible = true
+
+	if savedUsername != "":
+		await Talo.players.identify("usernameEntry", savedUsername)
 
 	await _LoadEntries()
 	_SetEntryCount()
+	loaded_entries.emit(savedUsername)
+
+func SubmitScore(score: int) -> void:
+	
+	var user_type := "tester" if OS.is_debug_build() else "player"
+
+	var res := await Talo.leaderboards.add_entry(leaderboardInternalName, score, {user_type = user_type})
+	assert(is_instance_valid(res))
+	print("Submitted score: ", score, " for user: ", user_type, " Updated: ", res.updated)
+
+	_BuildEntries()
+
+func _onGameDataDeleteRequested() -> void:
+	if savedUsername == "":
+		return
+	
+	Talo.players.clear_identity()
+
 
 func _LoadEntries() -> void:
 	var page := 0
@@ -49,8 +84,6 @@ func _BuildEntries() -> void:
 		child.queue_free()
 
 	var entries = Talo.leaderboards.get_cached_entries(leaderboardInternalName)
-	# if _filter != "All":
-	# 	entries = entries.filter(func (entry: TaloLeaderboardEntry): return entry.get_prop("team", "") == _filter)
 
 	for entry in entries:
 		entry.position = entries.find(entry)
@@ -70,15 +103,23 @@ func _SetEntryCount():
 		# 	infoLabel.text += " (%s team)" % _filter
 
 func _on_submit_pressed() -> void:
-	await Talo.players.identify("username", username.text)
-	var score := RandomNumberGenerator.new().randi_range(0, 100)
-
-	var user_type := "tester" if OS.is_debug_build() else "player"
+	user_h_box.visible = false
+	username_info.text = "Adding User..."
 
 
+	await Talo.players.identify("usernameEntry", usernameEntry.text)
+	# var user_type := "tester" if OS.is_debug_build() else "player"
+	GM.saveLoad.SaveString(SaveKeys.USERNAME, usernameEntry.text)
 
-	var res := await Talo.leaderboards.add_entry(leaderboardInternalName, score, {user_type = user_type})
-	assert(is_instance_valid(res))
-	infoLabel.text = "You scored %s points for the %s team!%s" % [score, user_type, " Your highscore was updated!" if res.updated else ""]
+	# var res := await Talo.leaderboards.add_entry(leaderboardInternalName, score, {user_type = user_type})
+	# assert(is_instance_valid(res))
+	# infoLabel.text = "You scored %s points for the %s team!%s" % [score, user_type, " Your highscore was updated!" if res.updated else ""]
+
+	# Hide the input box and show the username info
+	user_h_box.visible = false
+	username_info.text = "Playing as " + usernameEntry.text
+	username_info.visible = true
+
+	username_saved.emit(usernameEntry.text)
 
 	_BuildEntries()

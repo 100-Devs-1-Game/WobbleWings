@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const SCREEN_WIDTH:int = 640
+const MIN_OBSTACLE_SEPARATION:float = 280
 
 #region settings
 
@@ -63,6 +64,8 @@ var obstacleDodgeCount:int = 0:
 	set(val):
 		obstacleDodgeCount = val
 		score_label.text = str(obstacleDodgeCount)
+
+var _lastObstacleX:float = 0.0
 
 var _livesOriginalPosition: Vector2
 
@@ -159,7 +162,15 @@ func _OnGameOver(_score:int) -> void:
 func _on_spawner_act_done(spawnedInstances: Variant) -> void:
 	var obstacle = spawnedInstances[0]
 	
-	obstacle.global_position.x = player.global_position.x + SCREEN_WIDTH + 40
+	# Calculate base position
+	var base_x = player.global_position.x + SCREEN_WIDTH + 40
+	
+	# Ensure minimum separation from last obstacle
+	var min_x = _lastObstacleX + MIN_OBSTACLE_SEPARATION
+	obstacle.global_position.x = maxf(base_x, min_x)
+	
+	# Update last obstacle position for next spawn
+	_lastObstacleX = obstacle.global_position.x
 	
 	#Oscillation check first to determine separation
 	var oscillation_chance = _CalculateOscillationChance()
@@ -283,6 +294,7 @@ func _Reset() -> void:
 	currentRunGems = 0
 	_ResetDifficulty()
 	_ResetFireflyPool()
+	_lastObstacleX = 0.0
 
 func _ResetLivesOpacity() -> void:
 	# Stop any existing tween

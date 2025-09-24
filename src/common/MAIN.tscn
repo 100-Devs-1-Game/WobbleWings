@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=60 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" uid="uid://dypfxnluhh3n1" path="res://common/Leaderboard.gd" id="33_2k8ga"]
 [ext_resource type="Theme" uid="uid://ce2uyi827vc5x" path="res://addons/talo/samples/authentication/assets/theme.tres" id="33_im47d"]
 [ext_resource type="FontFile" uid="uid://ddy1u3w52h86i" path="res://lib_boo/assets/cc0/font/GermaniaOne-Regular.ttf" id="36_q4da4"]
+[ext_resource type="PackedScene" uid="uid://bonnyy0kqkkqb" path="res://lib_boo_internal/act_system/acts/dev/FPSMeter/FPSMeter.tscn" id="37_q4da4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4s7ph"]
 font_size = 24
@@ -522,10 +523,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.5
-offset_top = -11.5
-offset_right = 47.5
-offset_bottom = 11.5
+offset_left = -253.0
+offset_top = -85.0
+offset_right = -158.0
+offset_bottom = -62.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Highscore: 0"
@@ -539,9 +540,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -58.0
-offset_top = 14.0
+offset_top = -44.0
 offset_right = 58.0
-offset_bottom = 41.0
+offset_bottom = -17.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Create Username"
@@ -643,6 +644,7 @@ actors = [NodePath("../..")]
 metadata/_custom_type_script = "uid://cnwb780wdumwd"
 
 [node name="Leaderboard" type="Control" parent="GlobalUI/MainUI" index="8"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -768,13 +770,24 @@ size_flags_horizontal = 4
 theme = ExtResource("33_im47d")
 text = "Blue team scores"
 
+[node name="FPSMeter (CanvasLayer_OnProcessT)" parent="GlobalUI/MainUI" index="9" instance=ExtResource("37_q4da4")]
+visible = false
+layout_mode = 0
+offset_left = 6.0
+offset_top = 175.0
+offset_right = 6.0
+offset_bottom = 175.0
+
 [node name="Level0" parent="." index="1" instance=ExtResource("5_dp5wg")]
 oscillationSpeedIncrease = 0.1
 
 [connection signal="pressed" from="GlobalUI/MainUI/SoundMain/SoundOptions/VBox/DeleteDataButton" to="GlobalUI/MainUI/SoundMain" method="_on_delete_data_button_pressed"]
 [connection signal="toggled" from="GlobalUI/MainUI/SoundMain/SoundSettingsMenuBtn" to="GlobalUI/MainUI/SoundMain" method="_on_sound_settings_menu_btn_toggled"]
 [connection signal="toggled" from="GlobalUI/MainUI/SoundMain/SoundToggleContainer/ToggleSoundBtn" to="GlobalUI/MainUI/SoundMain" method="_on_toggle_sound_btn_toggled"]
+[connection signal="pressed" from="GlobalUI/MainUI/Credits/Highscore/UsernameBtn" to="." method="_on_username_btn_pressed"]
 [connection signal="pressed" from="GlobalUI/MainUI/Credits/CreditsBtn" to="." method="_on_credits_btn_pressed"]
 [connection signal="gui_input" from="GlobalUI/MainUI/Credits/CreditsCrawl" to="." method="_on_credits_gui_input"]
 [connection signal="pressed" from="GlobalUI/MainUI/AchievementButton" to="GlobalUI/MainUI/Achievements" method="show"]
+[connection signal="loaded_entries" from="GlobalUI/MainUI/Leaderboard" to="." method="_on_leaderboard_loaded_entries"]
+[connection signal="username_saved" from="GlobalUI/MainUI/Leaderboard" to="." method="_on_leaderboard_username_saved"]
 [connection signal="pressed" from="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/Username/User_HBox/Submit" to="GlobalUI/MainUI/Leaderboard" method="_on_submit_pressed"]

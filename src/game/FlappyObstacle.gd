@@ -13,7 +13,7 @@ extends RigidBody2D
 
 # Closing behavior variables
 @export var closingSpeed: float = 0.0
-@export var closingRange: float = 16
+@export var closingRange: float = 12
 
 enum OscillationType {
 	SINE,
@@ -139,3 +139,10 @@ func _SpawnGems():
 func _on_scoring_body_entered(_body: Node2D) -> void:
 	GM.events.ObstacleDodge()
 	$AudioStreamPlayer2D.play()
+
+
+func _on_scoring_area_entered(area: Area2D) -> void:
+	if area.is_in_group("cleaner"):
+		print("CLEANED!")
+		queue_free()
+		return
