@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwippgp7yxm7y"]
+
+[ext_resource type="Script" uid="uid://dbqheaf84rrj5" path="res://game/leaderboard/TaloLeaderboardDisplay.gd" id="1_v66wl"]
+
+[node name="TaloLeaderboardDisplay" type="PanelContainer"]
+offset_right = 121.0
+offset_bottom = 33.0
+script = ExtResource("1_v66wl")
+metadata/_custom_type_script = "uid://dbqheaf84rrj5"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Position Label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "#1"
+
+[node name="Player Name" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "[PLAYER_NAME]"
+
+[node name="Score" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "9999"
