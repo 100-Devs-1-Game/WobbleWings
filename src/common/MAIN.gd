@@ -10,6 +10,7 @@ extends MAIN
 @onready var achievement_button: TextureButton = $GlobalUI/MainUI/AchievementButton
 @onready var achievements: PanelContainer = $GlobalUI/MainUI/Achievements
 @onready var thanks_for_playing: Label = $GlobalUI/MainUI/ThanksForPlaying
+@onready var final_upgrade: MultiLevelShopItem = $GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades/FinalUpgrade
 
 var gems:int = 0:
 	set(val):

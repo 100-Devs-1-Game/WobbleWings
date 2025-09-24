@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=55 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d4n4q5lg0lqd3" path="res://game/level_backgrounds/bg2.tscn" id="12_jur75"]
 [ext_resource type="Script" uid="uid://hf5ajblwmega" path="res://common/SoundMain.gd" id="13_8gllf"]
 [ext_resource type="PackedScene" uid="uid://cr6nknd6187ce" path="res://lib_boo/components/volume_slider/VolumeSlider.tscn" id="13_xiwjy"]
+[ext_resource type="Texture2D" uid="uid://i3tg61fkvtp3" path="res://lib_boo/assets/img/star_yellow_rounded.png" id="18_7gmbk"]
 [ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="19_4s7ph"]
 [ext_resource type="Texture2D" uid="uid://bivhtnnpj5x8i" path="res://assets/graphic/wobble wings - shop mage sprite sheet.png" id="19_84tgi"]
 [ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="19_ge5fl"]
@@ -79,7 +80,7 @@ upgradeId = "final"
 upgradeName = "Final"
 description = "Thanks for Playing"
 color = Color(1, 1, 0.38, 1)
-icon = ExtResource("19_ge5fl")
+icon = ExtResource("18_7gmbk")
 levelPrices = Array[int]([999])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ge5fl"]
@@ -260,6 +261,7 @@ columns = 4
 
 [node name="ShopItem0" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="0" instance=ExtResource("5_fy7di")]
 layout_mode = 2
+isPurchased = true
 
 [node name="ShopItem1" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="1" instance=ExtResource("5_fy7di")]
 layout_mode = 2
@@ -305,7 +307,7 @@ data = ExtResource("10_mni8j")
 layout_mode = 2
 data = ExtResource("11_mni8j")
 
-[node name="MultiLevelShopItem3" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="2" instance=ExtResource("9_8wxic")]
+[node name="FinalUpgrade" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="2" instance=ExtResource("9_8wxic")]
 layout_mode = 2
 data = SubResource("Resource_7gmbk")
 

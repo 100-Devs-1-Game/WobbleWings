@@ -12,5 +12,5 @@ group = "run_gates"
 name = "40 gates in a single run"
 description = ""
 considered_rare = true
-progress_goal = 40.0
-indicate_progress_interval = 40.0
+progress_goal = 50.0
+indicate_progress_interval = 50.0

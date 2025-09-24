@@ -6,6 +6,7 @@ var multiLevelShopItems:Array[MultiLevelShopItem] = []
 @onready var items_costumes: GridContainer = %ItemsCostumes
 @onready var items_levels: GridContainer = %ItemsLevels
 @onready var items_upgrades: GridContainer = %ItemsUpgrades
+@onready var final_upgrade: MultiLevelShopItem = $VBoxContainer/ItemsUpgrades/FinalUpgrade
 
 var _initialPosition: Vector2
 
@@ -19,6 +20,8 @@ func _ready() -> void:
 
 	LoadPurchasedItems()
 	LoadMultiLevelUpgrades()
+	# Check if final upgrade should be revealed on initial load
+	_CheckAndRevealFinalUpgrade()
 	Appear()
 
 ## Setup shop items with common signal connections
@@ -33,6 +36,30 @@ func _SetupShopItems(container: GridContainer, target_array: Array, is_regular_s
 		item.mouse_exited_item.connect(_OnItemUnhovered)
 		item.update_display()
 
+## Check if all costume and level items are purchased
+func _CheckAllItemsPurchased() -> bool:
+	# Check all costume items
+	for item in items_costumes.get_children():
+		if item is ShopItem and not item.isPurchased:
+			return false
+	
+	# Check all level items  
+	for item in items_levels.get_children():
+		if item is ShopItem and not item.isPurchased:
+			return false
+	
+	return true
+
+## Check if final upgrade should be revealed and update visibility
+func _CheckAndRevealFinalUpgrade() -> void:
+	if _CheckAllItemsPurchased():
+		_RevealFinalUpgrade()
+	else:
+		final_upgrade.visible = false
+
+func _RevealFinalUpgrade() -> void:
+	final_upgrade.visible = true
+
 ## Handle item click - purchase if not owned, equip if owned
 func _OnItemClicked(item:ShopItem) -> void:
 	if item.isPurchased:
@@ -44,6 +71,8 @@ func _OnItemClicked(item:ShopItem) -> void:
 			GM.main.gems -= item.data.price
 			GM.globalAudio.PlaySound("item_purchased")
 			SavePurchasedItems()
+			# Check if final upgrade should be revealed after purchase
+			_CheckAndRevealFinalUpgrade()
 		else:
 			print("not enough score")
 
@@ -75,6 +104,7 @@ func _OnMultiLevelUpgradeClicked(item:MultiLevelShopItem) -> void:
 		print("Purchased ", item.data.upgradeName, " level ", currentLevel + 1)
 		GM.events.UpgradePurchased(item.data)
 		GM.globalAudio.PlaySound("item_purchased")
+		# Check if final upgrade should be revealed after purchase
 	else:
 		print("Not enough score for ", item.data.upgradeName)
 
