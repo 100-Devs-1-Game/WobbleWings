@@ -19,7 +19,7 @@ jobs:
       
       - name: Set access key for Talo service
         run: |
-          sed -i "s/^access_key=.*/access_key=${{ secrets.TALO_ACCESS_KEY }}/" src/addons/talo/settings.cfg
+          sed -i "s/^access_key=.*/access_key=\"${{ secrets.TALO_ACCESS_KEY }}\"/" src/addons/talo/settings.cfg
 
       - name: Build game
         id: build
