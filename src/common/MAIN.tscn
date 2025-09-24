@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=59 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -33,6 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://c2taclnmffs8h" path="res://lib_boo/assets/cc0/img/audioOn.png" id="28_84tgi"]
 [ext_resource type="Texture2D" uid="uid://cr5msydxmxwa7" path="res://lib_boo/assets/cc0/img/chest_opengameart.png" id="29_ge5fl"]
 [ext_resource type="PackedScene" uid="uid://dm1jvpowrjilt" path="res://game/ui_ux/achievement/AchievementDisplayLocal.tscn" id="30_ge5fl"]
+[ext_resource type="Script" uid="uid://dypfxnluhh3n1" path="res://common/Leaderboard.gd" id="33_2k8ga"]
+[ext_resource type="Theme" uid="uid://ce2uyi827vc5x" path="res://addons/talo/samples/authentication/assets/theme.tres" id="33_im47d"]
+[ext_resource type="FontFile" uid="uid://ddy1u3w52h86i" path="res://lib_boo/assets/cc0/font/GermaniaOne-Regular.ttf" id="36_q4da4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4s7ph"]
 font_size = 24
@@ -200,6 +203,9 @@ func _ready() -> void:
 func _onLoaded() -> void:
 	print(\"ASs\")
 "
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7gmbk"]
+bg_color = Color(0, 0, 0, 0.9372549)
 
 [node name="MAIN" instance=ExtResource("1_dp5wg")]
 script = ExtResource("2_cdcvv")
@@ -510,12 +516,35 @@ mouse_default_cursor_shape = 2
 
 [node name="Highscore" type="Label" parent="GlobalUI/MainUI/Credits" index="1"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 74.0
-offset_top = 75.0
-offset_right = 169.0
-offset_bottom = 98.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.5
+offset_top = -11.5
+offset_right = 47.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Highscore: 0"
+horizontal_alignment = 1
+
+[node name="UsernameBtn" type="Button" parent="GlobalUI/MainUI/Credits/Highscore" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = 14.0
+offset_right = 58.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Create Username"
 
 [node name="CreditsBtn" type="Button" parent="GlobalUI/MainUI/Credits" index="2"]
 layout_mode = 0
@@ -613,6 +642,132 @@ mode = 1
 actors = [NodePath("../..")]
 metadata/_custom_type_script = "uid://cnwb780wdumwd"
 
+[node name="Leaderboard" type="Control" parent="GlobalUI/MainUI" index="8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_2k8ga")
+
+[node name="Overlay" type="Panel" parent="GlobalUI/MainUI/Leaderboard" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7gmbk")
+
+[node name="ControlSignalsCue" type="Node" parent="GlobalUI/MainUI/Leaderboard/Overlay" index="0" node_paths=PackedStringArray("parent")]
+script = ExtResource("23_hghuq")
+cueOnClick = true
+parent = NodePath("..")
+metadata/_custom_type_script = "uid://cpivbxsuk43nj"
+
+[node name="ToggleAct" type="Node" parent="GlobalUI/MainUI/Leaderboard/Overlay/ControlSignalsCue" index="0" node_paths=PackedStringArray("actors")]
+script = ExtResource("24_si2jk")
+mode = 1
+actors = [NodePath("../../..")]
+metadata/_custom_type_script = "uid://cnwb780wdumwd"
+
+[node name="MarginContainer" type="MarginContainer" parent="GlobalUI/MainUI/Leaderboard" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GlobalUI/MainUI/Leaderboard/MarginContainer" index="0"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LeaderboardName" type="Label" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("33_im47d")
+text = "{leaderboard} entries"
+horizontal_alignment = 1
+
+[node name="InfoLabel" type="Label" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer" index="2"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+horizontal_scroll_mode = 0
+
+[node name="Entries" type="VBoxContainer" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/ScrollContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="Username" type="VBoxContainer" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer" index="3"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UsernameInfo" type="Label" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/Username" index="0"]
+layout_mode = 2
+text = "Add New User to submit your score."
+horizontal_alignment = 1
+
+[node name="User_HBox" type="HBoxContainer" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/Username" index="1"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="UsernameEntry" type="TextEdit" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/Username/User_HBox" index="0"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(124, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+theme = ExtResource("33_im47d")
+theme_override_fonts/font = ExtResource("36_q4da4")
+placeholder_text = "Username"
+
+[node name="Submit" type="Button" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/Username/User_HBox" index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Create User"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer" index="4"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="SubmitOld" type="Button" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("33_im47d")
+text = "Add entry"
+
+[node name="Filter" type="Button" parent="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/HBoxContainer" index="1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("33_im47d")
+text = "Blue team scores"
+
 [node name="Level0" parent="." index="1" instance=ExtResource("5_dp5wg")]
 oscillationSpeedIncrease = 0.1
 
@@ -622,3 +777,4 @@ oscillationSpeedIncrease = 0.1
 [connection signal="pressed" from="GlobalUI/MainUI/Credits/CreditsBtn" to="." method="_on_credits_btn_pressed"]
 [connection signal="gui_input" from="GlobalUI/MainUI/Credits/CreditsCrawl" to="." method="_on_credits_gui_input"]
 [connection signal="pressed" from="GlobalUI/MainUI/AchievementButton" to="GlobalUI/MainUI/Achievements" method="show"]
+[connection signal="pressed" from="GlobalUI/MainUI/Leaderboard/MarginContainer/VBoxContainer/Username/User_HBox/Submit" to="GlobalUI/MainUI/Leaderboard" method="_on_submit_pressed"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://rrbrrh7ka5tq"]
+
+[ext_resource type="Script" uid="uid://c72ppt5dawi36" path="res://addons/talo/samples/leaderboards/scripts/leaderboard_entry.gd" id="2_hlvf3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fnj2h"]
+line_spacing = 0.0
+font_size = 10
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Entry" type="Label"]
+text = "{pos}. {username} scored: {score} points"
+label_settings = SubResource("LabelSettings_fnj2h")
+script = ExtResource("2_hlvf3")
