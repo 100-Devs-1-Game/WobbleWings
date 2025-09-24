@@ -16,6 +16,11 @@ signal game_loaded(data_loaded: Variant)
 func GameLoaded(data_loaded: Variant) -> void:
 	game_loaded.emit(data_loaded)
 
+
+signal game_data_delete_requested()
+func GameDataDeleteRequested() -> void:
+	game_data_delete_requested.emit()
+
 signal game_data_deleted(data_deleted: Variant)
 func GameDataDeleted(data_deleted: Variant) -> void:
 	game_data_deleted.emit(data_deleted)

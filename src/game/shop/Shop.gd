@@ -7,13 +7,19 @@ var multiLevelShopItems:Array[MultiLevelShopItem] = []
 @onready var items_levels: GridContainer = %ItemsLevels
 @onready var items_upgrades: GridContainer = %ItemsUpgrades
 
+var _initialPosition: Vector2
+
 func _ready() -> void:
+	_initialPosition = position
 	_SetupShopItems(items_costumes, shopItems, true)
 	_SetupShopItems(items_levels, shopItems, true)
 	_SetupShopItems(items_upgrades, multiLevelShopItems, false)
 
+	GM.events.menu_entered.connect(Appear)
+
 	LoadPurchasedItems()
 	LoadMultiLevelUpgrades()
+	Appear()
 
 ## Setup shop items with common signal connections
 func _SetupShopItems(container: GridContainer, target_array: Array, is_regular_shop_item: bool) -> void:
@@ -67,7 +73,7 @@ func _OnMultiLevelUpgradeClicked(item:MultiLevelShopItem) -> void:
 		GM.main.gems -= nextPrice
 		item.update_display()
 		print("Purchased ", item.data.upgradeName, " level ", currentLevel + 1)
-		
+		GM.events.UpgradePurchased(item.data)
 		GM.globalAudio.PlaySound("item_purchased")
 	else:
 		print("Not enough score for ", item.data.upgradeName)
@@ -109,4 +115,14 @@ func LoadPurchasedItems() -> void:
 		if item.data.itemId in purchased_ids:
 			item.isPurchased = true
 
+#endregion
+
+#region Fun
+func Appear():
+	position = Vector2(650,0)
+	var t = get_tree().create_tween()
+	t.tween_property(self, "position", _initialPosition, .7)
+	t.set_ease(Tween.EASE_IN_OUT)
+	t.set_trans(Tween.TRANS_SINE)
+	t.play()
 #endregion

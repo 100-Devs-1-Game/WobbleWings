@@ -13,4 +13,4 @@ name = "Nice 100"
 description = "Collect 100 Gems"
 progressive = true
 progress_goal = 100.0
-indicate_progress_interval = 50.0
+indicate_progress_interval = 100.0

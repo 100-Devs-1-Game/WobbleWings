@@ -26,6 +26,7 @@ saveKeys = SubResource("Resource_1h201")
 
 [node name="GameConfig" parent="." index="3"]
 script = ExtResource("5_1h201")
+ShouldSkipIntros = true
 
 [node name="GlobalAudioPlayer" parent="." index="6"]
 audioDictionary = Dictionary[String, AudioStream]({

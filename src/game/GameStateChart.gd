@@ -11,6 +11,7 @@ var startPos:Vector2 = Vector2(115, 162)
 
 @onready var playAgainBtn:Button = %PlayAgainBtn
 
+
 func _ready() -> void:
 	super()
 	
@@ -52,11 +53,12 @@ func _on_active_state_entered() -> void:
 
 
 func _on_game_over_state_entered() -> void:
-	player.Stop()
-
+	player.Stop.call_deferred()
 	%ObstacleTimer.stop()
 	for obstacle in get_tree().get_nodes_in_group("hazard"):
 		obstacle.linear_velocity = Vector2.ZERO
+		var t = get_tree().create_tween()
+		t.tween_property(obstacle, "modulate:a", 0, 1.5)
 	
 	
 	playAgainBtn.show()
@@ -91,10 +93,14 @@ func _on_play_again_btn_gui_input(event: InputEvent) -> void:
 
 
 func _on_player_got_hit(area: Area2D) -> void:
-	GM.globalAudio.PlaySound("hit")
 	# player.jump.OnJumpPressed()
 	if area.is_in_group("floor"):
+		GM.globalAudio.PlaySound("hit")
 		took_damage.emit(9999)
 		return
+	elif area.is_in_group("ceiling"):
+		player.BounceFromCeiling()
+		return
 
+	GM.globalAudio.PlaySound("hit")
 	took_damage.emit(1)

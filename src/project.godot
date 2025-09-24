@@ -13,6 +13,11 @@ config_version=5
 config/name="Wobble Wings"
 run/main_scene="uid://cqq88bw2sesh1"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+audio/buses/default_bus_layout="res://lib_boo/default_bus_layout.tres"
+
+[audio]
+
+buses/default_bus_layout="uid://dral0mu8uxtdh"
 
 [autoload]
 

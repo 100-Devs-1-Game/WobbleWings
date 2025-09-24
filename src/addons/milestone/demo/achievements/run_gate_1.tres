@@ -11,5 +11,6 @@ icon = ExtResource("2_jnpa0")
 group = "run_gates"
 name = "40 gates in a single run"
 description = ""
+considered_rare = true
 progress_goal = 40.0
 indicate_progress_interval = 40.0

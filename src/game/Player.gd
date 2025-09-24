@@ -9,6 +9,8 @@ signal got_hit(area:Area2D)
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var invul_timer: Timer = $InvulTimer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var lose_check: Area2D = $LoseCheck
+
 
 @export var maxMoveSpd:float = 448.0
 var moveSpd:float = 224.0:
@@ -16,7 +18,7 @@ var moveSpd:float = 224.0:
 	set(val):
 		moveSpd = val
 		velocity.x = moveSpd
-
+@export var speedIncreaseAmount := 2
 
 func _ready() -> void:
 	GM.events.shop_item_purchased.connect(_OnShopItemSelected)
@@ -28,7 +30,7 @@ func _ready() -> void:
 	GM.events.play_started.connect(_onPlayStarted)
 
 func _OnObstacleDodge() -> void:
-	IncreaseSpeed(0.05)
+	IncreaseSpeed()
 
 func _OnShopItemSelected(item:ShopItemData) -> void:
 	if item.type == ShopItemData.Type.COSTUME:
@@ -59,11 +61,15 @@ func Stop():
 	jump.enabled = false
 	velocity.x = 0
 
-func IncreaseSpeed(percentage:float) -> void:
-	if moveSpd >= maxMoveSpd:
-		return
+func BounceFromCeiling():
+	var force = jump.jump_force * 0.4
+	
+	var vel = velocity
+	vel.y = force
+	velocity = vel
 
-	moveSpd = minf(maxMoveSpd, moveSpd + moveSpd * percentage)
+func IncreaseSpeed() -> void:
+	moveSpd = minf(maxMoveSpd, moveSpd + speedIncreaseAmount)
 
 func _on_score_check_area_entered(area: Area2D) -> void:
 	# Create tween animation for gem collection
@@ -126,9 +132,13 @@ func _on_lose_check_area_entered(area: Area2D) -> void:
 	if not invul_timer.is_stopped() and not area.is_in_group("floor"):
 		return
 	#Get hit
-	got_hit.emit(area)
-	invul_timer.start()
-	modulate.a = 0.5
+	if area.is_in_group("ceiling"):
+		BounceFromCeiling()
+		return
+	if jump.enabled: #Prevents getting hit after game over
+		got_hit.emit(area)
+		invul_timer.start()
+		modulate.a = 0.5
 	
 func _on_invul_timer_timeout() -> void:
 	modulate.a = 1.0

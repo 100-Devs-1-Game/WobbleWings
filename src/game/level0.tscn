@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://cdtumpmve4ox3"]
+[gd_scene load_steps=51 format=3 uid="uid://cdtumpmve4ox3"]
 
 [ext_resource type="PackedScene" uid="uid://dpeggnp44jqgv" path="res://game/Firefly.tscn" id="2_bnmkg"]
 [ext_resource type="Script" uid="uid://qgsj20igv7x8" path="res://game/GameLevel.gd" id="2_hvlfb"]
@@ -203,6 +203,8 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t6oaa"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1rb85"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_38qkh"]
 font_size = 24
 outline_size = 8
@@ -216,7 +218,7 @@ script/source = "extends CanvasLayer
 
 func _ready() -> void:
 	show()
-	if not showTitleScreen:
+	if not showTitleScreen and OS.is_debug_build():
 		hide()
 		return
 	
@@ -231,6 +233,7 @@ func _ready() -> void:
 follow_viewport_enabled = true
 script = ExtResource("2_hvlfb")
 increaseDifficultyThreshold = 5
+minPlayerSpd = 200.0
 oscillationSpeedIncrease = 0.05
 minPipeSeparation = 340
 maxPipeSeparation = 380
@@ -417,7 +420,17 @@ position = Vector2(345, 457)
 shape = SubResource("WorldBoundaryShape2D_t6oaa")
 debug_color = Color(0.954189, 1.92523e-06, 0.549712, 0.42)
 
-[node name="Obstacles" type="Node2D" parent="World/ForegroundSpace" index="1"]
+[node name="Ceiling" type="Area2D" parent="World/ForegroundSpace" index="1" groups=["ceiling"]]
+position = Vector2(691, -18)
+rotation = 3.1415927
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ForegroundSpace/Ceiling"]
+position = Vector2(345, 0)
+shape = SubResource("WorldBoundaryShape2D_1rb85")
+debug_color = Color(0.954189, 1.92523e-06, 0.549712, 0.42)
+
+[node name="Obstacles" type="Node2D" parent="World/ForegroundSpace" index="2"]
 
 [node name="ObstacleTimer" type="Timer" parent="World/ForegroundSpace/Obstacles"]
 unique_name_in_owner = true
@@ -533,6 +546,7 @@ alignment = 1
 layer = 100
 visible = false
 script = SubResource("GDScript_1rb85")
+showTitleScreen = false
 
 [node name="TitleScreen" type="TextureRect" parent="Title"]
 anchors_preset = 15

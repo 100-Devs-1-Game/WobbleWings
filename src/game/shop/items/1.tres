@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_smvyw")
 itemId = "1"
-price = 1
+price = 25
 color = Color(2.31028e-06, 0.520402, 0.707972, 1)
 description = "Leviathan"
 icon = ExtResource("1_jf3ld")

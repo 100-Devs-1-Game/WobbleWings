@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MultiLevelUpgradeData" load_steps=3 format=3 uid="uid://b8x7k2nan4p5q"]
+
+[ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="1_final"]
+[ext_resource type="Texture2D" uid="uid://2j6eu44k36j7" path="res://assets/graphic/game_icon.png" id="1_final_icon"]
+
+[resource]
+script = ExtResource("1_final")
+upgradeId = "final"
+upgradeName = "Final Upgrade"
+description = "The ultimate upgrade that unlocks the final power"
+color = Color(0.8, 0.8, 0.2, 1)
+icon = ExtResource("1_final_icon")
+levelPrices = Array[int]([1000])

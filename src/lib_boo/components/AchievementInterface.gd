@@ -17,7 +17,7 @@ func _ConnectGlobalEvents():
 	)
 
 	GM.events.game_over.connect(func(score:int):
-		if score >= 10:
+		if score >= 15:
 			AchievementManager.unlock_achievement("run_gate_0")
 		if score >= 40:
 			AchievementManager.unlock_achievement("run_gate_1")

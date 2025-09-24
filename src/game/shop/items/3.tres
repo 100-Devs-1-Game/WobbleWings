@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_fvrpb")
 itemId = "3"
-price = 10
+price = 100
 color = Color(0.432667, 0.26, 1, 1)
 description = "Nebula"
 icon = ExtResource("1_4nmb6")

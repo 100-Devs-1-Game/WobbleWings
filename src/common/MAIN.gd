@@ -9,6 +9,7 @@ extends MAIN
 @onready var credits_crawl: PanelContainer = $GlobalUI/MainUI/Credits/CreditsCrawl
 @onready var achievement_button: TextureButton = $GlobalUI/MainUI/AchievementButton
 @onready var achievements: PanelContainer = $GlobalUI/MainUI/Achievements
+@onready var thanks_for_playing: Label = $GlobalUI/MainUI/ThanksForPlaying
 
 var gems:int = 0:
 	set(val):
@@ -24,7 +25,8 @@ func _ready() -> void:
 	GM.events.player_scored.connect(_OnPlayerScored)
 	GM.events.play_started.connect(_OnPlayStarted)
 	GM.events.menu_entered.connect(_onMenuEntered)
-	
+	GM.events.game_data_delete_requested.connect(_OnGameDataDeleteRequested)
+	GM.events.upgrade_purchased.connect(_onUpgradePurchased)
 	# Load saved gem gems
 	LoadGemScore()
 	
@@ -34,6 +36,8 @@ func _onMenuEntered() -> void:
 	sound_main.show()
 	credits.show()
 	achievement_button.show()
+	thanks_for_playing.visible = GameUpgrades.finalUpgrade
+	
 
 	LoadHighScore()
 	%Highscore.text = "Highscore: " + str(highScore)
@@ -50,6 +54,11 @@ func _OnPlayStarted() -> void:
 	credits.hide()
 	achievement_button.hide()
 	achievements.hide()
+	thanks_for_playing.hide()
+
+func _onUpgradePurchased(item:MultiLevelUpgradeData):
+	if item.upgradeId == "final":
+		thanks_for_playing.show()
 
 ## Saves the current gem gems to persistent storage
 func SaveGemScore() -> void:
@@ -59,12 +68,16 @@ func SaveGemScore() -> void:
 func LoadGemScore() -> void:
 	gems = GM.saveLoad.LoadInt(SaveKeys.GEM_SCORE, 0)
 
+func _OnGameDataDeleteRequested() -> void:
+	ResetAllGameData()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not OS.is_debug_build():
+		return
 	if event.is_action_pressed("delete_all"):
-		ResetAllGameData()
-	# elif event.is_action_pressed("motherload"):
-	# 	gems = 999999
+		GM.events.GameDataDeleteRequested()
+	elif event.is_action_pressed("motherload"):
+		gems = 999999
 
 ## DEBUG: Resets all game data and reloads the game
 func ResetAllGameData() -> void:

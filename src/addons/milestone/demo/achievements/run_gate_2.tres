@@ -13,4 +13,5 @@ name = "100 gates in a single run"
 description = "Amazing!"
 hidden = true
 considered_rare = true
-progress_goal = 1.0
+progress_goal = 100.0
+indicate_progress_interval = 100.0

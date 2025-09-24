@@ -83,6 +83,10 @@ signal shop_item_purchased(data:ShopItemData)
 func ShopItemPurchased(data:ShopItemData) -> void:
 	shop_item_purchased.emit(data)
 
+signal upgrade_purchased(data:MultiLevelUpgradeData)
+func UpgradePurchased(data:MultiLevelUpgradeData) -> void:
+	upgrade_purchased.emit(data)
+
 signal shop_item_equipped(data:ShopItemData)
 func ShopItemEquipped(data:ShopItemData) -> void:
 	shop_item_equipped.emit(data)

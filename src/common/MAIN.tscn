@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=54 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d4n4q5lg0lqd3" path="res://game/level_backgrounds/bg2.tscn" id="12_jur75"]
 [ext_resource type="Script" uid="uid://hf5ajblwmega" path="res://common/SoundMain.gd" id="13_8gllf"]
 [ext_resource type="PackedScene" uid="uid://cr6nknd6187ce" path="res://lib_boo/components/volume_slider/VolumeSlider.tscn" id="13_xiwjy"]
+[ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="19_4s7ph"]
 [ext_resource type="Texture2D" uid="uid://bivhtnnpj5x8i" path="res://assets/graphic/wobble wings - shop mage sprite sheet.png" id="19_84tgi"]
 [ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="19_ge5fl"]
 [ext_resource type="LabelSettings" uid="uid://bojj0ywqtfplx" path="res://game/ui_ux/label_24.tres" id="19_jur75"]
@@ -31,6 +32,14 @@
 [ext_resource type="Texture2D" uid="uid://c2taclnmffs8h" path="res://lib_boo/assets/cc0/img/audioOn.png" id="28_84tgi"]
 [ext_resource type="Texture2D" uid="uid://cr5msydxmxwa7" path="res://lib_boo/assets/cc0/img/chest_opengameart.png" id="29_ge5fl"]
 [ext_resource type="PackedScene" uid="uid://dm1jvpowrjilt" path="res://game/ui_ux/achievement/AchievementDisplayLocal.tscn" id="30_ge5fl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4s7ph"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+outline_size = 12
+outline_color = Color(1, 0.9666667, 0, 1)
+shadow_size = 80
+shadow_color = Color(0, 0, 0, 0.03137255)
 
 [sub_resource type="Resource" id="Resource_e40kh"]
 script = ExtResource("9_db7hj")
@@ -63,6 +72,15 @@ type = 1
 icon = ExtResource("11_84tgi")
 levelScn = ExtResource("12_jur75")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"
+
+[sub_resource type="Resource" id="Resource_7gmbk"]
+script = ExtResource("19_4s7ph")
+upgradeId = "final"
+upgradeName = "Final"
+description = "Thanks for Playing"
+color = Color(1, 1, 0.38, 1)
+icon = ExtResource("19_ge5fl")
+levelPrices = Array[int]([999])
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ge5fl"]
 atlas = ExtResource("19_84tgi")
@@ -199,7 +217,24 @@ mouse_filter = 2
 theme = ExtResource("3_nang2")
 metadata/_edit_lock_ = true
 
-[node name="Shop" type="PanelContainer" parent="GlobalUI/MainUI" index="0"]
+[node name="ThanksForPlaying" type="Label" parent="GlobalUI/MainUI" index="0"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.5
+offset_top = -14.0
+offset_right = 91.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Thanks for Playing!"
+label_settings = SubResource("LabelSettings_4s7ph")
+
+[node name="Shop" type="PanelContainer" parent="GlobalUI/MainUI" index="1"]
 custom_minimum_size = Vector2(226, 0)
 layout_mode = 1
 anchors_preset = 1
@@ -259,6 +294,7 @@ data = SubResource("Resource_db7hj")
 [node name="ItemsUpgrades" type="GridContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="3"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 columns = 4
 
 [node name="MultiLevelShopItem" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="0" instance=ExtResource("9_8wxic")]
@@ -268,6 +304,10 @@ data = ExtResource("10_mni8j")
 [node name="MultiLevelShopItem2" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="1" instance=ExtResource("9_8wxic")]
 layout_mode = 2
 data = ExtResource("11_mni8j")
+
+[node name="MultiLevelShopItem3" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="2" instance=ExtResource("9_8wxic")]
+layout_mode = 2
+data = SubResource("Resource_7gmbk")
 
 [node name="ItemDescription" type="Label" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="4"]
 layout_mode = 2
@@ -282,7 +322,7 @@ autoplay = "default"
 frame = 6
 frame_progress = 0.96165854
 
-[node name="Gems" type="HBoxContainer" parent="GlobalUI/MainUI" index="1"]
+[node name="Gems" type="HBoxContainer" parent="GlobalUI/MainUI" index="2"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
 anchors_preset = 1
@@ -305,7 +345,7 @@ layout_mode = 2
 text = "x 000000"
 label_settings = ExtResource("19_jur75")
 
-[node name="StateChartDebugger" parent="GlobalUI/MainUI" index="2" instance=ExtResource("10_n5xpu")]
+[node name="StateChartDebugger" parent="GlobalUI/MainUI" index="3" instance=ExtResource("10_n5xpu")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -320,7 +360,7 @@ grow_horizontal = 0
 grow_vertical = 0
 enabled = false
 
-[node name="SoundMain" type="Control" parent="GlobalUI/MainUI" index="3"]
+[node name="SoundMain" type="Control" parent="GlobalUI/MainUI" index="4"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -369,7 +409,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="GlobalUI/MainUI/SoundMain/SoundOptions/VBox" index="0"]
 layout_mode = 2
-text = "Sound Options"
+text = "Options"
 label_settings = SubResource("LabelSettings_xiwjy")
 
 [node name="Music" type="Label" parent="GlobalUI/MainUI/SoundMain/SoundOptions/VBox" index="1"]
@@ -388,6 +428,14 @@ text = "Effects Volume"
 layout_mode = 2
 volumeType = 2
 
+[node name="DeleteDataButton" type="Button" parent="GlobalUI/MainUI/SoundMain/SoundOptions/VBox" index="5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.83137256, 0.25882354, 0.25882354, 1)
+theme_override_colors/font_focus_color = Color(0.83137256, 0.25882354, 0.25882354, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.7125, 0, 1)
+text = "Clear Data"
+
 [node name="SoundSettingsMenuBtn" type="Button" parent="GlobalUI/MainUI/SoundMain" index="2"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -396,15 +444,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 111.5
+offset_left = 120.5
 offset_top = -177.0
-offset_right = 188.5
+offset_right = 197.5
 offset_bottom = -151.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 12
 toggle_mode = true
-text = "Sound Settings"
+text = "Settings"
 script = ExtResource("26_ge5fl")
 pressCanCue = false
 toggledCanCue = true
@@ -417,9 +465,9 @@ metadata/_custom_type_script = "uid://cnwb780wdumwd"
 
 [node name="SoundToggleContainer" type="PanelContainer" parent="GlobalUI/MainUI/SoundMain" index="3"]
 layout_mode = 0
-offset_left = 291.0
+offset_left = 300.0
 offset_top = 4.0
-offset_right = 315.0
+offset_right = 324.0
 offset_bottom = 28.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v3efc")
 
@@ -432,7 +480,7 @@ texture_pressed = ExtResource("28_84tgi")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Credits" type="Control" parent="GlobalUI/MainUI" index="4"]
+[node name="Credits" type="Control" parent="GlobalUI/MainUI" index="5"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -503,7 +551,7 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="AchievementButton" type="TextureButton" parent="GlobalUI/MainUI" index="5"]
+[node name="AchievementButton" type="TextureButton" parent="GlobalUI/MainUI" index="6"]
 layout_mode = 0
 offset_left = 360.0
 offset_top = 278.0
@@ -523,7 +571,7 @@ offset_bottom = 77.0
 text = "Feats"
 horizontal_alignment = 1
 
-[node name="Achievements" type="PanelContainer" parent="GlobalUI/MainUI" index="6"]
+[node name="Achievements" type="PanelContainer" parent="GlobalUI/MainUI" index="7"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -566,6 +614,7 @@ metadata/_custom_type_script = "uid://cnwb780wdumwd"
 [node name="Level0" parent="." index="1" instance=ExtResource("5_dp5wg")]
 oscillationSpeedIncrease = 0.1
 
+[connection signal="pressed" from="GlobalUI/MainUI/SoundMain/SoundOptions/VBox/DeleteDataButton" to="GlobalUI/MainUI/SoundMain" method="_on_delete_data_button_pressed"]
 [connection signal="toggled" from="GlobalUI/MainUI/SoundMain/SoundSettingsMenuBtn" to="GlobalUI/MainUI/SoundMain" method="_on_sound_settings_menu_btn_toggled"]
 [connection signal="toggled" from="GlobalUI/MainUI/SoundMain/SoundToggleContainer/ToggleSoundBtn" to="GlobalUI/MainUI/SoundMain" method="_on_toggle_sound_btn_toggled"]
 [connection signal="pressed" from="GlobalUI/MainUI/Credits/CreditsBtn" to="." method="_on_credits_btn_pressed"]

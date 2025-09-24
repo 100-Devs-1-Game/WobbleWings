@@ -107,6 +107,7 @@ func _ready() -> void:
 
 
 func _OnMenuEntered() -> void:
+	print("Final Upgrade: ", GameUpgrades.finalUpgrade)
 	score.hide()
 
 func _OnShopItemSelected(item:ShopItemData) -> void:

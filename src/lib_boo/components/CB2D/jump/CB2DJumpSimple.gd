@@ -55,7 +55,7 @@ func _TryJump():
 func _Jump():
 	_coyoteTimer = 0.0
 
-	var velocity = _character_body.velocity
-	velocity.y = -jump_force
-	_character_body.velocity = velocity
+	var vel = _character_body.velocity
+	vel.y = -jump_force
+	_character_body.velocity = vel
 	jumped.emit()

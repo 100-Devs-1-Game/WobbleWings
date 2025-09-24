@@ -10,5 +10,5 @@ upgradeName = "Gems"
 description = "More gems appear"
 color = Color(0.62465, 0.276944, 0.72978, 1)
 icon = ExtResource("1_ghrce")
-levelPrices = Array[int]([1, 2, 3, 4, 5])
+levelPrices = Array[int]([10, 30, 60, 100, 150])
 maxLevel = 5

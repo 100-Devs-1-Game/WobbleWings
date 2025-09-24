@@ -10,6 +10,9 @@ var maxLives: int = 5  # Maximum possible lives
 var appearingGems:int = 2
 var maxGems: int = 7  # Maximum possible gems upgrade level
 
+
+var finalUpgrade := false
+
 # Upgrade level tracking
 var upgradeLevels: Dictionary = {}
 
@@ -49,6 +52,9 @@ func ApplyUpgradeLevels() -> void:
 	# Ensure we don't exceed max gems
 	if appearingGems > maxGems:
 		appearingGems = maxGems
+	
+	# Apply final upgrade
+	finalUpgrade = GetUpgradeLevel("final") > 0
 
 ## Save upgrade levels to persistent storage
 func SaveUpgradeLevels() -> void:
