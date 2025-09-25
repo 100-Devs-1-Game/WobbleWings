@@ -35,8 +35,15 @@ func _OnObstacleDodge() -> void:
 	IncreaseSpeed()
 
 func _OnShopItemSelected(item:ShopItemData) -> void:
-	if item.type == ShopItemData.Type.COSTUME:
+	if item.type != ShopItemData.Type.COSTUME:
+		return
+
+	if item.costumeSheet == null:
 		modulate = item.color
+	else:
+		body_spr.sprite_frames = item.costumeSheet
+	
+	body_spr.play("default")
 
 func _onMenuEntered():
 	animation_player.play("float")

@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://dbwfbm50keyf2"]
+
+[ext_resource type="Texture2D" uid="uid://dpmyns8mmjwa6" path="res://assets/graphic/wobble wings - player only.png" id="1_jvm2h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqpsq"]
+atlas = ExtResource("1_jvm2h")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xksyc"]
+atlas = ExtResource("1_jvm2h")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6oaa"]
+atlas = ExtResource("1_jvm2h")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48r7y"]
+atlas = ExtResource("1_jvm2h")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3rjb"]
+atlas = ExtResource("1_jvm2h")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38qkh"]
+atlas = ExtResource("1_jvm2h")
+region = Rect2(128, 64, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqpsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xksyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6oaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48r7y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3rjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38qkh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]

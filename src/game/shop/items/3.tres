@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ShopItemData" load_steps=3 format=3 uid="uid://d1wpa06keryyo"]
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://d1wpa06keryyo"]
 
+[ext_resource type="SpriteFrames" uid="uid://445r8t4mwk8" path="res://game/skins/skins3.tres" id="1_2ni85"]
 [ext_resource type="Texture2D" uid="uid://boaq1e28lpkqc" path="res://assets/graphic/player 24x24 portrait.png" id="1_4nmb6"]
 [ext_resource type="Script" uid="uid://ciyc68gwueb68" path="res://game/shop/ShopItemData.gd" id="1_fvrpb"]
 
@@ -7,7 +8,8 @@
 script = ExtResource("1_fvrpb")
 itemId = "3"
 price = 100
-color = Color(0.432667, 0.26, 1, 1)
-description = "Nebula"
+color = Color(0.2655417, 0.50971395, 0.35289532, 1)
+description = "Meadow"
+costumeSheet = ExtResource("1_2ni85")
 icon = ExtResource("1_4nmb6")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"

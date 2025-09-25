@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="ShopItemData" load_steps=3 format=3 uid="uid://bvcxcfhmqj2cg"]
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://bvcxcfhmqj2cg"]
 
+[ext_resource type="SpriteFrames" uid="uid://cwvq5xjdqps78" path="res://game/skins/skins1.tres" id="1_4ccjm"]
 [ext_resource type="Texture2D" uid="uid://boaq1e28lpkqc" path="res://assets/graphic/player 24x24 portrait.png" id="1_jf3ld"]
 [ext_resource type="Script" uid="uid://ciyc68gwueb68" path="res://game/shop/ShopItemData.gd" id="1_smvyw"]
 
@@ -9,5 +10,6 @@ itemId = "1"
 price = 25
 color = Color(2.31028e-06, 0.520402, 0.707972, 1)
 description = "Leviathan"
+costumeSheet = ExtResource("1_4ccjm")
 icon = ExtResource("1_jf3ld")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"

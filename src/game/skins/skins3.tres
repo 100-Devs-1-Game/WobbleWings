@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://445r8t4mwk8"]
+
+[ext_resource type="Texture2D" uid="uid://cyqqihtqsysm" path="res://assets/graphic/wobble wings - altskin5 character.png" id="1_8d88l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqvrd"]
+atlas = ExtResource("1_8d88l")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dywkx"]
+atlas = ExtResource("1_8d88l")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sgrp"]
+atlas = ExtResource("1_8d88l")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07e7j"]
+atlas = ExtResource("1_8d88l")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcbnr"]
+atlas = ExtResource("1_8d88l")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6621i"]
+atlas = ExtResource("1_8d88l")
+region = Rect2(128, 64, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqvrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dywkx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sgrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07e7j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcbnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6621i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]

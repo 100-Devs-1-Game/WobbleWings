@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="ShopItemData" load_steps=3 format=3 uid="uid://clnrtjh7oal83"]
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://clnrtjh7oal83"]
 
 [ext_resource type="Script" uid="uid://ciyc68gwueb68" path="res://game/shop/ShopItemData.gd" id="1_2y1qp"]
 [ext_resource type="Texture2D" uid="uid://boaq1e28lpkqc" path="res://assets/graphic/player 24x24 portrait.png" id="1_aqfec"]
+[ext_resource type="SpriteFrames" uid="uid://dbwfbm50keyf2" path="res://game/skins/skins0.tres" id="1_vrwtt"]
 
 [resource]
 script = ExtResource("1_2y1qp")
 itemId = "0"
 color = Color(1, 1, 1, 1)
 description = "Default"
+costumeSheet = ExtResource("1_vrwtt")
 icon = ExtResource("1_aqfec")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"

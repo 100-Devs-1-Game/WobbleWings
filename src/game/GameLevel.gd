@@ -58,7 +58,7 @@ var _currentLives = GameUpgrades.startingLives:
 	get:
 		return _currentLives
 
-@onready var frog_cheerleader: Sprite2D = $CanvasLayer/FrogCheerleader
+@onready var frog_cheerleader: AnimatedSprite2D = $CanvasLayer/FrogCheerleader
 
 var currentRunGems:int = 0
 var currentSeparation:float = maxPipeSeparation
@@ -113,52 +113,6 @@ func _ready() -> void:
 	# Setup firefly timer and pool
 	_SetupFireflyTimer()
 	_SetupFireflyPool()
-
-	_PrintCurrentDateLocalized()
-
-func _PrintCurrentDateLocalized() -> void:
-	var current_date = Time.get_datetime_string_from_system()
-	var formatted_date = _FormatDateToCustomFormat(current_date)
-	print(Time.get_unix_time_from_system())
-	var unix_formatted_date = _FormatDateToCustomFormat(Time.get_datetime_string_from_unix_time(Time.get_unix_time_from_system()))
-	print("Unix date: ", unix_formatted_date)
-	print("Current date: ", formatted_date)
-
-func _FormatDateToCustomFormat(date_string: String) -> String:
-	# Parse the date string (format: YYYY-MM-DDTHH:MM:SS)
-	var parts = date_string.split("T")
-	var date_part = parts[0]  # YYYY-MM-DD
-	var time_part = parts[1]  # HH:MM:SS
-	
-	# Parse date components
-	var date_components = date_part.split("-")
-	var year = date_components[0]
-	var month = int(date_components[1])
-	var day = int(date_components[2])
-	
-	# Parse time components
-	var time_components = time_part.split(":")
-	var hour = int(time_components[0])
-	var minute = time_components[1]
-	
-	# Convert month number to abbreviated month name
-	var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-					   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-	var month_name = month_names[month - 1]
-	
-	# Convert to 12-hour format with AM/PM
-	var am_pm = "AM"
-	var display_hour = hour
-	if hour == 0:
-		display_hour = 12
-	elif hour == 12:
-		am_pm = "PM"
-	elif hour > 12:
-		display_hour = hour - 12
-		am_pm = "PM"
-	
-	# Format: MMM DD, YYYY, T:TT AM/PM
-	return "%s %02d, %s, %d:%s %s" % [month_name, day, year, display_hour, minute, am_pm]
 
 
 

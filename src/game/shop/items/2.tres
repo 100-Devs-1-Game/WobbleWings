@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ShopItemData" load_steps=3 format=3 uid="uid://d1u3wo0y241es"]
+[gd_resource type="Resource" script_class="ShopItemData" load_steps=4 format=3 uid="uid://d1u3wo0y241es"]
 
 [ext_resource type="Texture2D" uid="uid://boaq1e28lpkqc" path="res://assets/graphic/player 24x24 portrait.png" id="1_4iwu3"]
 [ext_resource type="Script" uid="uid://ciyc68gwueb68" path="res://game/shop/ShopItemData.gd" id="1_c4fu5"]
+[ext_resource type="SpriteFrames" uid="uid://06bg7kg5qefw" path="res://game/skins/skins2.tres" id="1_xqpnl"]
 
 [resource]
 script = ExtResource("1_c4fu5")
@@ -9,5 +10,6 @@ itemId = "2"
 price = 50
 color = Color(0.81, 0.729, 0, 1)
 description = "Tempest"
+costumeSheet = ExtResource("1_xqpnl")
 icon = ExtResource("1_4iwu3")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"

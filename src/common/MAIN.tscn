@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=63 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -12,8 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://c7fl6jy4b3iwx" path="res://game/shop/MultiLevelShopItem.tscn" id="9_8wxic"]
 [ext_resource type="Script" uid="uid://ciyc68gwueb68" path="res://game/shop/ShopItemData.gd" id="9_db7hj"]
 [ext_resource type="PackedScene" uid="uid://crqvo4d77v72n" path="res://game/level_backgrounds/bg0.tscn" id="9_k3xms"]
+[ext_resource type="Texture2D" uid="uid://boaq1e28lpkqc" path="res://assets/graphic/player 24x24 portrait.png" id="10_df26s"]
 [ext_resource type="Resource" uid="uid://dokp85l68sx1m" path="res://game/shop/items/lives_upgrade.tres" id="10_mni8j"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="10_n5xpu"]
+[ext_resource type="SpriteFrames" uid="uid://c8v3ae7c05dlw" path="res://game/skins/skins4.tres" id="10_ymu5t"]
 [ext_resource type="Texture2D" uid="uid://cyj805eay4lm6" path="res://assets/graphic/level 24x24 t.png" id="11_84tgi"]
 [ext_resource type="Resource" uid="uid://dmmqevyfq4c2y" path="res://game/shop/items/gems_upgrades.tres" id="11_mni8j"]
 [ext_resource type="PackedScene" uid="uid://carwgs0dl6van" path="res://game/level_backgrounds/bg1.tscn" id="11_nang2"]
@@ -46,6 +48,16 @@ outline_size = 12
 outline_color = Color(1, 0.9666667, 0, 1)
 shadow_size = 80
 shadow_color = Color(0, 0, 0, 0.03137255)
+
+[sub_resource type="Resource" id="Resource_ymu5t"]
+script = ExtResource("9_db7hj")
+itemId = "11"
+price = 150
+color = Color(0.72421557, 0.24411905, 0.45494032, 1)
+description = "Vulcan"
+costumeSheet = ExtResource("10_ymu5t")
+icon = ExtResource("10_df26s")
+metadata/_custom_type_script = "uid://ciyc68gwueb68"
 
 [sub_resource type="Resource" id="Resource_e40kh"]
 script = ExtResource("9_db7hj")
@@ -264,7 +276,7 @@ label_settings = ExtResource("19_jur75")
 [node name="ItemsCostumes" type="GridContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="1"]
 unique_name_in_owner = true
 layout_mode = 2
-columns = 4
+columns = 5
 
 [node name="ShopItem0" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="0" instance=ExtResource("5_fy7di")]
 layout_mode = 2
@@ -281,6 +293,10 @@ data = ExtResource("7_bbau6")
 [node name="ShopItem3" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="3" instance=ExtResource("5_fy7di")]
 layout_mode = 2
 data = ExtResource("8_70eb6")
+
+[node name="ShopItem4" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="4" instance=ExtResource("5_fy7di")]
+layout_mode = 2
+data = SubResource("Resource_ymu5t")
 
 [node name="ItemsLevels" type="GridContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="2"]
 unique_name_in_owner = true
