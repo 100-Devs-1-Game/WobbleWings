@@ -66,13 +66,56 @@ func update_achievement_display() -> void:
 
 	if achievement.unlocked:
 		achievement_action_label.visible = true
-		achievement_action_label.text = "Unlocked %s" % get_readable_date(achievement.unlocked_date)
+		
+		var current_date = Time.get_datetime_string_from_system()
+		var formatted_date = _FormatDateToCustomFormat(current_date)
+		
+		
+		achievement_action_label.text = "Unlocked %s" % achievement.unlocked_date
 		achievement_rare_overlay.visible = achievement_resource.considered_rare
 	else:
 		achievement_action_label.visible = false
 		achievement_rare_overlay.visible = false
 		if achievement_resource.hidden:
 			progress_container.visible = false
+
+
+func _FormatDateToCustomFormat(date_string: String) -> String:
+	# Parse the date string (format: YYYY-MM-DDTHH:MM:SS)
+	var parts = date_string.split("T")
+	var date_part = parts[0]  # YYYY-MM-DD
+	var time_part = parts[1]  # HH:MM:SS
+	
+	# Parse date components
+	var date_components = date_part.split("-")
+	var year = date_components[0]
+	var month = int(date_components[1])
+	var day = int(date_components[2])
+	
+	# Parse time components
+	var time_components = time_part.split(":")
+	var hour = int(time_components[0])
+	var minute = time_components[1]
+	
+	# Convert month number to abbreviated month name
+	var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+					   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+	var month_name = month_names[month - 1]
+	
+	# Convert to 12-hour format with AM/PM
+	var am_pm = "AM"
+	var display_hour = hour
+	if hour == 0:
+		display_hour = 12
+	elif hour == 12:
+		am_pm = "PM"
+	elif hour > 12:
+		display_hour = hour - 12
+		am_pm = "PM"
+	
+	# Format: MMM DD, YYYY, T:TT AM/PM
+	return "%s %02d, %s, %d:%s %s" % [month_name, day, year, display_hour, minute, am_pm]
+
 
 func get_readable_date(unix: int) -> String:
 	var date_dict = Time.get_datetime_dict_from_unix_time(unix)

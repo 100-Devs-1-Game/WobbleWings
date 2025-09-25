@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cv7stc2w4g7kh" path="res://game/FlappyObstacle.gd" id="1_akc5q"]
 [ext_resource type="PackedScene" uid="uid://cly33o3fvqvu0" path="res://game/gem/Gem.tscn" id="3_3co8v"]
 [ext_resource type="Texture2D" uid="uid://d3t057phufsp7" path="res://lib_boo/assets/img/placeholders/16x16 white_block - placeholder.png" id="3_a82eq"]
+[ext_resource type="AudioStream" uid="uid://dlwmgvql25l1p" path="res://assets/sfx/warp-306033.mp3" id="5_3co8v"]
 [ext_resource type="Texture2D" uid="uid://c0d6w4oj1yf5s" path="res://assets/graphic/placeholder_gate.png" id="6_3mn66"]
-[ext_resource type="AudioStream" uid="uid://ers103i5gubu" path="res://lib_boo/assets/cc0/sound/notification-740420__anthonyrox__message-notification-1.wav" id="7_a82eq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eg1qk"]
 size = Vector2(80, 572)
@@ -67,7 +67,7 @@ scale = Vector2(1, 2.01528)
 texture = ExtResource("6_3mn66")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_a82eq")
+stream = ExtResource("5_3co8v")
 
 [connection signal="area_entered" from="Body/Scoring" to="." method="_on_scoring_area_entered"]
 [connection signal="body_entered" from="Body/Scoring" to="." method="_on_scoring_body_entered"]

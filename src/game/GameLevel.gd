@@ -45,6 +45,7 @@ const MIN_OBSTACLE_SEPARATION:float = 280
 #endregion
 
 var lifeIconScn:PackedScene = preload("res://game/LifeIcon.tscn")
+var currentLevel:int = 0
 
 var _currentLives = GameUpgrades.startingLives:
 	set(val):
@@ -57,6 +58,7 @@ var _currentLives = GameUpgrades.startingLives:
 	get:
 		return _currentLives
 
+@onready var frog_cheerleader: Sprite2D = $CanvasLayer/FrogCheerleader
 
 var currentRunGems:int = 0
 var currentSeparation:float = maxPipeSeparation
@@ -64,6 +66,10 @@ var obstacleDodgeCount:int = 0:
 	set(val):
 		obstacleDodgeCount = val
 		score_label.text = str(obstacleDodgeCount)
+		if obstacleDodgeCount == 1:
+			frog_cheerleader.Cheer1(obstacleDodgeCount)
+		_CheckForCheer()
+			
 
 var _lastObstacleX:float = 0.0
 
@@ -108,6 +114,53 @@ func _ready() -> void:
 	_SetupFireflyTimer()
 	_SetupFireflyPool()
 
+	_PrintCurrentDateLocalized()
+
+func _PrintCurrentDateLocalized() -> void:
+	var current_date = Time.get_datetime_string_from_system()
+	var formatted_date = _FormatDateToCustomFormat(current_date)
+	print(Time.get_unix_time_from_system())
+	var unix_formatted_date = _FormatDateToCustomFormat(Time.get_datetime_string_from_unix_time(Time.get_unix_time_from_system()))
+	print("Unix date: ", unix_formatted_date)
+	print("Current date: ", formatted_date)
+
+func _FormatDateToCustomFormat(date_string: String) -> String:
+	# Parse the date string (format: YYYY-MM-DDTHH:MM:SS)
+	var parts = date_string.split("T")
+	var date_part = parts[0]  # YYYY-MM-DD
+	var time_part = parts[1]  # HH:MM:SS
+	
+	# Parse date components
+	var date_components = date_part.split("-")
+	var year = date_components[0]
+	var month = int(date_components[1])
+	var day = int(date_components[2])
+	
+	# Parse time components
+	var time_components = time_part.split(":")
+	var hour = int(time_components[0])
+	var minute = time_components[1]
+	
+	# Convert month number to abbreviated month name
+	var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+					   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+	var month_name = month_names[month - 1]
+	
+	# Convert to 12-hour format with AM/PM
+	var am_pm = "AM"
+	var display_hour = hour
+	if hour == 0:
+		display_hour = 12
+	elif hour == 12:
+		am_pm = "PM"
+	elif hour > 12:
+		display_hour = hour - 12
+		am_pm = "PM"
+	
+	# Format: MMM DD, YYYY, T:TT AM/PM
+	return "%s %02d, %s, %d:%s %s" % [month_name, day, year, display_hour, minute, am_pm]
+
+
 
 func _OnMenuEntered() -> void:
 	print("Final Upgrade: ", GameUpgrades.finalUpgrade)
@@ -118,6 +171,8 @@ func _OnShopItemSelected(item:ShopItemData) -> void:
 		for child in background_space.get_children():
 			child.queue_free()
 		var level_scn = item.levelScn.instantiate()
+
+		currentLevel = int(item.itemId) - 4 #Gives 0, 1 or 2
 		background_space.add_child(level_scn)
 
 
@@ -205,7 +260,7 @@ func _on_game_state_chart_took_damage(amount: int) -> void:
 		_ResetLivesOpacity()
 
 
-#region FireFly Pooling System
+#region FireFly
 func _SetupFireflyTimer() -> void:
 	firefly_timer = Timer.new()
 	firefly_timer.wait_time = fireflySpawnRate
@@ -237,6 +292,9 @@ func _OnFireflyTimerTimeout() -> void:
 		_SpawnFirefly()
 
 func _SpawnFirefly() -> void:
+	if currentLevel != 0:
+		return
+
 	# Get a firefly from the pool
 	var firefly_instance = _GetFireflyFromPool()
 	if not firefly_instance:
@@ -300,27 +358,12 @@ func _ResetLivesOpacity() -> void:
 	# Stop any existing tween
 	if livesTween:
 		livesTween.kill()
-	
-	# Reset opacity to full and position to original center
-	lives.modulate.a = 1.0
-	lives.position = _livesOriginalPosition
-	
-	# Calculate timing: 20% hold, 80% fade
-	var hold_duration = livesFadeDuration * 0.2  # 20% of total time
-	var fade_duration = livesFadeDuration * 0.8  # 80% of total time
-	
 	# Create new tween with shake, then hold, then fade
 	livesTween = get_tree().create_tween()
 	
 	# Add shake effect
 	_AddShakeEffect(livesTween)
 	
-	# Then hold at full opacity
-	livesTween.tween_interval(hold_duration)
-	
-	# Finally fade
-	livesTween.tween_property(lives, "modulate:a", minLivesOpacity, fade_duration)
-
 func _AddShakeEffect(tween: Tween) -> void:
 	# Create a quick shake effect by moving the lives container
 	var shake_steps = 8  # Number of shake movements
@@ -399,6 +442,31 @@ func _CalculateClosingSpeed() -> float:
 	var score_difference = obstacleDodgeCount - increaseDifficultyThreshold
 	var score_based_speed = minClosingSpeed + score_difference * closingSpeedIncrease
 	return minf(maxClosingSpeed, score_based_speed)
+
+func _CheckForCheer() -> void:
+	# Only check every 10 gates (10, 20, 30, etc.)
+	if obstacleDodgeCount % 10 != 0:
+		return
+	
+	# Calculate cheer chance based on current score
+	var cheer_chance = _CalculateCheerChance()
+	
+	# Roll for cheer
+	if randf() < cheer_chance:
+		frog_cheerleader.Cheer1(obstacleDodgeCount)
+
+func _CalculateCheerChance() -> float:
+	# Chance increases linearly from 0% at 10 gates to 50% at 100 gates
+	# Formula: (current_gates - 10) / (100 - 10) * 0.5
+	# This gives us 0% at 10 gates, 50% at 100 gates, and caps at 50% beyond 100 gates
+	
+	if obstacleDodgeCount < 10:
+		return 0.0
+	
+	var progress = float(obstacleDodgeCount - 10) / 90.0  # 90 is the range from 10 to 100
+	var cheer_chance = progress * 0.5  # 0.5 = 50% maximum chance
+	
+	return minf(0.5, cheer_chance)  # Cap at 50%
 
 
 #endregion

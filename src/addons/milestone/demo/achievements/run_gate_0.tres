@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://8dhagocjulmn"]
 
 [ext_resource type="Texture2D" uid="uid://cg3b84ak8bsrv" path="res://addons/milestone/icons/hidden_achievement.svg" id="1_sf7ag"]
-[ext_resource type="Texture2D" uid="uid://djtbmjt7k0k5j" path="res://assets/graphic/frogman-art.png" id="2_sf7ag"]
+[ext_resource type="Texture2D" uid="uid://cv2dxeugfkxk6" path="res://assets/graphic/20_gates_run.png" id="2_sf7ag"]
 [ext_resource type="Script" uid="uid://dtyojmellf4e5" path="res://addons/milestone/scripts/achievements/achievement.gd" id="3_asaxe"]
 
 [resource]

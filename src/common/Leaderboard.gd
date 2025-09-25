@@ -5,6 +5,7 @@ signal username_saved(user:String)
 
 const ENTRY_SCN = preload("res://addons/talo/samples/leaderboards/entry.tscn")
 
+@export var activateOnStart := true
 @export var leaderboardInternalName: String = "test_board"
 @export var includeArchived: bool = false
 
@@ -30,6 +31,9 @@ func _ready() -> void:
 		username_info.text = "Playing as " + savedUsername
 		username_info.visible = true
 
+	if not activateOnStart:
+		return
+
 	if savedUsername != "":
 		await Talo.players.identify("usernameEntry", savedUsername)
 
@@ -37,8 +41,14 @@ func _ready() -> void:
 	_SetEntryCount()
 	loaded_entries.emit(savedUsername)
 
-func SubmitScore(score: int) -> void:
+func Show():
+	show()
+	usernameEntry.grab_focus()
 	
+
+func SubmitScore(score: int) -> void:
+	if not activateOnStart:
+		return
 	var user_type := "tester" if OS.is_debug_build() else "player"
 
 	var res := await Talo.leaderboards.add_entry(leaderboardInternalName, score, {user_type = user_type})
@@ -123,3 +133,12 @@ func _on_submit_pressed() -> void:
 	username_saved.emit(usernameEntry.text)
 
 	_BuildEntries()
+
+func _input(event: InputEvent) -> void:
+	if usernameEntry.text == "":
+		return
+	if not usernameEntry.has_focus():
+		return
+
+	if event.is_action_pressed("ui_accept"):
+		_on_submit_pressed()

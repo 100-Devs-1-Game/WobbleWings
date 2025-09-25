@@ -10,6 +10,8 @@ signal got_hit(area:Area2D)
 @onready var invul_timer: Timer = $InvulTimer
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var lose_check: Area2D = $LoseCheck
+@onready var flap: AudioStreamPlayer = $Flap
+@onready var hit: AudioStreamPlayer = $Hit
 
 
 @export var maxMoveSpd:float = 448.0
@@ -37,6 +39,8 @@ func _OnShopItemSelected(item:ShopItemData) -> void:
 		modulate = item.color
 
 func _onMenuEntered():
+	animation_player.play("float")
+
 	body_spr.sprite_frames.set_animation_loop("default", true)
 	body_spr.sprite_frames.set_animation_speed("default", 8.0)
 	body_spr.play("default")
@@ -124,8 +128,11 @@ func _onJumped() -> void:
 
 
 func _on_body_spr_frame_changed() -> void:
+	if not grav.enabled:
+		return
+
 	if body_spr.frame == 1:
-		GM.globalAudio.PlaySound("flap")
+		flap.play()
 
 
 func _on_lose_check_area_entered(area: Area2D) -> void:

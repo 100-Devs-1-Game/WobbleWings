@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cdtumpmve4ox3"]
+[gd_scene load_steps=64 format=3 uid="uid://cdtumpmve4ox3"]
 
 [ext_resource type="PackedScene" uid="uid://dpeggnp44jqgv" path="res://game/Firefly.tscn" id="2_bnmkg"]
 [ext_resource type="Script" uid="uid://qgsj20igv7x8" path="res://game/GameLevel.gd" id="2_hvlfb"]
@@ -20,11 +20,15 @@
 [ext_resource type="AudioStream" uid="uid://bdgqqadt7ps2s" path="res://assets/sfx/retro-coin-1-236677.mp3" id="12_t6oaa"]
 [ext_resource type="LabelSettings" uid="uid://dbm3rntcuvahk" path="res://common/base_label_small.tres" id="14_3w21h"]
 [ext_resource type="PackedScene" uid="uid://cytbu807mdyqf" path="res://game/gem/GemSpawn.tscn" id="14_c62tx"]
+[ext_resource type="AudioStream" uid="uid://pn8ua1plnsuu" path="res://assets/sfx/wing-flap-1-6434.mp3" id="17_xbyi2"]
+[ext_resource type="AudioStream" uid="uid://dsuwmnbml1c8f" path="res://assets/sfx/hard-slap-46388.mp3" id="18_xirai"]
 [ext_resource type="Theme" uid="uid://blpg4nf6pmt2r" path="res://game/main_style_theme.tres" id="19_38qkh"]
 [ext_resource type="Script" uid="uid://dkj2mgb16kv47" path="res://lib_boo/components/BooStreamPlayer.gd" id="20_ffkp2"]
 [ext_resource type="Texture2D" uid="uid://bsdmf74e2pd3x" path="res://assets/graphic/gate_icon.png" id="22_woij5"]
 [ext_resource type="LabelSettings" uid="uid://bojj0ywqtfplx" path="res://game/ui_ux/label_24.tres" id="23_woij5"]
 [ext_resource type="Texture2D" uid="uid://bvfvjhxktk1v0" path="res://assets/graphic/ww_title_banner.png" id="25_1rb85"]
+[ext_resource type="FontFile" uid="uid://ddy1u3w52h86i" path="res://lib_boo/assets/cc0/font/GermaniaOne-Regular.ttf" id="27_84iox"]
+[ext_resource type="Texture2D" uid="uid://djtbmjt7k0k5j" path="res://assets/graphic/frogman-art.png" id="27_ffkp2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yqpsq"]
 atlas = ExtResource("6_xns2i")
@@ -128,7 +132,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xns2i"]
 radius = 10.5
-height = 51.0
+height = 44.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6oaa"]
 size = Vector2(32, 60)
@@ -165,6 +169,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(115, 162)]
+}
 
 [sub_resource type="Animation" id="Animation_t6oaa"]
 resource_name = "flap"
@@ -195,13 +211,37 @@ tracks/1/keys = {
 "values": [Vector2(1.3, 0.7), Vector2(0.7, 1.3), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_xirai"]
+resource_name = "float"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(115, 160), Vector2(115, 150), Vector2(115, 170), Vector2(115, 160)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q3rjb"]
 _data = {
 &"RESET": SubResource("Animation_48r7y"),
-&"flap": SubResource("Animation_t6oaa")
+&"flap": SubResource("Animation_t6oaa"),
+&"float": SubResource("Animation_xirai")
 }
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xbyi2"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1rb85"]
+random_pitch = 1.1
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("17_xbyi2")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t6oaa"]
 
@@ -211,6 +251,101 @@ _data = {
 font_size = 24
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffkp2"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ffkp2"]
+font = ExtResource("27_84iox")
+font_size = 12
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_84iox"]
+resource_name = "FrogCheerleader"
+script/source = "extends Sprite2D
+
+@onready var anim: AnimationPlayer = $FrogAnim
+@onready var level: CanvasLayer = $\"../..\"
+@onready var frog_label: Label = $\"../FrogWords/FrogLabel\"
+
+func Cheer1(amount:int = 0):
+	if amount == 1:
+			frog_label.text = \"How many can you get?\"
+	else:
+		frog_label.text = \"Wow \" + str(level.obstacleDodgeCount) + \" Gates!\"
+	anim.play(\"cheer1\")
+"
+
+[sub_resource type="Animation" id="Animation_ffkp2"]
+resource_name = "cheer1"
+length = 1.78
+step = 0.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FrogCheerleader:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.29, 0.57, 0.89, 1.16, 1.41, 1.69, 1.78),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(578, 433), Vector2(578, 286), Vector2(578, 250), Vector2(578, 300), Vector2(578, 267), Vector2(578, 297), Vector2(578, 143), Vector2(578, 459)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FrogWords:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.33333334, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_84iox"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FrogCheerleader:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(578, 433)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FrogWords:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_28mnu"]
+_data = {
+&"RESET": SubResource("Animation_84iox"),
+&"cheer1": SubResource("Animation_ffkp2")
+}
 
 [sub_resource type="GDScript" id="GDScript_1rb85"]
 resource_name = "TitleScreen"
@@ -405,6 +540,7 @@ limit_bottom = 360
 libraries = {
 &"": SubResource("AnimationLibrary_q3rjb")
 }
+autoplay = "float"
 
 [node name="InvulTimer" type="Timer" parent="World/MainSpace/Player"]
 one_shot = true
@@ -423,6 +559,15 @@ position = Vector2(-214, 0)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_xbyi2")
 
+[node name="Flap" type="AudioStreamPlayer" parent="World/MainSpace/Player"]
+stream = SubResource("AudioStreamRandomizer_1rb85")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="Hit" type="AudioStreamPlayer" parent="World/MainSpace/Player"]
+stream = ExtResource("18_xirai")
+volume_db = -14.0
+
 [node name="LoseArea" type="Area2D" parent="World/ForegroundSpace" index="0" groups=["floor"]]
 collision_layer = 16
 
@@ -437,7 +582,7 @@ rotation = 3.1415927
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/ForegroundSpace/Ceiling"]
-position = Vector2(345, 0)
+position = Vector2(345, 15.9999695)
 shape = SubResource("WorldBoundaryShape2D_1rb85")
 debug_color = Color(0.954189, 1.92523e-06, 0.549712, 0.42)
 
@@ -552,6 +697,32 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("19_38qkh")
 alignment = 1
+
+[node name="FrogWords" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+offset_left = 405.0
+offset_top = 263.0
+offset_right = 517.0
+offset_bottom = 277.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ffkp2")
+
+[node name="FrogLabel" type="Label" parent="CanvasLayer/FrogWords"]
+layout_mode = 2
+text = "How many can you get?"
+label_settings = SubResource("LabelSettings_ffkp2")
+horizontal_alignment = 1
+
+[node name="FrogCheerleader" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(578, 433)
+scale = Vector2(2, 2)
+texture = ExtResource("27_ffkp2")
+script = SubResource("GDScript_84iox")
+
+[node name="FrogAnim" type="AnimationPlayer" parent="CanvasLayer/FrogCheerleader"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_28mnu")
+}
 
 [node name="Title" type="CanvasLayer" parent="."]
 layer = 100

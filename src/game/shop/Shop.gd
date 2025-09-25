@@ -2,7 +2,7 @@ extends PanelContainer
 
 var shopItems:Array[ShopItem] = []
 var multiLevelShopItems:Array[MultiLevelShopItem] = []
-@onready var item_description: Label = $VBoxContainer/ItemDescription
+@onready var item_description: Label = %ItemDescription
 @onready var items_costumes: GridContainer = %ItemsCostumes
 @onready var items_levels: GridContainer = %ItemsLevels
 @onready var items_upgrades: GridContainer = %ItemsUpgrades

@@ -63,7 +63,7 @@ func unlock_achievement(achievement_id: String) -> void:
 		if achievements[achievement_id]["unlocked"] == false:
 			achievements[achievement_id]["progress"] = achievement.progress_goal
 			achievements[achievement_id]["unlocked"] = true
-			achievements[achievement_id]["unlocked_date"] = Time.get_unix_time_from_system()
+			achievements[achievement_id]["unlocked_date"] = _FormatDateToCustomFormat(Time.get_datetime_string_from_system())
 
 			emit_signal("achievement_unlocked", achievement_id)
 
@@ -91,7 +91,7 @@ func progress_achievement(achievement_id: String, progress_amount: int = 1) -> v
 
 				if achievements[achievement_id]["progress"] >= achievement.progress_goal:
 					achievements[achievement_id]["unlocked"] = true
-					achievements[achievement_id]["unlocked_date"] = Time.get_unix_time_from_system()
+					achievements[achievement_id]["unlocked_date"] = _FormatDateToCustomFormat(Time.get_datetime_string_from_system())
 
 					emit_signal("achievement_unlocked", achievement_id)
 
@@ -105,7 +105,7 @@ func progress_achievement(achievement_id: String, progress_amount: int = 1) -> v
 						print("[Milestone] Achievement '%s' progressed to (%s/%s)" % [achievement_id, achievements[achievement_id]["progress"], achievement.progress_goal])
 			else:
 				achievements[achievement_id]["unlocked"] = true
-				achievements[achievement_id]["unlocked_date"] = Time.get_unix_time_from_system()
+				achievements[achievement_id]["unlocked_date"] = _FormatDateToCustomFormat(Time.get_datetime_string_from_system())
 
 				emit_signal("achievement_unlocked", achievement_id)
 
@@ -243,3 +243,40 @@ func load_achievements() -> void:
 			if json:
 				achievements = JSON.parse_string(json)
 				achievements_loaded.emit.call_deferred()
+
+func _FormatDateToCustomFormat(date_string: String) -> String:
+	# Parse the date string (format: YYYY-MM-DDTHH:MM:SS)
+	var parts = date_string.split("T")
+	var date_part = parts[0]  # YYYY-MM-DD
+	var time_part = parts[1]  # HH:MM:SS
+	
+	# Parse date components
+	var date_components = date_part.split("-")
+	var year = date_components[0]
+	var month = int(date_components[1])
+	var day = int(date_components[2])
+	
+	# Parse time components
+	var time_components = time_part.split(":")
+	var hour = int(time_components[0])
+	var minute = time_components[1]
+	
+	# Convert month number to abbreviated month name
+	var month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+					   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+	var month_name = month_names[month - 1]
+	
+	# Convert to 12-hour format with AM/PM
+	var am_pm = "AM"
+	var display_hour = hour
+	if hour == 0:
+		display_hour = 12
+	elif hour == 12:
+		am_pm = "PM"
+	elif hour > 12:
+		display_hour = hour - 12
+		am_pm = "PM"
+	
+	# Format: MMM DD, YYYY, T:TT AM/PM
+	return "%s %02d, %s, %d:%s %s" % [month_name, day, year, display_hour, minute, am_pm]
+

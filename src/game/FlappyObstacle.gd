@@ -139,10 +139,13 @@ func _SpawnGems():
 func _on_scoring_body_entered(_body: Node2D) -> void:
 	GM.events.ObstacleDodge()
 	$AudioStreamPlayer2D.play()
+	var t = get_tree().create_tween()
+	t.tween_property(self, "modulate:a", 0.0, 1.0)
+	await t.finished
+	queue_free()
 
 
 func _on_scoring_area_entered(area: Area2D) -> void:
 	if area.is_in_group("cleaner"):
-		print("CLEANED!")
 		queue_free()
 		return

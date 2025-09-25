@@ -31,8 +31,9 @@
 [ext_resource type="Script" uid="uid://cemwblg5dbr8c" path="res://lib_boo/act_system/cues/ui_ux/ButtonCue.gd" id="26_ge5fl"]
 [ext_resource type="Texture2D" uid="uid://pbon6my3qo1m" path="res://lib_boo/assets/cc0/img/audioOff.png" id="27_v3efc"]
 [ext_resource type="Texture2D" uid="uid://c2taclnmffs8h" path="res://lib_boo/assets/cc0/img/audioOn.png" id="28_84tgi"]
-[ext_resource type="Texture2D" uid="uid://cr5msydxmxwa7" path="res://lib_boo/assets/cc0/img/chest_opengameart.png" id="29_ge5fl"]
 [ext_resource type="PackedScene" uid="uid://dm1jvpowrjilt" path="res://game/ui_ux/achievement/AchievementDisplayLocal.tscn" id="30_ge5fl"]
+[ext_resource type="Texture2D" uid="uid://be4m1bkp0efpf" path="res://assets/graphic/chest_closed.png" id="31_brpv6"]
+[ext_resource type="Texture2D" uid="uid://baj60t83mgiws" path="res://assets/graphic/chest_open.png" id="32_df26s"]
 [ext_resource type="Script" uid="uid://dypfxnluhh3n1" path="res://common/Leaderboard.gd" id="33_2k8ga"]
 [ext_resource type="Theme" uid="uid://ce2uyi827vc5x" path="res://addons/talo/samples/authentication/assets/theme.tres" id="33_im47d"]
 [ext_resource type="FontFile" uid="uid://ddy1u3w52h86i" path="res://lib_boo/assets/cc0/font/GermaniaOne-Regular.ttf" id="36_q4da4"]
@@ -50,7 +51,7 @@ shadow_color = Color(0, 0, 0, 0.03137255)
 script = ExtResource("9_db7hj")
 itemId = "4"
 color = Color(0.209125, 0.62614, 0.375691, 1)
-description = "Level 1"
+description = "Whimsical Woods"
 type = 1
 icon = ExtResource("11_84tgi")
 levelScn = ExtResource("9_k3xms")
@@ -61,7 +62,7 @@ script = ExtResource("9_db7hj")
 itemId = "5"
 price = 100
 color = Color(0.387317, 0.520058, 0.847931, 1)
-description = "Level 2"
+description = "Flowering Fields"
 type = 1
 icon = ExtResource("11_84tgi")
 levelScn = ExtResource("11_nang2")
@@ -72,7 +73,7 @@ script = ExtResource("9_db7hj")
 itemId = "6"
 price = 500
 color = Color(1, 0.425788, 0.357085, 1)
-description = "Level 3"
+description = "Laval Lands"
 type = 1
 icon = ExtResource("11_84tgi")
 levelScn = ExtResource("12_jur75")
@@ -86,6 +87,13 @@ description = "Thanks for Playing"
 color = Color(1, 1, 0.38, 1)
 icon = ExtResource("18_7gmbk")
 levelPrices = Array[int]([999])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4da4"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ge5fl"]
 atlas = ExtResource("19_84tgi")
@@ -163,14 +171,6 @@ corner_radius_bottom_left = 100
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mni8j"]
 bg_color = Color(0, 0, 0, 0.854902)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_df26s"]
-atlas = ExtResource("29_ge5fl")
-region = Rect2(2, 0, 214, 0)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ymu5t"]
-atlas = ExtResource("29_ge5fl")
-region = Rect2(295.645, 0, 214, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_84tgi"]
 content_margin_left = 0.0
@@ -318,8 +318,14 @@ data = ExtResource("11_mni8j")
 layout_mode = 2
 data = SubResource("Resource_7gmbk")
 
-[node name="ItemDescription" type="Label" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="4"]
+[node name="PanelContainer" type="PanelContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="4"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q4da4")
+
+[node name="ItemDescription" type="Label" parent="GlobalUI/MainUI/Shop/VBoxContainer/PanelContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Welcome friend!"
 horizontal_alignment = 1
 
@@ -585,22 +591,29 @@ mouse_default_cursor_shape = 2
 
 [node name="AchievementButton" type="TextureButton" parent="GlobalUI/MainUI" index="6"]
 layout_mode = 0
-offset_left = 360.0
-offset_top = 278.0
-offset_right = 409.0
+offset_left = 343.0
+offset_top = 287.0
+offset_right = 392.0
 offset_bottom = 336.61682
-texture_normal = SubResource("AtlasTexture_df26s")
-texture_hover = SubResource("AtlasTexture_ymu5t")
+texture_normal = ExtResource("31_brpv6")
+texture_hover = ExtResource("32_df26s")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="AchieveLabel" type="Label" parent="GlobalUI/MainUI/AchievementButton" index="0"]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 58.0
-offset_right = 45.0
-offset_bottom = 77.0
-text = "Feats"
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.5
+offset_top = 23.19159
+offset_right = 43.5
+offset_bottom = 42.19159
+grow_horizontal = 2
+grow_vertical = 2
+text = "Achievements"
 horizontal_alignment = 1
 
 [node name="Achievements" type="PanelContainer" parent="GlobalUI/MainUI" index="7"]
@@ -652,6 +665,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("33_2k8ga")
+activateOnStart = false
 
 [node name="Overlay" type="Panel" parent="GlobalUI/MainUI/Leaderboard" index="0"]
 layout_mode = 1
@@ -784,7 +798,7 @@ oscillationSpeedIncrease = 0.1
 [connection signal="pressed" from="GlobalUI/MainUI/SoundMain/SoundOptions/VBox/DeleteDataButton" to="GlobalUI/MainUI/SoundMain" method="_on_delete_data_button_pressed"]
 [connection signal="toggled" from="GlobalUI/MainUI/SoundMain/SoundSettingsMenuBtn" to="GlobalUI/MainUI/SoundMain" method="_on_sound_settings_menu_btn_toggled"]
 [connection signal="toggled" from="GlobalUI/MainUI/SoundMain/SoundToggleContainer/ToggleSoundBtn" to="GlobalUI/MainUI/SoundMain" method="_on_toggle_sound_btn_toggled"]
-[connection signal="pressed" from="GlobalUI/MainUI/Credits/Highscore/UsernameBtn" to="." method="_on_username_btn_pressed"]
+[connection signal="pressed" from="GlobalUI/MainUI/Credits/Highscore/UsernameBtn" to="GlobalUI/MainUI/Leaderboard" method="Show"]
 [connection signal="pressed" from="GlobalUI/MainUI/Credits/CreditsBtn" to="." method="_on_credits_btn_pressed"]
 [connection signal="gui_input" from="GlobalUI/MainUI/Credits/CreditsCrawl" to="." method="_on_credits_gui_input"]
 [connection signal="pressed" from="GlobalUI/MainUI/AchievementButton" to="GlobalUI/MainUI/Achievements" method="show"]

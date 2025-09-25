@@ -95,12 +95,12 @@ func _on_play_again_btn_gui_input(event: InputEvent) -> void:
 func _on_player_got_hit(area: Area2D) -> void:
 	# player.jump.OnJumpPressed()
 	if area.is_in_group("floor"):
-		GM.globalAudio.PlaySound("hit")
+		player.hit.play()
 		took_damage.emit(9999)
 		return
 	elif area.is_in_group("ceiling"):
 		player.BounceFromCeiling()
 		return
 
-	GM.globalAudio.PlaySound("hit")
+	player.hit.play()
 	took_damage.emit(1)

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://d1lrb5a1f0pet"]
 
 [ext_resource type="Texture2D" uid="uid://cg3b84ak8bsrv" path="res://addons/milestone/icons/hidden_achievement.svg" id="1_wxtki"]
-[ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="2_wxtki"]
+[ext_resource type="Texture2D" uid="uid://58v6jjmksu5q" path="res://assets/graphic/100_gems.png" id="2_wxtki"]
 [ext_resource type="Script" uid="uid://dtyojmellf4e5" path="res://addons/milestone/scripts/achievements/achievement.gd" id="3_7ou3w"]
 
 [resource]
