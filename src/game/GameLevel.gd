@@ -5,6 +5,10 @@ const MIN_OBSTACLE_SEPARATION:float = 280
 
 #region settings
 
+@export var levelSongs:Array[LevelSong] = []
+@onready var introTimer: Timer = Timer.new()
+
+
 @export var increaseDifficultyThreshold:int = 3 ## After how many points does the difficulty start increasing
 @export var minPlayerSpd:float = 224.0
 
@@ -90,6 +94,9 @@ var _livesOriginalPosition: Vector2
 @onready var foreground_space: Node2D = $World/ForegroundSpace
 @onready var firefly_timer: Timer
 
+@onready var streamIntro: BooStreamPlayer = $BgStreamPlayer
+@onready var streamLoop: BooStreamPlayer = $BgStreamIntro
+
 var livesTween: Tween = null
 
 # Firefly pooling system
@@ -98,6 +105,8 @@ var _activeFireflies: Array[Node2D] = []
 
 
 func _ready() -> void:
+	add_child(introTimer)
+
 	GM.events.play_started.connect(_onPlayStarted)
 	GM.events.player_scored.connect(_OnPlayerScored)
 	GM.events.game_over.connect(_OnGameOver)
@@ -113,6 +122,7 @@ func _ready() -> void:
 	# Setup firefly timer and pool
 	_SetupFireflyTimer()
 	_SetupFireflyPool()
+	_SetLevelSong(0)
 
 
 
@@ -128,7 +138,34 @@ func _OnShopItemSelected(item:ShopItemData) -> void:
 
 		currentLevel = int(item.itemId) - 4 #Gives 0, 1 or 2
 		background_space.add_child(level_scn)
+		_SetLevelSong(currentLevel)
 
+
+#region Song
+func _SetLevelSong(level:int) -> void:
+	if not introTimer.is_stopped():
+		introTimer.stop()
+	var level_song = levelSongs[level]
+	streamIntro.stop()
+	streamLoop.stop()
+	streamIntro.stream = level_song.intro
+	streamLoop.stream = level_song.loop
+	
+	# Calculate intro duration based on BPM and beat count
+	introTimer.wait_time = _CalculateIntroDuration(level_song.bpm, level_song.intro_beats)
+	introTimer.start()
+	
+	# Start intro
+	streamIntro.play()
+	
+	await introTimer.timeout
+	streamLoop.play()
+
+func _CalculateIntroDuration(bpm: float, intro_beats: float) -> float:
+	# Calculate duration in seconds: (beats / bpm) * 60 seconds per minute
+	return (intro_beats / bpm) * 60.0
+
+#endregion
 
 func _SetupLives() -> void:
 	_currentLives = GameUpgrades.startingLives

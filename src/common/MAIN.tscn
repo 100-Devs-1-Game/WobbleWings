@@ -85,7 +85,7 @@ script = ExtResource("9_db7hj")
 itemId = "6"
 price = 500
 color = Color(1, 0.425788, 0.357085, 1)
-description = "Laval Lands"
+description = "Lava Lands"
 type = 1
 icon = ExtResource("11_84tgi")
 levelScn = ExtResource("12_jur75")
@@ -681,7 +681,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("33_2k8ga")
-activateOnStart = false
+leaderboardInternalName = "score"
 
 [node name="Overlay" type="Panel" parent="GlobalUI/MainUI/Leaderboard" index="0"]
 layout_mode = 1

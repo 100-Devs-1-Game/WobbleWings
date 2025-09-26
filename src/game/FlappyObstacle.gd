@@ -140,7 +140,7 @@ func _on_scoring_body_entered(_body: Node2D) -> void:
 	GM.events.ObstacleDodge()
 	$AudioStreamPlayer2D.play()
 	var t = get_tree().create_tween()
-	t.tween_property(self, "modulate:a", 0.0, 1.0)
+	t.tween_property(self, "modulate:a", 0.0, 2.5)
 	await t.finished
 	queue_free()
 
