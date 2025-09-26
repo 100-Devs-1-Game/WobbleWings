@@ -10,7 +10,7 @@
 size = Vector2(80, 572)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akc5q"]
-size = Vector2(52, 309)
+size = Vector2(52, 216)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdkn4"]
 
@@ -53,7 +53,6 @@ collision_layer = 2
 collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Scoring"]
-position = Vector2(43, 0.5)
 shape = SubResource("RectangleShape2D_akc5q")
 debug_color = Color(0, 0.634547, 0.427764, 0.42)
 
