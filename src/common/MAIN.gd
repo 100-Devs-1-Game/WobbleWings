@@ -130,5 +130,5 @@ func _on_leaderboard_username_saved(user: String) -> void:
 	_UpdateUsernameBtn(user)
 
 func _UpdateUsernameBtn(user: String) -> void:
-	username_btn.text = "Create User" if user == "" else "Hi, "+ user + " - Leaderboards"
+	username_btn.text = "Create User" if user == "" else "Hi, "+ user + " - Leaderboard"
 	username_btn.show()
