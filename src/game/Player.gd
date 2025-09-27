@@ -126,7 +126,7 @@ func _onJumped() -> void:
 	if body_spr.is_playing():
 		body_spr.stop()
 	
-	body_spr.play("default")
+	#body_spr.play("default")
 
 
 func _on_body_spr_frame_changed() -> void:
