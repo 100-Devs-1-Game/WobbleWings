@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://37ht7lkqug8g"]
+
+[ext_resource type="Texture2D" uid="uid://dhulaxi7ekyec" path="res://assets/graphic/lava/Backdroplvl3 - 7mountainrange.png" id="1_n227h"]
+[ext_resource type="Texture2D" uid="uid://dtryqv3vrad4h" path="res://assets/graphic/lava/Backdroplvl3 - 6_castle.png" id="2_uafgh"]
+[ext_resource type="Texture2D" uid="uid://b0bb82k58baf2" path="res://assets/graphic/lava/Backdroplvl3 - 5_lvl2_sand.png" id="3_1uf2j"]
+[ext_resource type="Texture2D" uid="uid://bou47lm6scnky" path="res://assets/graphic/lava/Backdroplvl3 - 5_lvl1_dirt.png" id="4_17s4q"]
+[ext_resource type="Texture2D" uid="uid://dn7og0owv2638" path="res://assets/graphic/lava/Backdroplvl3 - 4boulders.png" id="5_oonwo"]
+[ext_resource type="Texture2D" uid="uid://cuti6j1cxupul" path="res://assets/graphic/lava/Backdroplvl3 - tertiary_blume.png" id="6_igwur"]
+[ext_resource type="Texture2D" uid="uid://hkdomi6c1dij" path="res://assets/graphic/lava/Backdroplvl3 - 2ndry lvl lava shift anim.png" id="7_mepxl"]
+[ext_resource type="Texture2D" uid="uid://c7v1ydwa6xyy3" path="res://assets/graphic/lava/Backdroplvl3-top level fencing.png" id="10_ehq58"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tmhr"]
+atlas = ExtResource("7_mepxl")
+region = Rect2(0, 0, 640, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta0yu"]
+atlas = ExtResource("7_mepxl")
+region = Rect2(0, 384, 640, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c62uh"]
+atlas = ExtResource("7_mepxl")
+region = Rect2(0, 768, 640, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l824r"]
+atlas = ExtResource("7_mepxl")
+region = Rect2(0, 1152, 640, 384)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvbvw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tmhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta0yu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c62uh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l824r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Level Lava" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture = ExtResource("1_n227h")
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+modulate = Color(1, 0, 0, 1)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("2_uafgh")
+centered = false
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("3_1uf2j")
+centered = false
+
+[node name="Sprite2D5" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("4_17s4q")
+centered = false
+
+[node name="Sprite2D6" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("5_oonwo")
+centered = false
+
+[node name="Sprite2D7" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("6_igwur")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxLayer2"]
+sprite_frames = SubResource("SpriteFrames_lvbvw")
+autoplay = "default"
+frame_progress = 0.5595053
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxLayer4"]
+position = Vector2(0, -13)
+texture = ExtResource("10_ehq58")
+centered = false
