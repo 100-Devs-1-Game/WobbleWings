@@ -152,7 +152,10 @@ func _SetLevelSong(level:int) -> void:
 	streamLoop.stream = level_song.loop
 	
 	# Calculate intro duration based on BPM and beat count
-	introTimer.wait_time = _CalculateIntroDuration(level_song.bpm, level_song.intro_beats)
+	if level_song.introDuration > 0:
+		introTimer.wait_time = level_song.introDuration
+	else:
+		introTimer.wait_time = _CalculateIntroDuration(level_song.bpm, level_song.intro_beats)
 	introTimer.start()
 	
 	# Start intro

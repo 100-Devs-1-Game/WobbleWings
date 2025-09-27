@@ -76,9 +76,9 @@ func get_description() -> String:
 		return ""
 	
 	var current_level = GameUpgrades.GetUpgradeLevel(data.upgradeId)
-	var level_text = "Level " + str(current_level)
+	var level_text = "Lv." + str(current_level)
 	
 	if data.description:
-		return level_text + ": " + data.description
+		return data.description + " " + level_text
 	else:
 		return level_text

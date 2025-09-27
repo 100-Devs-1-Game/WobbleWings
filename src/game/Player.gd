@@ -37,24 +37,20 @@ func _OnObstacleDodge() -> void:
 func _OnShopItemSelected(item:ShopItemData) -> void:
 	if item.type != ShopItemData.Type.COSTUME:
 		return
-
-	if item.costumeSheet == null:
-		modulate = item.color
-	else:
-		body_spr.sprite_frames = item.costumeSheet
+	body_spr.play(item.itemId)
 	
-	body_spr.play("default")
+
 
 func _onMenuEntered():
 	animation_player.play("float")
 
-	body_spr.sprite_frames.set_animation_loop("default", true)
-	body_spr.sprite_frames.set_animation_speed("default", 8.0)
-	body_spr.play("default")
+	body_spr.sprite_frames.set_animation_loop("0", true)
+	body_spr.sprite_frames.set_animation_speed("0", 8.0)
+	body_spr.play("0")
 
 func _onPlayStarted():
-	body_spr.sprite_frames.set_animation_loop("default", false)
-	body_spr.sprite_frames.set_animation_speed("default", 16.0)
+	body_spr.sprite_frames.set_animation_loop("0", false)
+	body_spr.sprite_frames.set_animation_speed("0", 16.0)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("confirm") or event.is_action_pressed("left_click"):

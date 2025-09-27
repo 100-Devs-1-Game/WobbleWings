@@ -599,9 +599,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 17
 text = "CREDITS
 - Brain On Oxygen - Programmer
+- Duncan T. - QA
 - frog - Composer
 - Hannah Sekerka - Lead Game Designer & 2D Artist
-- JaKraZmon - 2D Artist"
+- JaKraZmon - 2D Artist
+
+SPECIAL THANKS
+- Codimon - Scraw - Zeph
+- And everyone in this community."
 
 [node name="DiscordButton" parent="GlobalUI/MainUI/Credits/CreditsCrawl/VBoxContainer" index="1" instance=ExtResource("12_70eb6")]
 custom_minimum_size = Vector2(100, 100)
@@ -685,7 +690,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("33_2k8ga")
-leaderboardInternalName = "score"
 
 [node name="Overlay" type="Panel" parent="GlobalUI/MainUI/Leaderboard" index="0"]
 layout_mode = 1

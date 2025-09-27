@@ -6,7 +6,7 @@ signal username_saved(user:String)
 const ENTRY_SCN = preload("res://addons/talo/samples/leaderboards/entry.tscn")
 
 @export var activateOnStart := true
-@export var leaderboardInternalName: String = "test_board"
+@export var leaderboardInternalName: String = "score"
 @export var includeArchived: bool = false
 
 @onready var boardName: Label = %LeaderboardName
@@ -31,7 +31,7 @@ func _ready() -> void:
 		username_info.text = "Playing as " + savedUsername
 		username_info.visible = true
 
-	if not activateOnStart:
+	if not activateOnStart and OS.is_debug_build():
 		return
 
 	if savedUsername != "":
@@ -47,7 +47,7 @@ func Show():
 	
 
 func SubmitScore(score: int) -> void:
-	if not activateOnStart:
+	if not activateOnStart and OS.is_debug_build():
 		return
 	var user_type := "tester" if OS.is_debug_build() else "player"
 

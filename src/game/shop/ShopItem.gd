@@ -9,6 +9,9 @@ var _needs_display_update: bool = false
 		if is_inside_tree():
 			call_deferred("_update_display_if_needed")
 
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
+
 func get_data() -> Resource:
 	return data
 
@@ -17,9 +20,29 @@ func get_data_color() -> Color:
 		return data.color
 	return Color.WHITE
 
+func MarkSelected(itemId:String) -> void:
+	if data.itemId == itemId:
+		animated_sprite_2d.play(str(data.itemId))
+	else:
+		animated_sprite_2d.stop()
+
 func update_display() -> void:
 	super()
+	
+	if data.levelScn != null:
+		texture_rect.show()
+		animated_sprite_2d.hide()
+	else:
+		_UpdateCostumeItem()
+	
 	update_button_state()
+
+func _UpdateCostumeItem() -> void:
+	animated_sprite_2d.play(str(data.itemId))
+	animated_sprite_2d.stop()
+	# animated_sprite_2d.show()
+	# texture_rect.hide()
+
 
 func get_button_text() -> String:
 	if not data:

@@ -10,6 +10,8 @@ var multiLevelShopItems:Array[MultiLevelShopItem] = []
 
 var _initialPosition: Vector2
 
+var activeCostume:String = ""
+
 func _ready() -> void:
 	_initialPosition = position
 	_SetupShopItems(items_costumes, shopItems, true)
@@ -17,12 +19,23 @@ func _ready() -> void:
 	_SetupShopItems(items_upgrades, multiLevelShopItems, false)
 
 	GM.events.menu_entered.connect(Appear)
+	GM.events.shop_item_equipped.connect(_OnShopItemEquipped)
 
 	LoadPurchasedItems()
 	LoadMultiLevelUpgrades()
-	# Check if final upgrade should be revealed on initial load
 	_CheckAndRevealFinalUpgrade()
 	Appear()
+
+	await get_tree().process_frame
+	if activeCostume == "":
+		activeCostume = "0"
+		shopItems[0].MarkSelected(activeCostume)
+
+func _OnShopItemEquipped(item:ShopItemData) -> void:
+	if item.type == ShopItemData.Type.COSTUME:
+		for child in items_costumes.get_children():
+			activeCostume = item.itemId
+			child.MarkSelected(activeCostume)
 
 ## Setup shop items with common signal connections
 func _SetupShopItems(container: GridContainer, target_array: Array, is_regular_shop_item: bool) -> void:
@@ -30,11 +43,12 @@ func _SetupShopItems(container: GridContainer, target_array: Array, is_regular_s
 		target_array.append(item)
 		if is_regular_shop_item:
 			item.item_pressed.connect(_OnItemClicked)
+			item.update_display()
 		else:
 			item.upgrade_pressed.connect(_OnMultiLevelUpgradeClicked)
+			item.update_display()
 		item.mouse_entered_item.connect(_OnItemHovered)
 		item.mouse_exited_item.connect(_OnItemUnhovered)
-		item.update_display()
 
 ## Check if all costume and level items are purchased
 func _CheckAllItemsPurchased() -> bool:
@@ -74,7 +88,7 @@ func _OnItemClicked(item:ShopItem) -> void:
 			# Check if final upgrade should be revealed after purchase
 			_CheckAndRevealFinalUpgrade()
 		else:
-			print("not enough score")
+			print("not enough games to purchase")
 
 
 ## Handle multi-level upgrade click

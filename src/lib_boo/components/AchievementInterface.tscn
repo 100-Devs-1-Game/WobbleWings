@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dppeuwhkxhmhj"]
+[gd_scene load_steps=5 format=3 uid="uid://dppeuwhkxhmhj"]
 
 [ext_resource type="Script" uid="uid://c67sx8wqhcnky" path="res://lib_boo/components/AchievementInterface.gd" id="1_pit52"]
 [ext_resource type="Script" uid="uid://wn30x7o3f47m" path="res://addons/milestone/scripts/achievements/achievement_notifier.gd" id="2_s04n3"]
 [ext_resource type="PackedScene" uid="uid://cn34r22uary31" path="res://game/ui_ux/achievement/AchievementNotificationLocal.tscn" id="3_s04n3"]
+[ext_resource type="AudioStream" uid="uid://cgvaf7ud8s7e8" path="res://assets/sfx/unlock-stinger-289722.mp3" id="4_4shqt"]
 
 [node name="AchievementInterface" type="CanvasLayer"]
 layer = 77
@@ -13,4 +14,7 @@ script = ExtResource("2_s04n3")
 screen_corner = "BottomLeft"
 notification_component = ExtResource("3_s04n3")
 margin = 4
+bus_name = "SFX"
+unlocked_sound = ExtResource("4_4shqt")
+volume = 2.0
 metadata/_custom_type_script = "uid://wn30x7o3f47m"
