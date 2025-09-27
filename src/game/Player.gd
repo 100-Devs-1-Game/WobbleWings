@@ -22,6 +22,8 @@ var moveSpd:float = 224.0:
 		velocity.x = moveSpd
 @export var speedIncreaseAmount := 2
 
+var purchased_skin_id: String
+
 func _ready() -> void:
 	GM.events.shop_item_purchased.connect(_OnShopItemSelected)
 	GM.events.shop_item_equipped.connect(_OnShopItemSelected)
@@ -38,7 +40,7 @@ func _OnShopItemSelected(item:ShopItemData) -> void:
 	if item.type != ShopItemData.Type.COSTUME:
 		return
 	body_spr.play(item.itemId)
-	
+	purchased_skin_id = item.itemId
 
 
 func _onMenuEntered():
@@ -46,6 +48,8 @@ func _onMenuEntered():
 
 	body_spr.sprite_frames.set_animation_loop("0", true)
 	body_spr.sprite_frames.set_animation_speed("0", 8.0)
+	
+	body_spr.play(purchased_skin_id)
 
 func _onPlayStarted():
 	body_spr.sprite_frames.set_animation_loop("0", false)
@@ -126,7 +130,7 @@ func _onJumped() -> void:
 	if body_spr.is_playing():
 		body_spr.stop()
 	
-	#body_spr.play("default")
+	body_spr.play(purchased_skin_id)
 
 
 func _on_body_spr_frame_changed() -> void:
