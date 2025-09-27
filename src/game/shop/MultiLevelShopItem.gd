@@ -3,8 +3,11 @@ class_name MultiLevelShopItem extends BaseShopItem
 signal upgrade_pressed(MultiLevelShopItem)
 
 @export var data: MultiLevelUpgradeData = null
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var name_label: Label = $VBox/NameLabel
 @onready var cost: Label = $VBox/Cost
+
 var currentLevel: int = 0
 
 func get_button_node() -> Button:
@@ -36,7 +39,14 @@ func update_display() -> void:
 			var price = data.GetNextLevelPrice(currentLevel)
 			cost.text = str(price)
 	
-	texture_rect.texture = data.icon
+	if animated_sprite_2d.sprite_frames.has_animation(data.upgradeId):
+		animated_sprite_2d.show()
+		animated_sprite_2d.play(data.upgradeId)
+		texture_rect.hide()
+	else:
+		animated_sprite_2d.hide()
+		texture_rect.show()
+		texture_rect.texture = data.icon
 	
 	# Update button state
 	update_button_state()

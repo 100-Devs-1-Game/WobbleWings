@@ -1,12 +1,77 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7fl6jy4b3iwx"]
+[gd_scene load_steps=16 format=3 uid="uid://c7fl6jy4b3iwx"]
 
 [ext_resource type="Theme" uid="uid://blpg4nf6pmt2r" path="res://game/main_style_theme.tres" id="1_8jrr8"]
 [ext_resource type="Script" uid="uid://cfu01xeeduqst" path="res://game/shop/MultiLevelShopItem.gd" id="1_multi"]
 [ext_resource type="LabelSettings" uid="uid://dbm3rntcuvahk" path="res://common/base_label_small.tres" id="2_fgq8u"]
 [ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="3_1fsy5"]
+[ext_resource type="Texture2D" uid="uid://ch8ac0jhcfs14" path="res://assets/graphic/wobble wings - crystal cllctbl sprite sheet.png" id="4_gpulc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_multi"]
 bg_color = Color(0.2, 0.3, 0.8, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8kad"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2isxi"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccqid"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vufb6"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpa1o"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ax7sf"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isu7r"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ien5"]
+atlas = ExtResource("4_gpulc")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_evjf1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8kad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2isxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ccqid")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vufb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpa1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ax7sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isu7r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ien5")
+}],
+"loop": true,
+"name": &"gems",
+"speed": 5.0
+}]
 
 [node name="MultiLevelShopItem" type="PanelContainer"]
 custom_minimum_size = Vector2(40, 40)
@@ -20,6 +85,13 @@ script = ExtResource("1_multi")
 layout_mode = 2
 texture = ExtResource("3_1fsy5")
 expand_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(21, 22)
+sprite_frames = SubResource("SpriteFrames_evjf1")
+animation = &"gems"
+frame_progress = 0.12865417
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 2
