@@ -20,9 +20,9 @@
 [ext_resource type="Resource" uid="uid://dmmqevyfq4c2y" path="res://game/shop/items/gems_upgrades.tres" id="11_mni8j"]
 [ext_resource type="PackedScene" uid="uid://carwgs0dl6van" path="res://game/level_backgrounds/bg1.tscn" id="11_nang2"]
 [ext_resource type="PackedScene" uid="uid://c3cx280f4i76s" path="res://100_devs_components/src/components/discord_link/discord_button.tscn" id="12_70eb6"]
-[ext_resource type="PackedScene" uid="uid://d4n4q5lg0lqd3" path="res://game/level_backgrounds/bg2.tscn" id="12_jur75"]
 [ext_resource type="Script" uid="uid://hf5ajblwmega" path="res://common/SoundMain.gd" id="13_8gllf"]
 [ext_resource type="PackedScene" uid="uid://cr6nknd6187ce" path="res://lib_boo/components/volume_slider/VolumeSlider.tscn" id="13_xiwjy"]
+[ext_resource type="PackedScene" uid="uid://37ht7lkqug8g" path="res://game/level_backgrounds/lava.tscn" id="14_df26s"]
 [ext_resource type="Texture2D" uid="uid://i3tg61fkvtp3" path="res://lib_boo/assets/img/star_yellow_rounded.png" id="18_7gmbk"]
 [ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="19_4s7ph"]
 [ext_resource type="Texture2D" uid="uid://bivhtnnpj5x8i" path="res://assets/graphic/wobble wings - shop mage sprite sheet.png" id="19_84tgi"]
@@ -87,7 +87,7 @@ color = Color(1, 0.425788, 0.357085, 1)
 description = "Lava Lands"
 type = 1
 icon = ExtResource("11_84tgi")
-levelScn = ExtResource("12_jur75")
+levelScn = ExtResource("14_df26s")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"
 
 [sub_resource type="Resource" id="Resource_7gmbk"]
