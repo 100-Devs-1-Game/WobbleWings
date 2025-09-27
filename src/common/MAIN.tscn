@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=62 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -39,7 +39,6 @@
 [ext_resource type="Script" uid="uid://dypfxnluhh3n1" path="res://common/Leaderboard.gd" id="33_2k8ga"]
 [ext_resource type="Theme" uid="uid://ce2uyi827vc5x" path="res://addons/talo/samples/authentication/assets/theme.tres" id="33_im47d"]
 [ext_resource type="FontFile" uid="uid://ddy1u3w52h86i" path="res://lib_boo/assets/cc0/font/GermaniaOne-Regular.ttf" id="36_q4da4"]
-[ext_resource type="PackedScene" uid="uid://bonnyy0kqkkqb" path="res://lib_boo_internal/act_system/acts/dev/FPSMeter/FPSMeter.tscn" id="37_q4da4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4s7ph"]
 font_size = 24
@@ -807,14 +806,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("33_im47d")
 text = "Blue team scores"
-
-[node name="FPSMeter (CanvasLayer_OnProcessT)" parent="GlobalUI/MainUI" index="9" instance=ExtResource("37_q4da4")]
-visible = false
-layout_mode = 0
-offset_left = 6.0
-offset_top = 175.0
-offset_right = 6.0
-offset_bottom = 175.0
 
 [node name="Level0" parent="." index="1" instance=ExtResource("5_dp5wg")]
 oscillationSpeedIncrease = 0.1
