@@ -46,7 +46,6 @@ func _onMenuEntered():
 
 	body_spr.sprite_frames.set_animation_loop("0", true)
 	body_spr.sprite_frames.set_animation_speed("0", 8.0)
-	body_spr.play("0")
 
 func _onPlayStarted():
 	body_spr.sprite_frames.set_animation_loop("0", false)
