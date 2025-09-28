@@ -1,16 +1,65 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8ctwi7qi0m82"]
+[gd_scene load_steps=15 format=3 uid="uid://c8ctwi7qi0m82"]
 
 [ext_resource type="Script" uid="uid://cv7stc2w4g7kh" path="res://game/FlappyObstacle.gd" id="1_akc5q"]
 [ext_resource type="PackedScene" uid="uid://cly33o3fvqvu0" path="res://game/gem/Gem.tscn" id="3_3co8v"]
-[ext_resource type="Texture2D" uid="uid://d3t057phufsp7" path="res://lib_boo/assets/img/placeholders/16x16 white_block - placeholder.png" id="3_a82eq"]
+[ext_resource type="Texture2D" uid="uid://dhr1781tq5lqc" path="res://assets/graphic/wobble wings - gates.png" id="3_3mn66"]
 [ext_resource type="AudioStream" uid="uid://dlwmgvql25l1p" path="res://assets/sfx/warp-306033.mp3" id="5_3co8v"]
-[ext_resource type="Texture2D" uid="uid://c0d6w4oj1yf5s" path="res://assets/graphic/placeholder_gate.png" id="6_3mn66"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a82eq"]
+atlas = ExtResource("3_3mn66")
+region = Rect2(0, 0, 144, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tts71"]
+atlas = ExtResource("3_3mn66")
+region = Rect2(144, 0, 144, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uop78"]
+atlas = ExtResource("3_3mn66")
+region = Rect2(288, 0, 144, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekd70"]
+atlas = ExtResource("3_3mn66")
+region = Rect2(432, 0, 144, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shup4"]
+atlas = ExtResource("3_3mn66")
+region = Rect2(0, 640, 144, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nahjl"]
+atlas = ExtResource("3_3mn66")
+region = Rect2(144, 640, 144, 640)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ue2qm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a82eq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tts71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uop78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekd70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shup4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nahjl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eg1qk"]
-size = Vector2(80, 572)
+size = Vector2(80, 620)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akc5q"]
-size = Vector2(52, 216)
+size = Vector2(52, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdkn4"]
 
@@ -22,6 +71,12 @@ script = ExtResource("1_akc5q")
 pipes = [NodePath("Body/Hazard/CollisionShape2D"), NodePath("Body/Hazard/CollisionShape2D2")]
 gemScn = ExtResource("3_3co8v")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -10
+sprite_frames = SubResource("SpriteFrames_ue2qm")
+autoplay = "default"
+frame_progress = 0.4212879
+
 [node name="Body" type="Node2D" parent="."]
 
 [node name="Hazard" type="Area2D" parent="Body"]
@@ -32,20 +87,10 @@ position = Vector2(0, -400)
 shape = SubResource("RectangleShape2D_eg1qk")
 debug_color = Color(0.998593, 0, 0.137932, 0.42)
 
-[node name="Sprite2D" type="Sprite2D" parent="Body/Hazard/CollisionShape2D"]
-position = Vector2(-1.5, -4)
-scale = Vector2(5.0625, 36.25)
-texture = ExtResource("3_a82eq")
-
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Body/Hazard"]
 position = Vector2(0, 400)
 shape = SubResource("RectangleShape2D_eg1qk")
 debug_color = Color(0.998593, 0, 0.137932, 0.42)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Body/Hazard/CollisionShape2D2"]
-position = Vector2(-0.499998, 4)
-scale = Vector2(5.0625, 36.25)
-texture = ExtResource("3_a82eq")
 
 [node name="Scoring" type="Area2D" parent="Body" groups=["scoring"]]
 position = Vector2(24, 0)
@@ -59,11 +104,6 @@ debug_color = Color(0, 0.634547, 0.427764, 0.42)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qdkn4")
 disabled = true
-
-[node name="Gate" type="Sprite2D" parent="."]
-position = Vector2(0, 72)
-scale = Vector2(1, 2.01528)
-texture = ExtResource("6_3mn66")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_3co8v")
