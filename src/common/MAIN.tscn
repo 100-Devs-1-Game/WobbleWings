@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=64 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -23,6 +23,8 @@
 [ext_resource type="Script" uid="uid://hf5ajblwmega" path="res://common/SoundMain.gd" id="13_8gllf"]
 [ext_resource type="PackedScene" uid="uid://cr6nknd6187ce" path="res://lib_boo/components/volume_slider/VolumeSlider.tscn" id="13_xiwjy"]
 [ext_resource type="PackedScene" uid="uid://37ht7lkqug8g" path="res://game/level_backgrounds/lava.tscn" id="14_df26s"]
+[ext_resource type="Texture2D" uid="uid://b38rxvuw003xr" path="res://assets/graphic/lvl2-icon.png" id="15_ikyaj"]
+[ext_resource type="Texture2D" uid="uid://db7wvi7vqad7u" path="res://assets/graphic/lvl3-icon.png" id="17_iljx0"]
 [ext_resource type="Texture2D" uid="uid://i3tg61fkvtp3" path="res://lib_boo/assets/img/star_yellow_rounded.png" id="18_7gmbk"]
 [ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="19_4s7ph"]
 [ext_resource type="Texture2D" uid="uid://bivhtnnpj5x8i" path="res://assets/graphic/wobble wings - shop mage sprite sheet.png" id="19_84tgi"]
@@ -75,7 +77,7 @@ price = 100
 color = Color(0.387317, 0.520058, 0.847931, 1)
 description = "Flowering Fields"
 type = 1
-icon = ExtResource("11_84tgi")
+icon = ExtResource("15_ikyaj")
 levelScn = ExtResource("11_nang2")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"
 
@@ -86,7 +88,7 @@ price = 500
 color = Color(1, 0.425788, 0.357085, 1)
 description = "Lava Lands"
 type = 1
-icon = ExtResource("11_84tgi")
+icon = ExtResource("17_iljx0")
 levelScn = ExtResource("14_df26s")
 metadata/_custom_type_script = "uid://ciyc68gwueb68"
 
