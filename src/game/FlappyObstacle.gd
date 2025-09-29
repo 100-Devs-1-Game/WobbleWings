@@ -28,6 +28,7 @@ enum MovementDirection {
 }
 
 @onready var body: Node2D = $Body
+@onready var gate_sprite: AnimatedSprite2D = %"Gate Sprite"
 
 var _initialPosition: Vector2
 var _time: float = 0.0
@@ -85,8 +86,10 @@ func _UpdateClosing() -> void:
 	var closing_offset = sin(_closingTime) * closingRange
 	
 	# Apply the closing effect to both pipes
-	pipes[0].position.y = -(_initialSeparation + closing_offset)
-	pipes[1].position.y = (_initialSeparation + closing_offset)
+	var amount = _initialSeparation + closing_offset
+	UpdateGateSpriteScale(amount)
+	pipes[0].position.y = -amount
+	pipes[1].position.y = amount
 
 func SetSeparation(amount:float):
 	if oscillationSpeed == 0:
@@ -97,13 +100,16 @@ func SetSeparation(amount:float):
 		# Update the initial position for oscillation
 		if body:
 			_initialPosition = body.position
-
+	
 	# Store initial separation for closing behavior
 	_initialSeparation = amount
+	UpdateGateSpriteScale(amount)
 
 	pipes[0].position.y = -amount
 	pipes[1].position.y = amount
 
+func UpdateGateSpriteScale(amount: float):
+	gate_sprite.scale.y = 1.0 - (412 - amount) / (412 - 374) * 0.4
 
 func SetRandomYPosition() -> void:
 	position.y = randf_range(-pipeOffsetRange, pipeOffsetRange)

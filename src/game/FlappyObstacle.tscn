@@ -1,9 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8ctwi7qi0m82"]
+[gd_scene load_steps=25 format=3 uid="uid://c8ctwi7qi0m82"]
 
 [ext_resource type="Script" uid="uid://cv7stc2w4g7kh" path="res://game/FlappyObstacle.gd" id="1_akc5q"]
 [ext_resource type="PackedScene" uid="uid://cly33o3fvqvu0" path="res://game/gem/Gem.tscn" id="3_3co8v"]
 [ext_resource type="Texture2D" uid="uid://dhr1781tq5lqc" path="res://assets/graphic/wobble wings - gates.png" id="3_3mn66"]
+[ext_resource type="Texture2D" uid="uid://cexjfjg3vvga3" path="res://assets/graphic/gates/wobble wings - gates top.png" id="4_a82eq"]
 [ext_resource type="AudioStream" uid="uid://dlwmgvql25l1p" path="res://assets/sfx/warp-306033.mp3" id="5_3co8v"]
+[ext_resource type="Texture2D" uid="uid://bw1pnwr25uhb5" path="res://assets/graphic/gates/wobble wings - gates bottom.png" id="5_tts71"]
+[ext_resource type="Texture2D" uid="uid://b6frpsmftljpu" path="res://assets/graphic/gates/wobble wings - gate animation.png" id="6_uop78"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a82eq"]
 atlas = ExtResource("3_3mn66")
@@ -56,10 +59,60 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eg1qk"]
-size = Vector2(80, 620)
+size = Vector2(40, 620)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akc5q"]
 size = Vector2(52, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue2qm"]
+atlas = ExtResource("6_uop78")
+region = Rect2(0, 0, 144, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yq4p"]
+atlas = ExtResource("6_uop78")
+region = Rect2(144, 0, 144, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue4u5"]
+atlas = ExtResource("6_uop78")
+region = Rect2(288, 0, 144, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r41ou"]
+atlas = ExtResource("6_uop78")
+region = Rect2(432, 0, 144, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06gms"]
+atlas = ExtResource("6_uop78")
+region = Rect2(0, 195, 144, 195)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83l8m"]
+atlas = ExtResource("6_uop78")
+region = Rect2(144, 195, 144, 195)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wiuoo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue2qm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6yq4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue4u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r41ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06gms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83l8m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdkn4"]
 
@@ -72,10 +125,12 @@ pipes = [NodePath("Body/Hazard/CollisionShape2D"), NodePath("Body/Hazard/Collisi
 gemScn = ExtResource("3_3co8v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 z_index = -10
 sprite_frames = SubResource("SpriteFrames_ue2qm")
 autoplay = "default"
-frame_progress = 0.4212879
+frame = 3
+frame_progress = 0.9631539
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -83,14 +138,44 @@ frame_progress = 0.4212879
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Hazard"]
-position = Vector2(0, -400)
+position = Vector2(0, -372)
 shape = SubResource("RectangleShape2D_eg1qk")
 debug_color = Color(0.998593, 0, 0.137932, 0.42)
 
+[node name="Sprite2D" type="Sprite2D" parent="Body/Hazard/CollisionShape2D"]
+z_index = -10
+position = Vector2(0, 113.00001)
+scale = Vector2(1, 2.0088496)
+texture = ExtResource("4_a82eq")
+
+[node name="ColorRect" type="ColorRect" parent="Body/Hazard/CollisionShape2D"]
+visible = false
+offset_left = -20.0
+offset_top = -134.0
+offset_right = 19.0
+offset_bottom = 310.0
+mouse_filter = 2
+color = Color(1, 0, 0, 0.43137255)
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Body/Hazard"]
-position = Vector2(0, 400)
+position = Vector2(7, 372)
 shape = SubResource("RectangleShape2D_eg1qk")
 debug_color = Color(0.998593, 0, 0.137932, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="Body/Hazard/CollisionShape2D2"]
+z_index = -10
+position = Vector2(0, -120.260826)
+scale = Vector2(1, 1.935745)
+texture = ExtResource("5_tts71")
+
+[node name="ColorRect" type="ColorRect" parent="Body/Hazard/CollisionShape2D2"]
+visible = false
+offset_left = -19.0
+offset_top = -309.0
+offset_right = 20.0
+offset_bottom = 135.0
+mouse_filter = 2
+color = Color(1, 0, 0, 0.43137255)
 
 [node name="Scoring" type="Area2D" parent="Body" groups=["scoring"]]
 position = Vector2(24, 0)
@@ -100,6 +185,15 @@ collision_mask = 33
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Scoring"]
 shape = SubResource("RectangleShape2D_akc5q")
 debug_color = Color(0, 0.634547, 0.427764, 0.42)
+
+[node name="Gate Sprite" type="AnimatedSprite2D" parent="Body/Scoring/CollisionShape2D"]
+unique_name_in_owner = true
+z_index = -10
+position = Vector2(-20, 0)
+scale = Vector2(1, 0.6)
+sprite_frames = SubResource("SpriteFrames_wiuoo")
+autoplay = "default"
+frame_progress = 0.52827746
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qdkn4")
