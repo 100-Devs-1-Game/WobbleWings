@@ -37,6 +37,10 @@ var _time: float = 0.0
 var _initialSeparation: float = 0.0
 var _closingTime: float = 0.0
 
+# Scaling behaviour variables
+var _max_amount_scaling := 472
+var _min_amount_scaling := 380
+
 func _ready() -> void:
 	_SpawnGems()
 	
@@ -91,6 +95,10 @@ func _UpdateClosing() -> void:
 	pipes[0].position.y = -amount
 	pipes[1].position.y = amount
 
+func SetupScalingAmount(min: float, max: float) -> void:
+	_min_amount_scaling = min
+	_max_amount_scaling = max
+
 func SetSeparation(amount:float):
 	if oscillationSpeed == 0:
 		SetRandomYPosition()
@@ -109,7 +117,9 @@ func SetSeparation(amount:float):
 	pipes[1].position.y = amount
 
 func UpdateGateSpriteScale(amount: float):
-	gate_sprite.scale.y = 1.0 - (412 - amount) / (412 - 374) * 0.4
+	const MIN_SCALE := 0.6
+	const SCALING := 1.0 - MIN_SCALE
+	gate_sprite.scale.y = 1.0 - (_max_amount_scaling - amount) / (_max_amount_scaling - _min_amount_scaling) * SCALING
 
 func SetRandomYPosition() -> void:
 	position.y = randf_range(-pipeOffsetRange, pipeOffsetRange)

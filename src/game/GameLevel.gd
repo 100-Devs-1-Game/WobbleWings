@@ -210,6 +210,7 @@ func _OnGameOver(_score:int) -> void:
 ## Sets properties of spawned obstacles
 func _on_spawner_act_done(spawnedInstances: Variant) -> void:
 	var obstacle = spawnedInstances[0]
+	obstacle.SetupScalingAmount(minPipeSeparation, maxPipeSeparation)
 	
 	# Calculate base position
 	var base_x = player.global_position.x + SCREEN_WIDTH + 40
@@ -394,7 +395,6 @@ func _IncreaseDifficulty() -> void:
 	#Separation
 	var separation_mod = 0 if obstacleDodgeCount < increaseDifficultyThreshold else obstacleDodgeCount * 2
 	currentSeparation = maxf(minPipeSeparation, maxPipeSeparation - separation_mod)
-	
 	#Timers
 	obstacle_timer.wait_time = maxf(minSpawnRate, maxSpawnRate - (obstacleDodgeCount * 0.02))
 
