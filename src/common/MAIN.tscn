@@ -370,7 +370,6 @@ offset_right = 0.0
 offset_bottom = 147.0
 data = SubResource("Resource_e40kh")
 isPurchased = true
-is_floating = true
 
 [node name="ShopItem5" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Levels" index="1" instance=ExtResource("5_fy7di")]
 offset_left = 7.0
@@ -378,7 +377,6 @@ offset_top = 117.0
 offset_right = 38.0
 offset_bottom = 147.0
 data = SubResource("Resource_v472j")
-is_floating = true
 
 [node name="ShopItem6" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Levels" index="2" instance=ExtResource("5_fy7di")]
 offset_left = 49.0
@@ -386,18 +384,17 @@ offset_top = 117.0
 offset_right = 80.0
 offset_bottom = 147.0
 data = SubResource("Resource_db7hj")
-is_floating = true
 
 [node name="Items Upgrades" type="Node2D" parent="GlobalUI/MainUI/Shop/Shop/Products" index="2"]
 unique_name_in_owner = true
 
 [node name="MultiLevelShopItem" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Upgrades" index="0" instance=ExtResource("9_8wxic")]
 offset_left = -65.0
-offset_top = 108.0
+offset_top = 104.0
 offset_right = -35.0
-offset_bottom = 138.0
+offset_bottom = 134.0
 data = ExtResource("10_mni8j")
-is_floating = true
+scaling = 0.8
 
 [node name="MultiLevelShopItem2" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Upgrades" index="1" instance=ExtResource("9_8wxic")]
 offset_left = 85.0
@@ -405,7 +402,6 @@ offset_top = 101.0
 offset_right = 115.0
 offset_bottom = 131.0
 data = ExtResource("11_mni8j")
-is_floating = true
 
 [node name="FinalUpgrade" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Upgrades" index="2" instance=ExtResource("9_8wxic")]
 unique_name_in_owner = true
@@ -414,7 +410,6 @@ offset_top = 7.0
 offset_right = -40.0
 offset_bottom = 37.0
 data = SubResource("Resource_7gmbk")
-is_floating = true
 
 [node name="PanelContainer" type="PanelContainer" parent="GlobalUI/MainUI/Shop/Shop/Products" index="3"]
 offset_left = -89.0

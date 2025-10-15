@@ -4,6 +4,7 @@ signal upgrade_pressed(MultiLevelShopItem)
 
 @export var data: MultiLevelUpgradeData = null
 @export var is_floating: bool
+@export var scaling: float = 1.0
 
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var name_label: Label = $VBox/NameLabel
@@ -11,6 +12,9 @@ signal upgrade_pressed(MultiLevelShopItem)
 @onready var view_control: Control = %"View Control"
 
 var currentLevel: int = 0
+
+func _ready() -> void:
+	view_control.scale = scaling * Vector2.ONE
 
 func get_button_node() -> Button:
 	return %Btn
@@ -28,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var offset := sin(Time.get_ticks_usec() / 100_000 + position.x)
-	view_control.position.y = offset
+	view_control.position.y = (offset / 2 + 0.5)
 
 func update_display() -> void:
 	if not data:

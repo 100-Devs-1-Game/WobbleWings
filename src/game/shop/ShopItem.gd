@@ -14,7 +14,6 @@ var _needs_display_update: bool = false
 @onready var view_control: Control = %"View Control"
 @onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 
-
 func get_data() -> Resource:
 	return data
 
@@ -34,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var offset := sin(Time.get_ticks_usec() / 100_000 + position.x)
-	view_control.position.y = offset
+	view_control.position.y = (offset / 2 + 0.5)
 
 func update_display() -> void:
 	super()
