@@ -3,10 +3,10 @@ extends PanelContainer
 var shopItems:Array[ShopItem] = []
 var multiLevelShopItems:Array[MultiLevelShopItem] = []
 @onready var item_description: Label = %ItemDescription
-@onready var items_costumes: GridContainer = %ItemsCostumes
-@onready var items_levels: GridContainer = %ItemsLevels
-@onready var items_upgrades: GridContainer = %ItemsUpgrades
-@onready var final_upgrade: MultiLevelShopItem = $VBoxContainer/ItemsUpgrades/FinalUpgrade
+@onready var items_costumes: Node2D = %"Items Costumes"
+@onready var items_levels: Node2D = %"Items Levels"
+@onready var items_upgrades: Node2D = %"Items Upgrades"
+@onready var final_upgrade: MultiLevelShopItem = %FinalUpgrade
 
 var _initialPosition: Vector2
 
@@ -38,7 +38,7 @@ func _OnShopItemEquipped(item:ShopItemData) -> void:
 			child.MarkSelected(activeCostume)
 
 ## Setup shop items with common signal connections
-func _SetupShopItems(container: GridContainer, target_array: Array, is_regular_shop_item: bool) -> void:
+func _SetupShopItems(container: Node, target_array: Array, is_regular_shop_item: bool) -> void:
 	for item in container.get_children():
 		target_array.append(item)
 		if is_regular_shop_item:

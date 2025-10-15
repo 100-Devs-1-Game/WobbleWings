@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://b4je1bl5aicno"]
+[gd_scene load_steps=71 format=3 uid="uid://b4je1bl5aicno"]
 
 [ext_resource type="PackedScene" uid="uid://oevkgsymtr66" path="res://lib_boo/dev_and_templates/MAIN_Template.tscn" id="1_dp5wg"]
 [ext_resource type="Script" uid="uid://cddnfix6ajhb2" path="res://common/MAIN.gd" id="2_cdcvv"]
@@ -16,7 +16,6 @@
 [ext_resource type="Resource" uid="uid://dokp85l68sx1m" path="res://game/shop/items/lives_upgrade.tres" id="10_mni8j"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="10_n5xpu"]
 [ext_resource type="SpriteFrames" uid="uid://c8v3ae7c05dlw" path="res://game/skins/skins4.tres" id="10_ymu5t"]
-[ext_resource type="Texture2D" uid="uid://cyj805eay4lm6" path="res://assets/graphic/level 24x24 t.png" id="11_84tgi"]
 [ext_resource type="Resource" uid="uid://dmmqevyfq4c2y" path="res://game/shop/items/gems_upgrades.tres" id="11_mni8j"]
 [ext_resource type="PackedScene" uid="uid://carwgs0dl6van" path="res://game/level_backgrounds/bg1.tscn" id="11_nang2"]
 [ext_resource type="PackedScene" uid="uid://c3cx280f4i76s" path="res://100_devs_components/src/components/discord_link/discord_button.tscn" id="12_70eb6"]
@@ -24,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cr6nknd6187ce" path="res://lib_boo/components/volume_slider/VolumeSlider.tscn" id="13_xiwjy"]
 [ext_resource type="PackedScene" uid="uid://37ht7lkqug8g" path="res://game/level_backgrounds/lava.tscn" id="14_df26s"]
 [ext_resource type="Texture2D" uid="uid://b38rxvuw003xr" path="res://assets/graphic/lvl2-icon.png" id="15_ikyaj"]
+[ext_resource type="Texture2D" uid="uid://dne24cetxplqo" path="res://assets/graphic/shop/wobble wings - icon-lvl1.png" id="16_4tc5a"]
 [ext_resource type="Texture2D" uid="uid://db7wvi7vqad7u" path="res://assets/graphic/lvl3-icon.png" id="17_iljx0"]
 [ext_resource type="Texture2D" uid="uid://i3tg61fkvtp3" path="res://lib_boo/assets/img/star_yellow_rounded.png" id="18_7gmbk"]
 [ext_resource type="Script" uid="uid://dvwpb8ynpyv42" path="res://game/shop/MultiLevelUpgradeData.gd" id="19_4s7ph"]
@@ -31,8 +31,10 @@
 [ext_resource type="Texture2D" uid="uid://cruo2anr0h7dy" path="res://assets/graphic/gem_icon.png" id="19_ge5fl"]
 [ext_resource type="LabelSettings" uid="uid://bojj0ywqtfplx" path="res://game/ui_ux/label_24.tres" id="19_jur75"]
 [ext_resource type="Script" uid="uid://cpivbxsuk43nj" path="res://lib_boo/act_system/cues/ui_ux/ControlSignalsCue.gd" id="23_hghuq"]
+[ext_resource type="Texture2D" uid="uid://0gfyyq2rv13t" path="res://assets/graphic/shop/wobblewings - mage shop_background.png" id="24_4tc5a"]
 [ext_resource type="Script" uid="uid://cnwb780wdumwd" path="res://lib_boo/act_system/acts/util/ToggleAct.gd" id="24_si2jk"]
 [ext_resource type="Script" uid="uid://cemwblg5dbr8c" path="res://lib_boo/act_system/cues/ui_ux/ButtonCue.gd" id="26_ge5fl"]
+[ext_resource type="Texture2D" uid="uid://gnqj1s4vx361" path="res://assets/graphic/shop/wobblewings - mage shop_storeront.png" id="26_kfgtc"]
 [ext_resource type="Texture2D" uid="uid://pbon6my3qo1m" path="res://lib_boo/assets/cc0/img/audioOff.png" id="27_v3efc"]
 [ext_resource type="Texture2D" uid="uid://c2taclnmffs8h" path="res://lib_boo/assets/cc0/img/audioOn.png" id="28_84tgi"]
 [ext_resource type="PackedScene" uid="uid://dm1jvpowrjilt" path="res://game/ui_ux/achievement/AchievementDisplayLocal.tscn" id="30_ge5fl"]
@@ -49,64 +51,6 @@ outline_size = 12
 outline_color = Color(1, 0.9666667, 0, 1)
 shadow_size = 80
 shadow_color = Color(0, 0, 0, 0.03137255)
-
-[sub_resource type="Resource" id="Resource_ymu5t"]
-script = ExtResource("9_db7hj")
-itemId = "11"
-price = 150
-color = Color(0.72421557, 0.24411905, 0.45494032, 1)
-description = "Vulcan"
-costumeSheet = ExtResource("10_ymu5t")
-icon = ExtResource("10_df26s")
-metadata/_custom_type_script = "uid://ciyc68gwueb68"
-
-[sub_resource type="Resource" id="Resource_e40kh"]
-script = ExtResource("9_db7hj")
-itemId = "4"
-color = Color(0.209125, 0.62614, 0.375691, 1)
-description = "Whimsical Woods"
-type = 1
-icon = ExtResource("11_84tgi")
-levelScn = ExtResource("9_k3xms")
-metadata/_custom_type_script = "uid://ciyc68gwueb68"
-
-[sub_resource type="Resource" id="Resource_v472j"]
-script = ExtResource("9_db7hj")
-itemId = "5"
-price = 100
-color = Color(0.387317, 0.520058, 0.847931, 1)
-description = "Flowering Fields"
-type = 1
-icon = ExtResource("15_ikyaj")
-levelScn = ExtResource("11_nang2")
-metadata/_custom_type_script = "uid://ciyc68gwueb68"
-
-[sub_resource type="Resource" id="Resource_db7hj"]
-script = ExtResource("9_db7hj")
-itemId = "6"
-price = 500
-color = Color(1, 0.425788, 0.357085, 1)
-description = "Lava Lands"
-type = 1
-icon = ExtResource("17_iljx0")
-levelScn = ExtResource("14_df26s")
-metadata/_custom_type_script = "uid://ciyc68gwueb68"
-
-[sub_resource type="Resource" id="Resource_7gmbk"]
-script = ExtResource("19_4s7ph")
-upgradeId = "final"
-upgradeName = "Final"
-description = "Thanks for Playing"
-color = Color(1, 1, 0.38, 1)
-icon = ExtResource("18_7gmbk")
-levelPrices = Array[int]([999])
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4da4"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ge5fl"]
 atlas = ExtResource("19_84tgi")
@@ -171,6 +115,74 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4tc5a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfgtc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bn2hh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3a8ft"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xu8o6"]
+
+[sub_resource type="Resource" id="Resource_ymu5t"]
+script = ExtResource("9_db7hj")
+itemId = "11"
+price = 150
+color = Color(0.72421557, 0.24411905, 0.45494032, 1)
+description = "Vulcan"
+costumeSheet = ExtResource("10_ymu5t")
+icon = ExtResource("10_df26s")
+metadata/_custom_type_script = "uid://ciyc68gwueb68"
+
+[sub_resource type="Resource" id="Resource_e40kh"]
+script = ExtResource("9_db7hj")
+itemId = "4"
+color = Color(0.209125, 0.62614, 0.375691, 1)
+description = "Whimsical Woods"
+type = 1
+icon = ExtResource("16_4tc5a")
+levelScn = ExtResource("9_k3xms")
+metadata/_custom_type_script = "uid://ciyc68gwueb68"
+
+[sub_resource type="Resource" id="Resource_v472j"]
+script = ExtResource("9_db7hj")
+itemId = "5"
+price = 100
+color = Color(0.387317, 0.520058, 0.847931, 1)
+description = "Flowering Fields"
+type = 1
+icon = ExtResource("15_ikyaj")
+levelScn = ExtResource("11_nang2")
+metadata/_custom_type_script = "uid://ciyc68gwueb68"
+
+[sub_resource type="Resource" id="Resource_db7hj"]
+script = ExtResource("9_db7hj")
+itemId = "6"
+price = 500
+color = Color(1, 0.425788, 0.357085, 1)
+description = "Lava Lands"
+type = 1
+icon = ExtResource("17_iljx0")
+levelScn = ExtResource("14_df26s")
+metadata/_custom_type_script = "uid://ciyc68gwueb68"
+
+[sub_resource type="Resource" id="Resource_7gmbk"]
+script = ExtResource("19_4s7ph")
+upgradeId = "final"
+upgradeName = "Final"
+description = "Thanks for Playing"
+color = Color(1, 1, 0.38, 1)
+icon = ExtResource("18_7gmbk")
+levelPrices = Array[int]([999])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4da4"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_xiwjy"]
 font_size = 31
@@ -267,6 +279,7 @@ grow_horizontal = 0
 script = ExtResource("4_4fyve")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GlobalUI/MainUI/Shop" index="0"]
+visible = false
 layout_mode = 2
 
 [node name="ShopLabel" type="Label" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="0"]
@@ -274,85 +287,148 @@ layout_mode = 2
 text = "Shop"
 label_settings = ExtResource("19_jur75")
 
-[node name="ItemsCostumes" type="GridContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="1"]
-unique_name_in_owner = true
-layout_mode = 2
-columns = 5
+[node name="Shop" type="Node2D" parent="GlobalUI/MainUI/Shop" index="1"]
+position = Vector2(85, 167)
 
-[node name="ShopItem0" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="0" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="Shop View" type="Node2D" parent="GlobalUI/MainUI/Shop/Shop" index="0"]
+position = Vector2(24, 2.0000038)
+scale = Vector2(2, 2)
+
+[node name="Shop Background" type="Sprite2D" parent="GlobalUI/MainUI/Shop/Shop/Shop View" index="0"]
+texture = ExtResource("24_4tc5a")
+
+[node name="AnimatedSpr" type="AnimatedSprite2D" parent="GlobalUI/MainUI/Shop/Shop/Shop View" index="1"]
+position = Vector2(0, 43)
+sprite_frames = SubResource("SpriteFrames_df26s")
+autoplay = "default"
+frame = 6
+frame_progress = 0.96165854
+
+[node name="Shop Foreground" type="Sprite2D" parent="GlobalUI/MainUI/Shop/Shop/Shop View" index="2"]
+texture = ExtResource("26_kfgtc")
+
+[node name="Products" type="Node2D" parent="GlobalUI/MainUI/Shop/Shop" index="1"]
+
+[node name="Items Costumes" type="Node2D" parent="GlobalUI/MainUI/Shop/Shop/Products" index="0"]
+unique_name_in_owner = true
+
+[node name="ShopItem0" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Costumes" index="0" instance=ExtResource("5_fy7di")]
+offset_left = -71.0
+offset_top = 37.0
+offset_right = -40.0
+offset_bottom = 67.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4tc5a")
 isPurchased = true
+is_floating = true
 
-[node name="ShopItem1" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="1" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="ShopItem1" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Costumes" index="1" instance=ExtResource("5_fy7di")]
+offset_left = -69.0
+offset_top = 69.0
+offset_right = -38.0
+offset_bottom = 99.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kfgtc")
 data = ExtResource("6_n5xpu")
+is_floating = true
 
-[node name="ShopItem2" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="2" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="ShopItem2" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Costumes" index="2" instance=ExtResource("5_fy7di")]
+offset_left = 88.0
+offset_top = 7.0
+offset_right = 119.0
+offset_bottom = 37.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_bn2hh")
 data = ExtResource("7_bbau6")
+is_mirrored_icon = true
+is_floating = true
 
-[node name="ShopItem3" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="3" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="ShopItem3" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Costumes" index="3" instance=ExtResource("5_fy7di")]
+offset_left = 87.0
+offset_top = 37.0
+offset_right = 118.0
+offset_bottom = 67.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3a8ft")
 data = ExtResource("8_70eb6")
+is_mirrored_icon = true
+is_floating = true
 
-[node name="ShopItem4" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsCostumes" index="4" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="ShopItem4" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Costumes" index="4" instance=ExtResource("5_fy7di")]
+offset_left = 85.0
+offset_top = 69.0
+offset_right = 116.0
+offset_bottom = 99.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xu8o6")
 data = SubResource("Resource_ymu5t")
+is_mirrored_icon = true
+is_floating = true
 
-[node name="ItemsLevels" type="GridContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="2"]
+[node name="Items Levels" type="Node2D" parent="GlobalUI/MainUI/Shop/Shop/Products" index="1"]
 unique_name_in_owner = true
-layout_mode = 2
-columns = 4
 
-[node name="ShopItem4" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsLevels" index="0" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="ShopItem4" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Levels" index="0" instance=ExtResource("5_fy7di")]
+offset_left = -31.0
+offset_top = 117.0
+offset_right = 0.0
+offset_bottom = 147.0
 data = SubResource("Resource_e40kh")
 isPurchased = true
+is_floating = true
 
-[node name="ShopItem5" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsLevels" index="1" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="ShopItem5" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Levels" index="1" instance=ExtResource("5_fy7di")]
+offset_left = 7.0
+offset_top = 117.0
+offset_right = 38.0
+offset_bottom = 147.0
 data = SubResource("Resource_v472j")
+is_floating = true
 
-[node name="ShopItem6" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsLevels" index="2" instance=ExtResource("5_fy7di")]
-layout_mode = 2
+[node name="ShopItem6" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Levels" index="2" instance=ExtResource("5_fy7di")]
+offset_left = 49.0
+offset_top = 117.0
+offset_right = 80.0
+offset_bottom = 147.0
 data = SubResource("Resource_db7hj")
+is_floating = true
 
-[node name="ItemsUpgrades" type="GridContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="3"]
+[node name="Items Upgrades" type="Node2D" parent="GlobalUI/MainUI/Shop/Shop/Products" index="2"]
 unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-columns = 4
 
-[node name="MultiLevelShopItem" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="0" instance=ExtResource("9_8wxic")]
-layout_mode = 2
+[node name="MultiLevelShopItem" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Upgrades" index="0" instance=ExtResource("9_8wxic")]
+offset_left = -65.0
+offset_top = 108.0
+offset_right = -35.0
+offset_bottom = 138.0
 data = ExtResource("10_mni8j")
+is_floating = true
 
-[node name="MultiLevelShopItem2" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="1" instance=ExtResource("9_8wxic")]
-layout_mode = 2
+[node name="MultiLevelShopItem2" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Upgrades" index="1" instance=ExtResource("9_8wxic")]
+offset_left = 85.0
+offset_top = 101.0
+offset_right = 115.0
+offset_bottom = 131.0
 data = ExtResource("11_mni8j")
+is_floating = true
 
-[node name="FinalUpgrade" parent="GlobalUI/MainUI/Shop/VBoxContainer/ItemsUpgrades" index="2" instance=ExtResource("9_8wxic")]
-layout_mode = 2
+[node name="FinalUpgrade" parent="GlobalUI/MainUI/Shop/Shop/Products/Items Upgrades" index="2" instance=ExtResource("9_8wxic")]
+unique_name_in_owner = true
+offset_left = -70.0
+offset_top = 7.0
+offset_right = -40.0
+offset_bottom = 37.0
 data = SubResource("Resource_7gmbk")
+is_floating = true
 
-[node name="PanelContainer" type="PanelContainer" parent="GlobalUI/MainUI/Shop/VBoxContainer" index="4"]
-layout_mode = 2
+[node name="PanelContainer" type="PanelContainer" parent="GlobalUI/MainUI/Shop/Shop/Products" index="3"]
+offset_left = -89.0
+offset_top = 162.0
+offset_right = 137.0
+offset_bottom = 185.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_q4da4")
 
-[node name="ItemDescription" type="Label" parent="GlobalUI/MainUI/Shop/VBoxContainer/PanelContainer" index="0"]
+[node name="ItemDescription" type="Label" parent="GlobalUI/MainUI/Shop/Shop/Products/PanelContainer" index="0"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Welcome friend!"
 horizontal_alignment = 1
-
-[node name="AnimatedSpr" type="AnimatedSprite2D" parent="GlobalUI/MainUI/Shop" index="1"]
-position = Vector2(112, 276)
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_df26s")
-autoplay = "default"
-frame = 6
-frame_progress = 0.96165854
 
 [node name="Gems" type="HBoxContainer" parent="GlobalUI/MainUI" index="2"]
 custom_minimum_size = Vector2(0, 32)

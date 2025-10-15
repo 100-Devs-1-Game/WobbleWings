@@ -7,7 +7,7 @@ signal mouse_entered_item(BaseShopItem)
 signal mouse_exited_item(BaseShopItem)
 
 @onready var btn: Button = get_button_node()
-@onready var texture_rect: TextureRect = $TextureRect
+@onready var texture_rect: TextureRect = %TextureRect
 
 ## Override this in subclasses to specify the button node path
 func get_button_node() -> Button:

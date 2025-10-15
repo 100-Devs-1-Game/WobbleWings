@@ -8,8 +8,11 @@ var _needs_display_update: bool = false
 		_needs_display_update = true
 		if is_inside_tree():
 			call_deferred("_update_display_if_needed")
+@export var is_mirrored_icon: bool
+@export var is_floating: bool
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var view_control: Control = %"View Control"
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 
 
 func get_data() -> Resource:
@@ -25,6 +28,13 @@ func MarkSelected(itemId:String) -> void:
 		animated_sprite_2d.play(str(data.itemId))
 	else:
 		animated_sprite_2d.stop()
+
+func _physics_process(delta: float) -> void:
+	if not is_floating:
+		return
+	
+	var offset := sin(Time.get_ticks_usec() / 100_000 + position.x)
+	view_control.position.y = offset
 
 func update_display() -> void:
 	super()
@@ -62,6 +72,9 @@ func get_description() -> String:
 func _ready() -> void:
 	super._ready()
 	_update_display_if_needed()
+	
+	if is_mirrored_icon:
+		animated_sprite_2d.scale.x *= -1
 
 func _update_display_if_needed() -> void:
 	if _needs_display_update:

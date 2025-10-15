@@ -3,10 +3,12 @@ class_name MultiLevelShopItem extends BaseShopItem
 signal upgrade_pressed(MultiLevelShopItem)
 
 @export var data: MultiLevelUpgradeData = null
+@export var is_floating: bool
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 @onready var name_label: Label = $VBox/NameLabel
-@onready var cost: Label = $VBox/Cost
+@onready var cost: Button = %Btn
+@onready var view_control: Control = %"View Control"
 
 var currentLevel: int = 0
 
@@ -20,6 +22,13 @@ func get_data_color() -> Color:
 	if data and data.color:
 		return data.color
 	return Color.WHITE
+
+func _physics_process(delta: float) -> void:
+	if not is_floating:
+		return
+	
+	var offset := sin(Time.get_ticks_usec() / 100_000 + position.x)
+	view_control.position.y = offset
 
 func update_display() -> void:
 	if not data:

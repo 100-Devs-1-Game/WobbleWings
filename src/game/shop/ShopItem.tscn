@@ -1,17 +1,16 @@
-[gd_scene load_steps=47 format=3 uid="uid://bl04ismiy8j6d"]
+[gd_scene load_steps=48 format=3 uid="uid://bl04ismiy8j6d"]
 
 [ext_resource type="Script" uid="uid://ly4g1l13idgb" path="res://game/shop/ShopItem.gd" id="1_enl0t"]
 [ext_resource type="Theme" uid="uid://blpg4nf6pmt2r" path="res://game/main_style_theme.tres" id="1_xl3qh"]
 [ext_resource type="Resource" uid="uid://clnrtjh7oal83" path="res://game/shop/items/0.tres" id="2_l68wd"]
-[ext_resource type="Texture2D" uid="uid://boaq1e28lpkqc" path="res://assets/graphic/player 24x24 portrait.png" id="4_3xw6i"]
+[ext_resource type="Texture2D" uid="uid://dne24cetxplqo" path="res://assets/graphic/shop/wobble wings - icon-lvl1.png" id="4_6dweg"]
 [ext_resource type="Texture2D" uid="uid://bja6bhi3b8y0o" path="res://assets/graphic/wobblewings - altskingrn icon BASEt.png" id="5_5xbjk"]
 [ext_resource type="Texture2D" uid="uid://b45qtbdd20utk" path="res://assets/graphic/wobblewings - altskincyn icon.png" id="6_6dweg"]
 [ext_resource type="Texture2D" uid="uid://dyclictiti3sf" path="res://assets/graphic/wobblewings - altskinyel icon.png" id="7_wx5wr"]
 [ext_resource type="Texture2D" uid="uid://btkyp2amu3o2v" path="res://assets/graphic/wobblewings - altskingrn icon.png" id="8_5wuqn"]
 [ext_resource type="Texture2D" uid="uid://cqupo5btb676v" path="res://assets/graphic/wobblewings - altskinred icon.png" id="9_hghjh"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l68wd"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dweg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_52bev"]
 atlas = ExtResource("5_5xbjk")
@@ -286,23 +285,38 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wx5wr"]
+
 [node name="ShopItem" type="PanelContainer"]
-custom_minimum_size = Vector2(40, 40)
-offset_right = 42.0
-offset_bottom = 42.0
+custom_minimum_size = Vector2(30, 30)
+offset_right = 31.0
+offset_bottom = 30.0
 theme = ExtResource("1_xl3qh")
-theme_override_styles/panel = SubResource("StyleBoxFlat_l68wd")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6dweg")
 script = ExtResource("1_enl0t")
 data = ExtResource("2_l68wd")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
+[node name="Control" type="Control" parent="."]
 layout_mode = 2
-texture = ExtResource("4_3xw6i")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(21, 21.000002)
-scale = Vector2(1.3, 1.3)
+[node name="View Control" type="Control" parent="Control"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/View Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 31.0
+offset_bottom = 30.0
+texture = ExtResource("4_6dweg")
+expand_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/View Control"]
+unique_name_in_owner = true
+position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_4nmj7")
 animation = &"0"
 
@@ -310,8 +324,9 @@ animation = &"0"
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 24
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 12
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wx5wr")
 text = "100"
 flat = true
 
