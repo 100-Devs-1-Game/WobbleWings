@@ -279,4 +279,3 @@ func _FormatDateToCustomFormat(date_string: String) -> String:
 	
 	# Format: MMM DD, YYYY, T:TT AM/PM
 	return "%s %02d, %s, %d:%s %s" % [month_name, day, year, display_hour, minute, am_pm]
-

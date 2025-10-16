@@ -66,10 +66,8 @@ func update_achievement_display() -> void:
 
 	if achievement.unlocked:
 		achievement_action_label.visible = true
-		
-		var current_date = Time.get_datetime_string_from_system()
-		var formatted_date = _FormatDateToCustomFormat(current_date)
-		
+		if achievement.unlocked_date is float:
+			achievement.unlocked_date = get_readable_date(achievement.unlocked_date)
 		
 		achievement_action_label.text = "Unlocked %s" % achievement.unlocked_date
 		achievement_rare_overlay.visible = achievement_resource.considered_rare

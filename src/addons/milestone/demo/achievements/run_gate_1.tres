@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Achievement" load_steps=4 format=3 uid="uid://vb0ag08t038e"]
 
 [ext_resource type="Texture2D" uid="uid://cg3b84ak8bsrv" path="res://addons/milestone/icons/hidden_achievement.svg" id="1_jnpa0"]
-[ext_resource type="Texture2D" uid="uid://bbwjhwlaf1bse" path="res://assets/graphic/40_gates_run.png" id="2_jnpa0"]
+[ext_resource type="Texture2D" uid="uid://qwpndw8pahjg" path="res://assets/graphic/50gates.png" id="2_jnpa0"]
 [ext_resource type="Script" uid="uid://dtyojmellf4e5" path="res://addons/milestone/scripts/achievements/achievement.gd" id="3_v6yhh"]
 
 [resource]
