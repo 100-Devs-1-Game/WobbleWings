@@ -28,8 +28,8 @@ const MIN_OBSTACLE_SEPARATION:float = 280
 
 
 @export_group("Pipe settings")
-@export var minPipeSeparation = 372
-@export var maxPipeSeparation = 412
+@export var minPipeSeparation = 370
+@export var maxPipeSeparation = 382
 
 
 @export_group("Spawn rate settings")
@@ -232,7 +232,7 @@ func _on_spawner_act_done(spawnedInstances: Variant) -> void:
 	
 	var separation_amount = currentSeparation
 	if is_oscillating:
-		separation_amount = currentSeparation + 24
+		separation_amount = minf(currentSeparation + 24, maxPipeSeparation)
 	obstacle.SetSeparation(separation_amount)
 	
 	

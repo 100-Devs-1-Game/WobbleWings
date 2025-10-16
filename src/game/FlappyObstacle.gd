@@ -28,7 +28,7 @@ enum MovementDirection {
 }
 
 @onready var body: Node2D = $Body
-@onready var gate_sprite: AnimatedSprite2D = %"Gate Sprite"
+@onready var gate_sprite: Node2D = %"Gate Sprite"
 
 var _initialPosition: Vector2
 var _time: float = 0.0
@@ -117,7 +117,7 @@ func SetSeparation(amount:float):
 	pipes[1].position.y = amount
 
 func UpdateGateSpriteScale(amount: float):
-	const MIN_SCALE := 0.6
+	const MIN_SCALE := 0.75
 	const SCALING := 1.0 - MIN_SCALE
 	gate_sprite.scale.y = 1.0 - (_max_amount_scaling - amount) / (_max_amount_scaling - _min_amount_scaling) * SCALING
 
