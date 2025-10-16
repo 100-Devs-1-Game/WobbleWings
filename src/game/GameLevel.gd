@@ -232,13 +232,13 @@ func _on_spawner_act_done(spawnedInstances: Variant) -> void:
 	
 	var separation_amount = currentSeparation
 	if is_oscillating:
-		separation_amount = minf(currentSeparation + 24, maxPipeSeparation)
+		separation_amount = minf(currentSeparation, maxPipeSeparation)
 	obstacle.SetSeparation(separation_amount)
-	
 	
 	#Set oscillation speed if oscillating
 	if is_oscillating:
 		obstacle.oscillationSpeed = _CalculateOscillationSpeed()
+		obstacle.randomize_time()
 	
 	#Set closing speed if closing
 	if is_closing:

@@ -56,6 +56,9 @@ func _process(delta: float) -> void:
 		_closingTime += delta * closingSpeed
 		_UpdateClosing()
 
+func randomize_time() -> void:
+	_time = randf_range(0, PI)
+
 func _UpdateOscillation() -> void:
 	var offset: float = 0.0
 	
