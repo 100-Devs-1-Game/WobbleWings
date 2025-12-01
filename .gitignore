@@ -32,5 +32,3 @@ mono_crash.*.json
 
 # Rider specific ignores
 .idea/
-
-/src/lib_boo_internal/
